@@ -10,9 +10,9 @@
   ],
   "author": "Alex Kilgour",
   "bin": {
-    "sn-package-create": "./js/create.js",
-    "sn-package-validate": "./js/validate.js",
-    "sn-package-publish": "./js/publish.js"
+    "sn-package-create": "./bin/create.js",
+    "sn-package-validate": "./bin/validate.js",
+    "sn-package-publish": "./bin/publish.js"
   },
   "scripts": {
     "test": "jest --colors --verbose --coverage --silent"
