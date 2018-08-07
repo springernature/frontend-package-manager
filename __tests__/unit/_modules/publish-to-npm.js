@@ -6,7 +6,7 @@
 
 const pmock = require('pmock');
 
-jest.mock('../../../lib/js/_modules/_npm-utils-wrapper');
+jest.mock('npm-utils');
 
 const publishToNpm = require('../../../lib/js/_modules/_publish-to-npm');
 
