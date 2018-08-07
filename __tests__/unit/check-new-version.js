@@ -4,7 +4,7 @@
  */
 'use strict';
 
-const checkNewVersion = require('../../js/_check-new-version');
+const checkNewVersion = require('../../lib/js/_utils/_check-new-version');
 
 describe('Check for a valid semver version', () => {
 	test('Data is the version number when valid', () => {

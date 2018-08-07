@@ -4,7 +4,7 @@
  */
 'use strict';
 
-const exitScript = require('../../js/_exit-script');
+const exitScript = require('../../lib/js/_utils/_exit-script');
 
 describe('Exiting a script', () => {
 	test('throwErr function should throw an error', () => {

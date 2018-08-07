@@ -4,12 +4,14 @@
  */
 'use strict';
 
-jest.mock('../../js/_get-remote-file');
-jest.mock('../../js/_show-output');
-const mockfs = require('../../js/__mocks__/_fs');
+jest.mock('../../lib/js/_utils/_get-remote-file');
+jest.mock('../../lib/js/_utils/_show-output');
+
+const mockfs = require('../../__mocks__/_fs');
 const MOCK_PACKAGES = mockfs.__fsMockFiles();
 
-const mergeExtendedPackage = require('../../js/_merge-extended-package');
+const mergeExtendedPackage = require('../../lib/js/_utils/_merge-extended-package');
+
 const fileList = ["path/to/global-package/required.md", "fileNotExist.ext"];
 
 describe('Merge contents of remote package with current package', () => {

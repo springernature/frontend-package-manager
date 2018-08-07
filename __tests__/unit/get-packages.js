@@ -5,11 +5,12 @@
 'use strict';
 
 const path = require('path');
-const mockfs = require('../../js/__mocks__/_fs');
-const getPackages = require('../../js/_get-packages');
 
+const mockfs = require('../../__mocks__/_fs');
 const MOCK_PACKAGES = mockfs.__fsMockFiles();
 const MOCK_PACKAGES_EMPTY = mockfs.__fsMockFilesEmpty();
+
+const getPackages = require('../../lib/js/_utils/_get-packages');
 
 describe('Query Packages directory', () => {
 	beforeEach(() => {
@@ -18,7 +19,7 @@ describe('Query Packages directory', () => {
 
 	test('An array of package paths is returned', () => {
 		const fileSummary = getPackages('path/to');
-		const dir = path.resolve(__dirname, '../../../..');
+		const dir = path.resolve(__dirname, '../..');
 		const expected = [`${dir}/path/to/global-package`, `${dir}/path/to/global-package-b`];
 		expect.assertions(2);
 		expect(fileSummary.length).toBe(2);

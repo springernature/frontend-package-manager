@@ -5,7 +5,8 @@
 'use strict';
 
 const stripAnsi = require('strip-ansi');
-const showOutput = require('../../js/_show-output');
+
+const showOutput = require('../../lib/js/_utils/_show-output');
 
 const config = {
 	description: 'description',

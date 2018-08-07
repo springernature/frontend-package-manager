@@ -6,7 +6,7 @@
 
 const pmock = require('pmock');
 
-jest.mock('../../js/_npm-utils-wrapper');
+jest.mock('../../lib/js/_modules/_npm-utils-wrapper');
 
 describe('Publishing to NPM', () => {
 	beforeEach(() => {
@@ -14,7 +14,7 @@ describe('Publishing to NPM', () => {
 	});
 
 	test('Should resolve when publish step is successful', () => {
-		const publishToNpm = require('../../js/_publish-to-npm');
+		const publishToNpm = require('../../lib/js/_modules/_publish-to-npm');
 		expect.assertions(1);
 		return expect(
 			publishToNpm({}, 'path/to/success')
@@ -22,7 +22,7 @@ describe('Publishing to NPM', () => {
 	});
 
 	test('Should reject if publish step fails', () => {
-		const publishToNpm = require('../../js/_publish-to-npm');
+		const publishToNpm = require('../../lib/js/_modules/_publish-to-npm');
 		expect.assertions(1);
 		return expect(
 			publishToNpm({}, 'path/to/fail')

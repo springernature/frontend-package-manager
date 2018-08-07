@@ -4,7 +4,7 @@
  */
 'use strict';
 
-const getLicense = require('../../js/_get-license');
+const getLicense = require('../../lib/js/_modules/_get-license');
 
 const validationJson = {
 	license: "license-name"

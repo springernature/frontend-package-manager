@@ -4,7 +4,7 @@
  */
 'use strict';
 
-const mockfs = require('../../js/__mocks__/_fs');
+const mockfs = require('../../__mocks__/_fs');
 const MOCK_PACKAGES = mockfs.__fsMockFiles();
 
 const mockConfigJson = {
@@ -17,10 +17,10 @@ const mockConfigJson = {
 	]
 };
 
-jest.mock('../../js/_check-exists');
-jest.mock('../../js/config/default.json', () => (mockConfigJson), { virtual: true });
+jest.mock('../../lib/js/_utils/_check-exists');
+jest.mock('../../config/default.json', () => (mockConfigJson), { virtual: true });
 
-const configGenerator = require('../../js/_generate-config');
+const configGenerator = require('../../lib/js/_utils/_generate-config');
 
 describe('Generate a valid config file', () => {
 	beforeEach(() => {

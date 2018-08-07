@@ -4,7 +4,7 @@
  */
 'use strict';
 
-const checkFiles = require('../../js/_check-changed-files');
+const checkFiles = require('../../lib/js/_modules/_check-changed-files');
 
 jest.mock('path/to/global-package/package.json', () => ({
 	name: '@springernature/global-package'

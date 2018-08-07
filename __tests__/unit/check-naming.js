@@ -8,7 +8,7 @@ jest.mock('path/to/global-package/package.json', () => ({
 	name: '@springernature/global-package'
 }), {virtual: true});
 
-const checkNaming = require('../../js/_check-naming');
+const checkNaming = require('../../lib/js/_modules/_check-naming');
 
 describe('Check naming conventions', () => {
 	test('Package and folder names are valid (with prefix)', () => {

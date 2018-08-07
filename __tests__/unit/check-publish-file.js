@@ -4,7 +4,7 @@
  */
 'use strict';
 
-const checkPublishFile = require('../../js/_check-publish-file');
+const checkPublishFile = require('../../lib/js/_modules/_check-publish-file');
 
 describe('Check for updating of file when publishing', () => {
 	test('Resolve if file has been updated', () => {

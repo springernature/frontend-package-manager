@@ -6,7 +6,7 @@
 
 const path = require('path');
 const rewire = require('rewire');
-const tasks = rewire(path.resolve(__dirname, '../../js/_get-new-package-options'));
+const tasks = rewire(path.resolve(__dirname, '../../lib/js/_modules/_get-new-package-options'));
 
 // Test for a valid package name
 describe('Check for valid package names', () => {

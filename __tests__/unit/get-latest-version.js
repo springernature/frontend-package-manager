@@ -4,9 +4,9 @@
  */
 'use strict';
 
-jest.mock('../../js/_npm-registry-request');
+jest.mock('../../lib/js/_utils/_npm-registry-request');
 
-const getLatestVersion = require('../../js/_get-latest-version');
+const getLatestVersion = require('../../lib/js/_utils/_get-latest-version');
 
 describe('Get latest version of package published on NPM', () => {
 	test('The data is a valid version number', () => {

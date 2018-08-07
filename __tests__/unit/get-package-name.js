@@ -4,7 +4,7 @@
  */
 'use strict';
 
-const getPackageName = require('../../js/_get-package-name');
+const getPackageName = require('../../lib/js/_utils/_get-package-name');
 
 describe('Package name from it\'s path', () => {
 	test('The data is the package name', () => {

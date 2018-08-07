@@ -4,9 +4,9 @@
  */
 'use strict';
 
-const getExtendedFileList = require('../../js/_get-extended-file-list');
+jest.mock('../../lib/js/_utils/_get-remote-file');
 
-jest.mock('../../js/_get-remote-file');
+const getExtendedFileList = require('../../lib/js/_utils/_get-extended-file-list');
 
 const fileList = ["/topLevelFileA.ext", "/topLevelFileB.ext", "/topLevelDirA/secondLevelDirA/fileA.ext", "/topLevelDirA/secondLevelDirA/fileB.ext", "/topLevelDirA/fileA.ext", "/topLevelDirA/secondLevelDirB/fileA.ext", "/topLevelDirB/fileA.ext", "/topLevelFileC.ext"];
 

@@ -4,10 +4,10 @@
  */
 'use strict';
 
-const mockfs = require('../../js/__mocks__/_fs');
+const mockfs = require('../../__mocks__/_fs');
 const MOCK_PACKAGES = mockfs.__fsMockFiles();
 
-const exists = require('../../js/_check-exists');
+const exists = require('../../lib/js/_utils/_check-exists');
 
 describe('Check if files/folders exist on the filesystem', () => {
 	beforeEach(() => {

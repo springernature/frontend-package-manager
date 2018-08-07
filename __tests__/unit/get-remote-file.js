@@ -5,7 +5,8 @@
 'use strict';
 
 const nock = require('nock');
-const getRemoteFile = require('../../js/_get-remote-file');
+
+const getRemoteFile = require('../../lib/js/_utils/_get-remote-file');
 
 describe('Getting contents of a remote file from a URL', () => {
 	test('resolves with contents of a file', () => {

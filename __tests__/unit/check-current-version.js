@@ -4,8 +4,8 @@
  */
 'use strict';
 
-jest.mock('../../js/_get-latest-version');
-jest.mock('../../js/_check-new-version');
+jest.mock('../../lib/js/_utils/_get-latest-version');
+jest.mock('../../lib/js/_utils/_check-new-version');
 
 jest.mock('path/to/global-package/package.json', () => ({
 	name: 'global-package'
@@ -23,7 +23,7 @@ jest.mock('path/to/global-none/package.json', () => ({
 	name: 'global-none'
 }), {virtual: true});
 
-const checkCurrentVersion = require('../../js/_check-current-version');
+const checkCurrentVersion = require('../../lib/js/_utils/_check-current-version');
 
 describe('Compare NPM version and package.json version', () => {
 	test('Resolve with message when newer version in package.json - 3.0.0 > 2.0.0', () => {

@@ -8,7 +8,7 @@ jest.mock('path/to/global-package/package.json', () => ({
 	license: 'license-name'
 }), {virtual: true});
 
-const checkLicense = require('../../js/_check-license');
+const checkLicense = require('../../lib/js/_utils/_check-license');
 
 describe('Check for correct license', () => {
 	test('License matches global license', () => {
