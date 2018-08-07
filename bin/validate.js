@@ -27,5 +27,5 @@ configGenerator('package-manager.json', packageJsonPath)
 		validatePackages(packageJsonPath, config, argv);
 	})
 	.catch(err => {
-		error.displayErr(err);
+		error(err);
 	});

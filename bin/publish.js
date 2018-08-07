@@ -14,5 +14,5 @@ configGenerator('package-manager.json', packageJsonPath)
 		publishPackages(config);
 	})
 	.catch(err => {
-		error.displayErr(err);
+		error(err);
 	});

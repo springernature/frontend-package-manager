@@ -14,10 +14,17 @@ const validationJson = {
 
 describe('Check license', () => {
 	test('Throw error when no license info present in the top level package.json', () => {
-		expect.assertions(1);
-		expect(() => {
-			getLicense({});
-		}).toThrow();
+		const spy = jest.spyOn(global.console, 'log');
+		const mockExit = jest.spyOn(process, 'exit').mockImplementation(() => {});
+		getLicense({});
+
+		expect(spy).toHaveBeenCalled();
+		expect(mockExit).toHaveBeenCalledWith(1);
+
+		spy.mockReset();
+		spy.mockRestore();
+		mockExit.mockReset();
+		mockExit.mockRestore();
 	});
 
     test('Return the license type from package.json', () => {

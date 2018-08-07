@@ -13,10 +13,17 @@ describe('Check for a valid semver version', () => {
 		expect(json).toBe('1.0.0');
 	});
 
-	test('Throws an error when number is invalid', () => {
-		expect.assertions(1);
-		expect(() => {
-			checkNewVersion({version: 'x.x.x'});
-		}).toThrow();
+	test('Displays an error when number is invalid', () => {
+		const spy = jest.spyOn(global.console, 'log');
+		const mockExit = jest.spyOn(process, 'exit').mockImplementation(() => {});
+		checkNewVersion({version: 'x.x.x'});
+
+		expect(spy).toHaveBeenCalled();
+		expect(mockExit).toHaveBeenCalledWith(1);
+
+		spy.mockReset();
+		spy.mockRestore();
+		mockExit.mockReset();
+		mockExit.mockRestore();
 	});
 });
