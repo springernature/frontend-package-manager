@@ -8,7 +8,7 @@ const mockfs = require('../../../__mocks__/fs');
 const MOCK_PACKAGES = mockfs.__fsMockFiles();
 
 jest.mock('gitignore-globs');
-jest.mock('../../../lib/js/_modules/_glob-wrapper');
+jest.mock('glob');
 
 const checkValidation = require('../../../lib/js/_modules/_check-package-structure');
 

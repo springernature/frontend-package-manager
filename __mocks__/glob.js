@@ -1,5 +1,5 @@
 /**
- * __mocks__/glob-wrapper.js
+ * __mocks__/glob.js
  * Mock globbing a directory
  */
 'use strict';
