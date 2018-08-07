@@ -4,7 +4,7 @@
  */
 'use strict';
 
-const mockfs = require('../../../__mocks__/_fs');
+const mockfs = require('../../../__mocks__/fs');
 const MOCK_PACKAGES = mockfs.__fsMockFiles();
 
 const exists = require('../../../lib/js/_utils/_check-exists');

@@ -4,11 +4,13 @@
  */
 'use strict';
 
-const mockfs = require('../../../__mocks__/_fs');
+const mockfs = require('../../../__mocks__/fs');
 const MOCK_PACKAGES = mockfs.__fsMockFiles();
 
 jest.mock('gitignore-globs');
 jest.mock('../../../lib/js/_modules/_glob-wrapper');
+
+const checkValidation = require('../../../lib/js/_modules/_check-package-structure');
 
 const validationConfig = {
 	required: ['required.md'],
@@ -25,12 +27,10 @@ const validationConfigNoFolders = {
 describe('Check validation', () => {
 	beforeEach(() => {
 		jest.resetModules();
+		mockfs(MOCK_PACKAGES);
 	});
 
 	test('Error returned from glob', () => {
-		const checkValidation = require('../../../lib/js/_modules/_check-package-structure');
-		mockfs(MOCK_PACKAGES);
-
 		expect.assertions(1);
 		return expect(
 			checkValidation(validationConfig, 'path/to/global-package', 'error')
@@ -38,9 +38,6 @@ describe('Check validation', () => {
 	});
 
 	test('Resolves when filesystem matches config', () => {
-		const checkValidation = require('../../../lib/js/_modules/_check-package-structure');
-		mockfs(MOCK_PACKAGES);
-
 		expect.assertions(1);
 		return expect(
 			checkValidation(validationConfig, 'path/to/global-package', 'pass')
@@ -48,9 +45,6 @@ describe('Check validation', () => {
 	});
 
 	test('Resolves when filesystem matches config ignore files in .gitignore', () => {
-		const checkValidation = require('../../../lib/js/_modules/_check-package-structure');
-		mockfs(MOCK_PACKAGES);
-
 		expect.assertions(1);
 		return expect(
 			checkValidation(validationConfig, 'path/to/global-package', 'passGitIgnore')
@@ -58,9 +52,6 @@ describe('Check validation', () => {
 	});
 
 	test('Rejects when required file missing', () => {
-		const checkValidation = require('../../../lib/js/_modules/_check-package-structure');
-		mockfs(MOCK_PACKAGES);
-
 		expect.assertions(1);
 		return expect(
 			checkValidation(validationConfig, 'path/to/global-package', 'failIsRequired')
@@ -68,9 +59,6 @@ describe('Check validation', () => {
 	});
 
 	test('Rejects when invalid folder present', () => {
-		const checkValidation = require('../../../lib/js/_modules/_check-package-structure');
-		mockfs(MOCK_PACKAGES);
-
 		expect.assertions(1);
 		return expect(
 			checkValidation(validationConfig, 'path/to/global-package', 'failIsFolder')
@@ -78,9 +66,6 @@ describe('Check validation', () => {
 	});
 
 	test('Rejects when invalid file type present in a valid folder', () => {
-		const checkValidation = require('../../../lib/js/_modules/_check-package-structure');
-		mockfs(MOCK_PACKAGES);
-
 		expect.assertions(1);
 		return expect(
 			checkValidation(validationConfig, 'path/to/global-package', 'failIsFileType')
@@ -88,9 +73,6 @@ describe('Check validation', () => {
 	});
 
 	test('Rejects when invalid file present at top level', () => {
-		const checkValidation = require('../../../lib/js/_modules/_check-package-structure');
-		mockfs(MOCK_PACKAGES);
-
 		expect.assertions(1);
 		return expect(
 			checkValidation(validationConfig, 'path/to/global-package', 'failIsTopLevelFile')
@@ -98,9 +80,6 @@ describe('Check validation', () => {
 	});
 
 	test('Resolves with any folders when no folder config', () => {
-		const checkValidation = require('../../../lib/js/_modules/_check-package-structure');
-		mockfs(MOCK_PACKAGES);
-
 		expect.assertions(1);
 		return expect(
 			checkValidation(validationConfigNoFolders, 'path/to/global-package', 'failIsFolder')
@@ -108,9 +87,6 @@ describe('Check validation', () => {
 	});
 
 	test('Resolves with any files when no folder config', () => {
-		const checkValidation = require('../../../lib/js/_modules/_check-package-structure');
-		mockfs(MOCK_PACKAGES);
-
 		expect.assertions(1);
 		return expect(
 			checkValidation(validationConfigNoFolders, 'path/to/global-package', 'failIsFileType')

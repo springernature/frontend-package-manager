@@ -8,7 +8,7 @@ const path = require('path');
 const rewire = require('rewire');
 const stripAnsi = require('strip-ansi');
 
-const mockfs = require('../../../__mocks__/_fs');
+const mockfs = require('../../../__mocks__/fs');
 const MOCK_PACKAGES = mockfs.__fsMockFiles();
 
 // Public object returning the task

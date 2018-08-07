@@ -8,13 +8,14 @@ const pmock = require('pmock');
 
 jest.mock('../../../lib/js/_modules/_npm-utils-wrapper');
 
+const publishToNpm = require('../../../lib/js/_modules/_publish-to-npm');
+
 describe('Publishing to NPM', () => {
 	beforeEach(() => {
-        this.chdir = pmock.chdir('path/to/mock');
+        jest.chdir = pmock.chdir('path/to/mock');
 	});
 
 	test('Should resolve when publish step is successful', () => {
-		const publishToNpm = require('../../../lib/js/_modules/_publish-to-npm');
 		expect.assertions(1);
 		return expect(
 			publishToNpm({}, 'path/to/success')
@@ -22,7 +23,6 @@ describe('Publishing to NPM', () => {
 	});
 
 	test('Should reject if publish step fails', () => {
-		const publishToNpm = require('../../../lib/js/_modules/_publish-to-npm');
 		expect.assertions(1);
 		return expect(
 			publishToNpm({}, 'path/to/fail')
@@ -30,6 +30,6 @@ describe('Publishing to NPM', () => {
 	});
 
 	afterEach(() => {
-        this.chdir.reset();
+        jest.chdir.reset();
     });
 });
