@@ -3,7 +3,7 @@
 
 const path = require('path');
 
-const exitScript = require('../lib/js/_utils/_exit-script');
+const error = require('../lib/js/_utils/_error');
 const exists = require('../lib/js/_utils/_check-exists');
 const configGenerator = require('../lib/js/_utils/_generate-config');
 
@@ -18,6 +18,6 @@ configGenerator('package-manager.json', packageJsonPath)
 				createPackage(packageJsonPath, config);
 			})
 			.catch(err => {
-				exitScript.displayErr(err);
+				error.displayErr(err);
 			});
 	});

@@ -15,7 +15,7 @@ const argv = require('yargs')
 	.alias('h', 'help')
 	.argv;
 
-const exitScript = require('../lib/js/_utils/_exit-script');
+const error = require('../lib/js/_utils/_error');
 const configGenerator = require('../lib/js/_utils/_generate-config');
 
 const validatePackages = require('../lib/js/_validate');
@@ -27,5 +27,5 @@ configGenerator('package-manager.json', packageJsonPath)
 		validatePackages(packageJsonPath, config, argv);
 	})
 	.catch(err => {
-		exitScript.displayErr(err);
+		error.displayErr(err);
 	});

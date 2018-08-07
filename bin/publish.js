@@ -2,7 +2,7 @@
 
 const path = require('path');
 
-const exitScript = require('../lib/js/_utils/_exit-script');
+const error = require('../lib/js/_utils/_error');
 const configGenerator = require('../lib/js/_utils/_generate-config');
 
 const publishPackages = require('../lib/js/_publish');
@@ -14,5 +14,5 @@ configGenerator('package-manager.json', packageJsonPath)
 		publishPackages(config);
 	})
 	.catch(err => {
-		exitScript.displayErr(err);
+		error.displayErr(err);
 	});
