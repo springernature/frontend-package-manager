@@ -3,11 +3,11 @@
 
 const path = require('path');
 
-const exitScript = require('./js/_utils/_exit-script');
-const exists = require('./js/_utils/_check-exists');
-const configGenerator = require('./js/_utils/_generate-config');
+const exitScript = require('../lib/js/_utils/_exit-script');
+const exists = require('../lib/js/_utils/_check-exists');
+const configGenerator = require('../lib/js/_utils/_generate-config');
 
-const createPackage = require('./js/_create');
+const createPackage = require('../lib/js/_create');
 
 const packageJsonPath = path.resolve(process.cwd(), 'package.json');
 

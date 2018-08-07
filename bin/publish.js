@@ -2,10 +2,10 @@
 
 const path = require('path');
 
-const exitScript = require('./js/_utils/_exit-script');
-const configGenerator = require('./js/_utils/_generate-config');
+const exitScript = require('../lib/js/_utils/_exit-script');
+const configGenerator = require('../lib/js/_utils/_generate-config');
 
-const publishPackages = require('./js/_publish');
+const publishPackages = require('../lib/js/_publish');
 
 const packageJsonPath = path.resolve(process.cwd(), 'package.json');
 

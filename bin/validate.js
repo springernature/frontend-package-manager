@@ -15,10 +15,10 @@ const argv = require('yargs')
 	.alias('h', 'help')
 	.argv;
 
-const exitScript = require('./js/_utils/_exit-script');
-const configGenerator = require('./js/_utils/_generate-config');
+const exitScript = require('../lib/js/_utils/_exit-script');
+const configGenerator = require('../lib/js/_utils/_generate-config');
 
-const validatePackages = require('./js/_validate');
+const validatePackages = require('../lib/js/_validate');
 
 const packageJsonPath = path.resolve(process.cwd(), 'package.json');
 
