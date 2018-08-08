@@ -15,9 +15,18 @@
     "sn-package-publish": "./bin/publish.js"
   },
   "scripts": {
-    "test": "jest --colors --verbose --coverage --silent"
+    "test": "jest --colors --verbose --coverage --silent",
+    "lint": "eslint **/*.js"
   },
   "devDependencies": {
+    "@springernature/eslint-config": "^2.0.0",
+    "eslint": "^5.1.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jest": "^21.17.0",
+    "eslint-plugin-no-use-extend-native": "^0.3.12",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-unicorn": "^4.0.3",
     "gitignore-globs": "^0.1.1",
     "jest": "^23.1.0",
     "mock-fs": "^4.5.0",
