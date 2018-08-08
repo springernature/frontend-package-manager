@@ -11,9 +11,5 @@ const createPackage = require('../lib/js/_create');
 const packageJsonPath = path.resolve(process.cwd(), 'package.json');
 
 configGenerator('package-manager.json', packageJsonPath)
-	.then(config => {
-		createPackage(packageJsonPath, config);
-	})
-	.catch(err => {
-		error(err);
-	});
+	.then(config => createPackage(packageJsonPath, config))
+	.catch(err => error(err));

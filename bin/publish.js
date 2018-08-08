@@ -11,9 +11,5 @@ const publishPackages = require('../lib/js/_publish');
 const packageJsonPath = path.resolve(process.cwd(), 'package.json');
 
 configGenerator('package-manager.json', packageJsonPath)
-	.then(config => {
-		publishPackages(config);
-	})
-	.catch(err => {
-		error(err);
-	});
+	.then(config => publishPackages(config))
+	.catch(err => error(err));

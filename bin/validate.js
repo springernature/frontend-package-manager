@@ -24,9 +24,5 @@ const validatePackages = require('../lib/js/_validate');
 const packageJsonPath = path.resolve(process.cwd(), 'package.json');
 
 configGenerator('package-manager.json', packageJsonPath)
-	.then(config => {
-		validatePackages(packageJsonPath, config, argv);
-	})
-	.catch(err => {
-		error(err);
-	});
+	.then(config => validatePackages(packageJsonPath, config, argv))
+	.catch(err => error(err));
