@@ -26,8 +26,9 @@ const validationConfigNoFolders = {
 
 describe('Check validation', () => {
 	beforeEach(() => {
-		jest.resetModules();
 		mockfs(MOCK_PACKAGES);
+		jest.resetModules();
+
 	});
 
 	test('Error returned from glob', () => {
