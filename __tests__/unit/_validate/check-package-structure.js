@@ -1,6 +1,6 @@
 /**
- * __tests__/unit/_modules/check-validation.js
- * Test: js/_modules/_check-package-structure.js
+ * __tests__/unit/_validate/check-validation.js
+ * Test: js/_validate/_check-package-structure.js
  */
 'use strict';
 
@@ -10,7 +10,7 @@ const MOCK_PACKAGES = mockfs.__fsMockFiles();
 jest.mock('gitignore-globs');
 jest.mock('glob');
 
-const checkValidation = require('../../../lib/js/_modules/_check-package-structure');
+const checkValidation = require('../../../lib/js/_validate/_check-package-structure');
 
 const validationConfig = {
 	required: ['required.md'],

@@ -1,12 +1,12 @@
 /**
- * __tests__/unit/_modules/get-license.js
- * Test: js/_modules/_get-license.js
+ * __tests__/unit/_utils/get-license.js
+ * Test: js/_utils/_get-license.js
  */
 'use strict';
 
 jest.mock('path/to/package.json', () => ({}), {virtual: true});
 
-const getLicense = require('../../../lib/js/_modules/_get-license');
+const getLicense = require('../../../lib/js/_utils/_get-license');
 
 const validationJson = {
 	license: "license-name"

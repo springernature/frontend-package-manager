@@ -1,6 +1,6 @@
 /**
- * __tests__/unit/_modules/publish-to-npm.js
- * Test: js/_modules/_publish-to-npm.js
+ * __tests__/unit/_publish/publish-to-npm.js
+ * Test: js/_publish/_publish-to-npm.js
  */
 'use strict';
 
@@ -8,7 +8,7 @@ const pmock = require('pmock');
 
 jest.mock('npm-utils');
 
-const publishToNpm = require('../../../lib/js/_modules/_publish-to-npm');
+const publishToNpm = require('../../../lib/js/_publish/_publish-to-npm');
 
 describe('Publishing to NPM', () => {
 	beforeEach(() => {

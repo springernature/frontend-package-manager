@@ -1,10 +1,11 @@
 /**
- * __tests__/unit/_modules/build-new-package.js
- * Test: js/_modules/_build-new-package.js
+ * __tests__/unit/_create/build-new-package.js
+ * Test: js/_create/_build-new-package.js
  */
 'use strict';
 
 const path = require('path');
+
 const rewire = require('rewire');
 const stripAnsi = require('strip-ansi');
 
@@ -18,7 +19,7 @@ describe('Create task object based on config and answers', () => {
 	});
 
 	test('valid task format', () => {
-		const tasks = rewire(path.resolve(__dirname, '../../../lib/js/_modules/_build-new-package'));
+		const tasks = rewire(path.resolve(__dirname, '../../../lib/js/_create/_build-new-package'));
 		mockfs(MOCK_PACKAGES);
 
 		const result = tasks(
@@ -50,7 +51,7 @@ describe('Create task object based on config and answers', () => {
 // Contents of package.json
 describe('Create contents for package.json file', () => {
 	test('valid contents', () => {
-		const tasks = rewire(path.resolve(__dirname, '../../../lib/js/_modules/_build-new-package'));
+		const tasks = rewire(path.resolve(__dirname, '../../../lib/js/_create/_build-new-package'));
 		const configurePackageJson = tasks.__get__('configurePackageJson');
 
 		const result = `{
@@ -86,7 +87,7 @@ describe('Create folder tasks based on answers', () => {
 	});
 
 	test('valid task format', () => {
-		const tasks = rewire(path.resolve(__dirname, '../../../lib/js/_modules/_build-new-package'));
+		const tasks = rewire(path.resolve(__dirname, '../../../lib/js/_create/_build-new-package'));
 		const generateFolders = tasks.__get__('generateFolders');
 		mockfs(MOCK_PACKAGES);
 
@@ -112,7 +113,7 @@ describe('Create files based on config', () => {
 	});
 
 	test('valid task format', () => {
-		const tasks = rewire(path.resolve(__dirname, '../../../lib/js/_modules/_build-new-package'));
+		const tasks = rewire(path.resolve(__dirname, '../../../lib/js/_create/_build-new-package'));
 		const generateFiles = tasks.__get__('generateFiles');
 		mockfs(MOCK_PACKAGES);
 

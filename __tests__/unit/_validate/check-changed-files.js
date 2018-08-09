@@ -1,6 +1,6 @@
 /**
- * __tests__/unit/_modules/check-changed-files.js
- * Test: js/_modules/_check-changed-files.js
+ * __tests__/unit/_validate/check-changed-files.js
+ * Test: js/_validate/_check-changed-files.js
  */
 'use strict';
 
@@ -8,7 +8,7 @@ jest.mock('path/to/global-package/package.json', () => ({
 	name: '@springernature/global-package'
 }), { virtual: true });
 
-const checkFiles = require('../../../lib/js/_modules/_check-changed-files');
+const checkFiles = require('../../../lib/js/_validate/_check-changed-files');
 
 describe('Check correct files appear in CI changed files list', () => {
 	test('Reject if changelog not updated', () => {

@@ -1,15 +1,16 @@
 /**
- * __tests__/unit/_modules/get-new-package-options.js
- * Test: js/_modules/_get-new-package-options.js
+ * __tests__/unit/_create/get-new-package-options.js
+ * Test: js/_create/_get-new-package-options.js
  */
 'use strict';
 
 const path = require('path');
+
 const rewire = require('rewire');
 
 const tasks = rewire(
 	path.resolve(
-		__dirname, '../../../lib/js/_modules/_get-new-package-options'
+		__dirname, '../../../lib/js/_create/_get-new-package-options'
 	)
 );
 

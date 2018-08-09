@@ -1,10 +1,10 @@
 /**
- * __tests__/unit/_modules/check-publish-file.js
- * Test: js/_modules/_check-publish-file.js
+ * __tests__/unit/_validate/check-publish-file.js
+ * Test: js/_validate/_check-publish-file.js
  */
 'use strict';
 
-const checkPublishFile = require('../../../lib/js/_modules/_check-publish-file');
+const checkPublishFile = require('../../../lib/js/_validate/_check-publish-file');
 
 describe('Check for updating of file when publishing', () => {
 	test('Resolve if file has been updated', () => {
