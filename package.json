@@ -16,7 +16,7 @@
   },
   "scripts": {
     "test": "jest --colors --verbose --coverage --silent",
-    "lint": "eslint **/*.js"
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@springernature/eslint-config": "^2.0.0",
