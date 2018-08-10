@@ -9,6 +9,9 @@
     "npm"
   ],
   "author": "Alex Kilgour",
+  "engines": {
+    "node": ">=8"
+  },
   "bin": {
     "sn-package-create": "./bin/create.js",
     "sn-package-validate": "./bin/validate.js",
