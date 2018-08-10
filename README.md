@@ -78,7 +78,7 @@ The following example would allow a folder with the name `js` that contains file
 }
 ```
 
-## License
+## Package licensing
 
 All packages that are published **MUST** be licensed. As packages are published as part of a monorepo the license file should live in the root of the repository, and be referenced in the `package.json`. If a `license` key is not found then no packages will be published.
 
@@ -124,6 +124,12 @@ $ ./node_modules/.bin/sn-package-validate
 
  ```
  $ npm run validate -- -p name-of-package
+ ```
+
+ To view all the options:
+
+ ```
+ $ ./node_modules/.bin/sn-package-validate -h
  ```
 
 ### Package publication

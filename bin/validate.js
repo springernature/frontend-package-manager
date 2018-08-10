@@ -4,14 +4,14 @@
 const path = require('path');
 const argv = require('yargs')
 	.usage('Usage: $0 [options]')
-	.example('$0 -p name-of-package', 'validate only the named package')
-	.example('$0 -n', 'validate publishing a new version')
+	.example('$0 -p name-of-package', 'Validate only the named package')
+	.example('$0 -n', 'Validate publishing a new version')
 	.boolean(['n'])
 	.alias('p', 'package')
 	.nargs('p', 1)
-	.describe('p', 'validate a package')
+	.describe('p', 'Validate a package')
 	.alias('n', 'npm')
-	.describe('n', 'validate NPM publication')
+	.describe('n', 'Validate NPM publication')
 	.help('h')
 	.alias('h', 'help')
 	.argv;

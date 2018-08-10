@@ -59,6 +59,9 @@
     "modulePaths": [
       "<rootDir>/"
     ],
-    "testRegex": "__tests__/.*\\.js$"
+    "testRegex": "__tests__/.*\\.js$",
+    "collectCoverageFrom": [
+      "**/lib/**/*.js"
+    ]
   }
 }
