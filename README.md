@@ -1,7 +1,7 @@
-# Front-end Package manager
+# Front-end package manager
 
 ![frontend-package-manager](https://img.shields.io/npm/v/@springernature/frontend-package-manager.svg)
-![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)
+![LGPL 3.0 licensed](https://img.shields.io/badge/license-LGPL%203.0-blue.svg)
 
 Handles the **creation**, **validation**, and **publication** of packages built as part of the Springer Nature Front-End Toolkits.
 
