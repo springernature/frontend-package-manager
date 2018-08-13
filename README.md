@@ -223,3 +223,11 @@ This package has been written to work with [TRAVIS CI](https://travis-ci.org/) a
 - [`package.json`](https://github.com/springernature/frontend-global-toolkit/blob/master/package.json)
 - [`package-manager.json`](https://github.com/springernature/frontend-global-toolkit/blob/master/package-manager.json)
 - [`.travis.yml`](https://github.com/springernature/frontend-global-toolkit/blob/master/.travis.yml)
+
+## Testing
+
+Unit tests for this package are written with [Jest](https://jestjs.io/en/). To run all the tests use `npm run test` from the command line.
+
+## Linting
+
+Javascript linting is enforced using the [Springer Nature Eslint config](https://www.npmjs.com/package/@springernature/eslint-config). Run the linter using `npm run lint` from the command line.
