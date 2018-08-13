@@ -231,3 +231,8 @@ Unit tests for this package are written with [Jest](https://jestjs.io/en/). To r
 ## Linting
 
 Javascript linting is enforced using the [Springer Nature Eslint config](https://www.npmjs.com/package/@springernature/eslint-config). Run the linter using `npm run lint` from the command line.
+
+## License
+
+This repository is licensed under the [Lesser General Public License (LGPL-3.0)](LICENSE).
+Copyright &copy; 2018, Springer Nature
