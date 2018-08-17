@@ -1,7 +1,9 @@
 # Front-end package manager
 
-![frontend-package-manager](https://img.shields.io/npm/v/@springernature/frontend-package-manager.svg)
-![LGPL 3.0 licensed](https://img.shields.io/badge/license-LGPL%203.0-blue.svg)
+[![NPM version][badge-npm]][info-npm]
+[![Node version][badge-node]][info-node]
+[![Build Status][badge-build]][info-build]
+[![LGPL 3.0 licensed][badge-license]][info-license]
 
 Handles the **creation**, **validation**, and **publication** of packages built as part of the Springer Nature Front-End Toolkits.
 
@@ -234,5 +236,14 @@ Javascript linting is enforced using the [Springer Nature Eslint config](https:/
 
 ## License
 
-This repository is licensed under the [Lesser General Public License (LGPL-3.0)](LICENSE).
+This repository is licensed under the [Lesser General Public License (LGPL-3.0)][info-license].
 Copyright &copy; 2018, Springer Nature
+
+[info-npm]: https://www.npmjs.com/package/@springernature/frontend-package-manager
+[badge-npm]: https://img.shields.io/npm/v/@springernature/frontend-package-manager.svg
+[info-license]: LICENSE
+[badge-license]: https://img.shields.io/badge/license-LGPL%203.0-blue.svg
+[info-build]: https://travis-ci.org/springernature/frontend-package-manager
+[badge-build]: https://api.travis-ci.org/springernature/frontend-package-manager.svg?branch=master
+[badge-node]: https://img.shields.io/badge/node->=8-brightgreen.svg
+[info-node]: package.json
