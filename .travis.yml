@@ -2,9 +2,6 @@
 # Build matrix
 language: node_js
 
-gemfile:
-  - Gemfile
-
 # cache the node modules
 cache:
   directories:
