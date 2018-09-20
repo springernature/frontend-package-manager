@@ -146,13 +146,15 @@ $ ./node_modules/.bin/sn-package-publish
 
 If the `allowExtends` option is set to `TRUE` then packages within the current repository can extend other (remote) packages _from the same [scope](#scope)_.
 
-To extend another package, you need to define the package you wish to extend as a dependency within the `package.json` file of the local package. This should take the form `"extendsPackage": "name@version"`. In the following example we would extend version `1.0.0` of the package `left-pad` from NPM:
+To extend another package, you need to define the package you wish to extend as a dependency within the `package.json` file of the local package. This should take the form `"extendsPackage": "name@version"`. In the following example we would extend version `1.0.0` of the package `global-button` from NPM:
 
 ```json
 {
-  "extendsPackage": "left-pad@1.0.0"
+  "extendsPackage": "global-button@1.0.0"
 }
 ```
+
+You _do not_ need to specify the scope as this is taken from the configuration, but you must specify a specific version using valid semver.
 
 Extending works by merging any files from the dependency package into the local package if they do not already exist. This process is designed to [run on your CI environment](#continuous-integration) during the publication stage. Take the following example file structures for a local package, and it's dependency:
 
