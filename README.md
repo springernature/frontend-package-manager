@@ -3,6 +3,7 @@
 [![NPM version][badge-npm]][info-npm]
 [![Node version][badge-node]][info-node]
 [![Build Status][badge-build]][info-build]
+[![Coverage Status][badge-coverage]][info-coverage]
 [![LGPL 3.0 licensed][badge-license]][info-license]
 
 Handles the **creation**, **validation**, and **publication** of packages built as part of the Springer Nature Front-End Toolkits.
@@ -249,3 +250,5 @@ Copyright &copy; 2018, Springer Nature
 [badge-build]: https://api.travis-ci.org/springernature/frontend-package-manager.svg?branch=master
 [badge-node]: https://img.shields.io/badge/node->=8-brightgreen.svg
 [info-node]: package.json
+[badge-coverage]: https://coveralls.io/repos/github/springernature/frontend-package-manager/badge.svg?branch=master
+[info-coverage]: https://coveralls.io/github/springernature/frontend-package-manager?branch=master
