@@ -93,7 +93,7 @@ describe('Create folder tasks based on answers', () => {
 		const generateFolders = tasks.__get__('generateFolders');
 		mockfs(MOCK_PACKAGES);
 
-		const result = generateFolders({
+		const result = generateFolders({"CSSDirectoryStructure": ["10-settings", "20-functions", "30-mixins", "40-base", "50-components", "60-utilities"]},{
 			pkgname: 'package',
 			folders: ['scss', 'view']
 		});
