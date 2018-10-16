@@ -115,8 +115,13 @@ describe('Create folder tasks based on answers', () => {
 		expect(stripAnsi(result[1].title)).toBe('Create folder package/view');
 	});
 
-	test('empty answers arg', () => {
+	test('empty answers arg does not error', () => {
 		const tasks = rewire(rewirePath);
+		tasks.__set__('console',{
+				error: errorMock
+			}
+		);
+
 		const generateFolders = tasks.__get__('generateFolders');
 		mockfs(MOCK_PACKAGES);
 
@@ -129,7 +134,7 @@ describe('Create folder tasks based on answers', () => {
 			expect(errorMock).not.toHaveBeenCalled();
 	});
 
-	test('empty config arg', () => {
+	test('empty config arg does not error', () => {
 		const tasks = rewire(rewirePath);
 		tasks.__set__('console',{
 				error: errorMock
@@ -139,7 +144,7 @@ describe('Create folder tasks based on answers', () => {
 		const generateFolders = tasks.__get__('generateFolders');
 		mockfs(MOCK_PACKAGES);
 		
-		const result = generateFolders({
+		generateFolders({
 			},{
 			pkgname: 'package',
 			folders: ['scss', 'view']
