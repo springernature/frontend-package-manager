@@ -6,7 +6,6 @@
 	"allowExtends": false,
 	"required": [
 		"README.md",
-		"package.json",
-		".npmignore"
+		"package.json"
 	]
 }
