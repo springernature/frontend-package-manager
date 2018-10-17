@@ -84,7 +84,7 @@ The following example would allow a folder with the name `js` that contains file
 #### CSSDirectoryStructure
 This option allows you to specify a custom CSS folder structure. This is used in the [package creation](#package-creation) step to generate a sub-folder structure within a specified folder, to assist in quickly spinning up a new package. It is not used in the validation or publication steps.
 
-The following shows an example folder structure that is taken from the [frontend-global-toolkit](https://github.com/springernature/frontend-global-toolkit):
+The following shows an example folder structure, taken from the [frontend-global-toolkit](https://github.com/springernature/frontend-global-toolkit):
 
 ```json
 "CSSDirectoryStructure": {
