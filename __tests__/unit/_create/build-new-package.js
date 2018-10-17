@@ -84,17 +84,8 @@ describe('Create contents for package.json file', () => {
 
 // Create folders based on answers
 describe('Create folder tasks based on answers', () => {
-	let errorMock;
 	beforeEach(() => {
-		errorMock = jest.fn(
-			(...args) => true
-		);
 		jest.resetModules();
-	});
-	afterEach(() => {
-		errorMock.mockRestore();
-		jest.resetModules();
-		mockfs.restore();
 	});
 
 	test('valid task format', () => {
@@ -102,58 +93,40 @@ describe('Create folder tasks based on answers', () => {
 		const generateFolders = tasks.__get__('generateFolders');
 		mockfs(MOCK_PACKAGES);
 
-		const result = generateFolders({
-			CSSDirectoryStructure: 
-				["10-settings", "20-functions", "30-mixins", "40-base", "50-components", "60-utilities"]
-			},{
-			pkgname: 'package',
-			folders: ['scss', 'view']
-		});
+		const result = generateFolders({},
+			{
+				pkgname: 'package',
+				folders: ['scss', 'view']
+			});
 
 		expect.assertions(2);
 		expect(stripAnsi(result[0].title)).toBe('Create folder package/scss');
 		expect(stripAnsi(result[1].title)).toBe('Create folder package/view');
 	});
 
-	test('empty answers arg does not error', () => {
+	test('valid task format, with CSS directory structure', () => {
 		const tasks = rewire(rewirePath);
-		tasks.__set__('console',{
-				error: errorMock
-			}
-		);
-
 		const generateFolders = tasks.__get__('generateFolders');
 		mockfs(MOCK_PACKAGES);
 
-		generateFolders({
-			CSSDirectoryStructure: 
-				["10-settings", "20-functions", "30-mixins", "40-base", "50-components", "60-utilities"]
-			},{});
-
-			expect.assertions(1);
-			expect(errorMock).not.toHaveBeenCalled();
-	});
-
-	test('empty config arg does not error', () => {
-		const tasks = rewire(rewirePath);
-		tasks.__set__('console',{
-				error: errorMock
+		const result = generateFolders({
+			CSSDirectoryStructure: {
+				"scss": ["A", "B"]
 			}
-		);
+			}, {
+				pkgname: 'package',
+				folders: ['scss', 'view']
+			});
 
-		const generateFolders = tasks.__get__('generateFolders');
-		mockfs(MOCK_PACKAGES);
-		
-		generateFolders({
-			},{
-			pkgname: 'package',
-			folders: ['scss', 'view']
-		});
-
-		expect.assertions(1);
-		expect(errorMock).not.toHaveBeenCalled();
+		expect.assertions(3);
+		expect(stripAnsi(result[0].title)).toBe('Create folder package/scss');
+		expect(stripAnsi(result[1].title)).toBe('Create sub-folder structure within package/scss');
+		expect(stripAnsi(result[2].title)).toBe('Create folder package/view');
 	});
 
+	afterEach(() => {
+		mockfs.restore();
+	});
 });
 
 // Create files based on answers
