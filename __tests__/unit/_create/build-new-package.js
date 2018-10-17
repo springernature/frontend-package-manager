@@ -93,14 +93,35 @@ describe('Create folder tasks based on answers', () => {
 		const generateFolders = tasks.__get__('generateFolders');
 		mockfs(MOCK_PACKAGES);
 
-		const result = generateFolders({
-			pkgname: 'package',
-			folders: ['scss', 'view']
-		});
+		const result = generateFolders({},
+			{
+				pkgname: 'package',
+				folders: ['scss', 'view']
+			});
 
 		expect.assertions(2);
 		expect(stripAnsi(result[0].title)).toBe('Create folder package/scss');
 		expect(stripAnsi(result[1].title)).toBe('Create folder package/view');
+	});
+
+	test('valid task format, with CSS directory structure', () => {
+		const tasks = rewire(rewirePath);
+		const generateFolders = tasks.__get__('generateFolders');
+		mockfs(MOCK_PACKAGES);
+
+		const result = generateFolders({
+			CSSDirectoryStructure: {
+				"scss": ["A", "B"]
+			}
+			}, {
+				pkgname: 'package',
+				folders: ['scss', 'view']
+			});
+
+		expect.assertions(3);
+		expect(stripAnsi(result[0].title)).toBe('Create folder package/scss');
+		expect(stripAnsi(result[1].title)).toBe('Create sub-folder structure within package/scss');
+		expect(stripAnsi(result[2].title)).toBe('Create folder package/view');
 	});
 
 	afterEach(() => {

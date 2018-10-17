@@ -81,6 +81,26 @@ The following example would allow a folder with the name `js` that contains file
 }
 ```
 
+#### CSSDirectoryStructure
+This option allows you to specify a custom CSS folder structure. This is used in the [package creation](#package-creation) step to generate a sub-folder structure within a specified folder, to assist in quickly spinning up a new package. It is not used in the validation or publication steps.
+
+The following shows an example folder structure, taken from the [frontend-global-toolkit](https://github.com/springernature/frontend-global-toolkit):
+
+```json
+"CSSDirectoryStructure": {
+  "scss": [
+    "10-settings",
+    "20-functions",
+    "30-mixins",
+    "40-base",
+    "50-components",
+    "60-utilities"
+  ]
+}
+```
+
+In the above example, the object key `scss`, needs to match a key of the same name from the [folders](#folders) option mentioned above, to enable the sub-folders to be created in the correct parent.
+
 ## Package licensing
 
 All packages that are published **MUST** be licensed. As packages are published as part of a monorepo the license file should live in the root of the repository, and be referenced in the `package.json`. If a `license` key is not found then no packages will be published.
