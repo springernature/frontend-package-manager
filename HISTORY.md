@@ -1,6 +1,6 @@
 # History
 
-## 0.2.3 (2018-10-18)
+## 0.2.0 (2018-10-18)
 	* Creates subdirectory structure
 
 ## 0.1.3 (2018-10-01)
