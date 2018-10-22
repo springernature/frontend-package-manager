@@ -1,5 +1,8 @@
 # History
 
+## 0.2.0 (2018-10-18)
+	* Creates subdirectory structure
+
 ## 0.1.3 (2018-10-01)
 	* Fixes a bug when checking extended packages
 	* Was failing for packages that were not extended
