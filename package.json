@@ -32,10 +32,11 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-unicorn": "^4.0.3",
     "jest": "^24.1.0",
-    "q": "^1.5.0",
     "mock-fs": "^4.8.0",
+    "mock-os": "0.0.1",
     "nock": "^9.6.1",
     "pmock": "^0.2.3",
+    "q": "^1.5.0",
     "rewire": "^3.0.2",
     "strip-ansi": "^4.0.0"
   },
