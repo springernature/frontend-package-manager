@@ -28,4 +28,15 @@ describe('Generate Auth token URL', () => {
 			token: '//registry.npmjs.org/:_authToken=${FOO}'
 		});
 	});
+
+	test('Handles default ENV name', () => {
+		const registryUrl = 'https://registry.npmjs.org/';
+		const result = formAuthToken(registryUrl);
+
+		expect.assertions(1);
+		expect(result).toEqual({
+			test: '//registry.npmjs.org/:_authToken=',
+			token: '//registry.npmjs.org/:_authToken=${NPM_TOKEN}'
+		});
+	});
 });

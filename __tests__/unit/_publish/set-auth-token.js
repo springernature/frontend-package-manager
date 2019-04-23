@@ -27,15 +27,50 @@ const setAuthToken = require('../../../lib/js/_publish/_set-auth-token');
 describe('Set the auth token inside the correct .npmrc file', () => {
 	beforeEach(() => {
 		mockfs(MOCK_PACKAGES);
-		mockos({'homedir': '/home/user'});
 	});
-
-	test('XYZ', () => {
+	
+	test('Save new contents', () => {
+		mockos({'homedir': 'home/user'});
 		expect.assertions(1);
 		return expect(
 			setAuthToken('path/to/auth-package', null)
-			// path/to/auth-package/package.json
-		).resolves.toEqual('');
+		).resolves.toEqual([{
+			type: 'info',
+			description: 'npmrc file saved',
+			message: 'home/user/.npmrc'
+		}]);
+	});
+
+	test('Save new contents using custom registry', () => {
+		mockos({'homedir': 'home/user'});
+		expect.assertions(1);
+		return expect(
+			setAuthToken('path/to/auth-package-custom', null)
+		).resolves.toEqual([{
+			type: 'info',
+			description: 'npmrc file saved',
+			message: 'home/user/.npmrc'
+		}]);
+	});
+
+	test('Contents already exists', () => {
+		mockos({'homedir': 'home/user-b'});
+		expect.assertions(1);
+		return expect(
+			setAuthToken('path/to/auth-package', null)
+		).resolves.toEqual([{
+			type: 'info',
+			description: 'npmrc file already has correct contents',
+			message: 'skipping file generation'
+		}]);
+	});
+
+	test('Auth token already set', () => {
+		mockos({'homedir': 'home/user-c'});
+		expect.assertions(1);
+		return expect(
+			setAuthToken('path/to/auth-package', null)
+		).rejects.toBeInstanceOf(Error);
 	});
 
 	afterEach(() => {
