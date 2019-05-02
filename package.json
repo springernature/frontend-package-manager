@@ -50,7 +50,6 @@
     "minimatch": "^3.0.4",
     "npm-registry-client": "^8.3.0",
     "pretty-error": "^2.1.1",
-    "registry-url": "^5.1.0",
     "sanitize-filename": "^1.6.1",
     "semver": "^5.6.0",
     "validate-npm-package-name": "^3.0.0",

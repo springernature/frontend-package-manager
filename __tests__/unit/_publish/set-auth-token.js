@@ -6,8 +6,6 @@
 
 const mockos = require('mock-os');
 
-jest.mock('registry-url');
-
 const mockfs = require('../../../__mocks__/fs');
 const MOCK_PACKAGES = mockfs.__fsMockFiles();
 
