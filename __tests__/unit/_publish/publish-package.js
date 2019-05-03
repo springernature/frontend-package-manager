@@ -20,21 +20,21 @@ describe('Publish a package to NPM', () => {
 	test('Successfully publish package', () => {
 		expect.assertions(1);
 		return expect(
-			publish({access: 'public'})
+			publish()
 		).resolves.toEqual();
 	});
 
 	test('Error publishing package', () => {
 		expect.assertions(1);
 		return expect(
-			publish({access: 'public'})
+			publish()
 		).rejects.toBeInstanceOf(Error);
 	});
 
 	test('Exit publishing with error', () => {
 		expect.assertions(1);
 		return expect(
-			publish({access: 'public'})
+			publish()
 		).rejects.toBeInstanceOf(Error);
 	});
 });
