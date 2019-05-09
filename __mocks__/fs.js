@@ -36,7 +36,10 @@ const __fsMockFiles = () => {
 			'empty-dir': {/** empty directory */}
 		},
 		'path/to/some.png': Buffer.from([8, 6, 7, 5, 3, 0, 9]),
-		'some/other/path': {/** another empty directory */}
+		'some/other/path': {/** another empty directory */},
+		'home/user/.npmrc': '//mock-registry.npmjs.org/:_authToken=xyz',
+		'home/user-b/.npmrc': `//registry.npmjs.org/:_authToken=$\{NPM_TOKEN}`,
+		'home/user-c/.npmrc': `//registry.npmjs.org/:_authToken=$\{OTHER_NPM_TOKEN}`
 	};
 };
 
