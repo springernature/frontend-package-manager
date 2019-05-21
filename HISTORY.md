@@ -1,5 +1,9 @@
 # History
 
+## 1.0.0 (2019-05-21)
+	* Removes dependency on npm-utils
+	* Stable version
+
 ## 0.2.0 (2018-10-18)
 	* Creates subdirectory structure
 
