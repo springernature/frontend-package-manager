@@ -31,6 +31,12 @@ const results = {
 		'path/to/global-package/folder3/file.scss',
 		'path/to/global-package/folder3/file.js'
 	],
+	passDotfiles: [
+		'path/to/global-package/required.md',
+		'path/to/global-package/.adotfile',
+		'path/to/global-package/folder1',
+		'path/to/global-package/folder1/.anotherdotfile',
+	],
 	failIsRequired: [
 		'path/to/global-package/folder1',
 		'path/to/global-package/folder1/file.scss',
