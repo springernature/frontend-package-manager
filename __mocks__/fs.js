@@ -11,13 +11,16 @@ const __fsMockFiles = () => {
 		'path/to/global-package': {
 			'required.md': 'file content',
 			'fail.md': 'file content',
+			'.adotfile': 'file content',
 			folder1: {
 				'file.scss': 'file content',
 				'file.css': 'file content',
-				'file.js': 'file content'
+				'file.js': 'file content',
+				'.anotherdotfile': 'nested dotfile content'
 			},
 			folder2: {
 				'file.js': 'file content',
+				'file.spec.js': 'file content',
 				'file.json': 'file content',
 				subfolder: {
 					'file.js': 'file content'

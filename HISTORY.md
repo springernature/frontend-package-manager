@@ -1,5 +1,11 @@
 # History
 
+## 2.0.0 (2019-07-03)
+	* .dotfiles anywhere in a package now valid
+	
+## 1.0.1 (2019-07-03)
+	* Update package validation to allow .spec.js files
+
 ## 1.0.0 (2019-05-21)
 	* Removes dependency on npm-utils
 	* Stable version
