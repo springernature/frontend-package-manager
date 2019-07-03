@@ -1,5 +1,8 @@
 # History
 
+## 1.0.1 (2019-07-3)
+	* Update package validation to allow .spec.js files
+
 ## 1.0.0 (2019-05-21)
 	* Removes dependency on npm-utils
 	* Stable version
