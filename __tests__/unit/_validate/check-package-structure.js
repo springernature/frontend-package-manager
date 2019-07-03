@@ -59,6 +59,13 @@ describe('Check validation', () => {
 		).rejects.toBeInstanceOf(Error);
 	});
 
+	test('Does not reject when dotfiles included', () => {
+		expect.assertions(1);
+		return expect(
+			checkValidation(validationConfig, 'path/to/global-package', 'passDotfiles')
+		).resolves.toEqual();
+	});
+
 	test('Rejects when invalid folder present', () => {
 		expect.assertions(1);
 		return expect(
