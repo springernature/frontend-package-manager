@@ -12,6 +12,7 @@ const results = {
 		'path/to/global-package/folder1/file.css',
 		'path/to/global-package/folder2',
 		'path/to/global-package/folder2/file.js',
+		'path/to/global-package/folder2/file.spec.js',
 		'path/to/global-package/folder2/file.json',
 		'path/to/global-package/folder2/subfolder',
 		'path/to/global-package/folder2/subfolder/file.js'
