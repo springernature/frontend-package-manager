@@ -18,6 +18,7 @@ const __fsMockFiles = () => {
 			},
 			folder2: {
 				'file.js': 'file content',
+				'file.spec.js': 'file content',
 				'file.json': 'file content',
 				subfolder: {
 					'file.js': 'file content'
