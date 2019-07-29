@@ -1,5 +1,9 @@
 # History
 
+## 2.0.1 (2019-07-29)
+	* BUG: handling unpkg redirects
+	* unpkg now redirects to /browse for directories
+
 ## 2.0.0 (2019-07-03)
 	* .dotfiles anywhere in a package now valid
 	
