@@ -16,7 +16,7 @@ describe('Getting contents of a remote file from a URL', () => {
 
 		expect.assertions(1);
 		return expect(
-			getRemoteFile('https://www.example.com/success', 'package')
+			getRemoteFile('https://www.example.com/success')
 		).resolves.toEqual('domain matched');
 	});
 
@@ -27,7 +27,7 @@ describe('Getting contents of a remote file from a URL', () => {
 
 		expect.assertions(1);
 		return expect(
-			getRemoteFile('https://www.example.com/notfound', 'package')
+			getRemoteFile('https://www.example.com/notfound')
 		).rejects.toBeInstanceOf(Error);
 	});
 
@@ -38,7 +38,7 @@ describe('Getting contents of a remote file from a URL', () => {
 
 		expect.assertions(1);
 		return expect(
-			getRemoteFile('https://www.example.com/failure', 'package')
+			getRemoteFile('https://www.example.com/failure')
 		).rejects.toBeInstanceOf(Error);
 	});
 
