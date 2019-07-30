@@ -1,5 +1,9 @@
 # History
 
+## 2.0.2 (2019-07-30)
+	* Switch CDN from unpkg to jsDelivr
+	* Hopefully fixes bug with reliability
+
 ## 2.0.1 (2019-07-29)
 	* BUG: handling unpkg redirects
 	* unpkg now redirects to /browse for directories
