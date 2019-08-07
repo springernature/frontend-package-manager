@@ -1,5 +1,8 @@
 # History
 
+## 2.1.0 (2019-08-07)
+	* Feature: Allow multiple retries on CDN requests
+
 ## 2.0.2 (2019-07-30)
 	* Switch CDN from unpkg to jsDelivr
 	* Hopefully fixes bug with reliability
