@@ -4,6 +4,8 @@
  */
 'use strict';
 
+jest.mock('@springernature/util-cli-reporter');
+
 const checkPublishFile = require('../../../lib/js/_validate/_check-publish-file');
 
 describe('Check for updating of file when publishing', () => {

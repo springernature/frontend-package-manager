@@ -6,6 +6,8 @@
 
 const nock = require('nock');
 
+jest.mock('@springernature/util-cli-reporter');
+
 const getRemoteFile = require('../../../lib/js/_utils/_get-remote-file');
 
 describe('Getting contents of a remote file from a URL', () => {

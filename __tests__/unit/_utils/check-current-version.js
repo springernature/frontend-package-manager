@@ -4,6 +4,7 @@
  */
 'use strict';
 
+jest.mock('@springernature/util-cli-reporter');
 jest.mock('../../../lib/js/_utils/_get-latest-version');
 jest.mock('../../../lib/js/_utils/_check-new-version');
 

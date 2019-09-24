@@ -4,6 +4,8 @@
  */
 'use strict';
 
+console.log = jest.fn();
+
 const error = require('../../../lib/js/_utils/_error');
 
 describe('Exiting a script', () => {

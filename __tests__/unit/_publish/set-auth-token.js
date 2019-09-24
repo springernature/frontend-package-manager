@@ -9,6 +9,8 @@ const mockos = require('mock-os');
 const mockfs = require('../../../__mocks__/fs');
 const MOCK_PACKAGES = mockfs.__fsMockFiles();
 
+jest.mock('@springernature/util-cli-reporter');
+
 jest.mock('path/to/auth-package/package.json', () => ({
 	name: 'global-package'
 }), {virtual: true});
@@ -32,11 +34,10 @@ describe('Set the auth token inside the correct .npmrc file', () => {
 		expect.assertions(1);
 		return expect(
 			setAuthToken('path/to/auth-package', null)
-		).resolves.toEqual([{
-			type: 'info',
+		).resolves.toEqual({
 			description: 'npmrc file saved',
-			message: 'home/user/.npmrc'
-		}]);
+			text: 'home/user/.npmrc'
+		});
 	});
 
 	test('Save new contents using custom registry', () => {
@@ -44,11 +45,10 @@ describe('Set the auth token inside the correct .npmrc file', () => {
 		expect.assertions(1);
 		return expect(
 			setAuthToken('path/to/auth-package-custom', null)
-		).resolves.toEqual([{
-			type: 'info',
+		).resolves.toEqual({
 			description: 'npmrc file saved',
-			message: 'home/user/.npmrc'
-		}]);
+			text: 'home/user/.npmrc'
+		});
 	});
 
 	test('Contents already exists', () => {
@@ -56,11 +56,10 @@ describe('Set the auth token inside the correct .npmrc file', () => {
 		expect.assertions(1);
 		return expect(
 			setAuthToken('path/to/auth-package', null)
-		).resolves.toEqual([{
-			type: 'info',
+		).resolves.toEqual({
 			description: 'npmrc file already has correct contents',
-			message: 'skipping file generation'
-		}]);
+			text: 'skipping file generation'
+		});
 	});
 
 	test('Auth token already set', () => {

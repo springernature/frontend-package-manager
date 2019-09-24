@@ -5,7 +5,7 @@
 'use strict';
 
 jest.mock('../../../lib/js/_utils/_get-remote-file');
-jest.mock('../../../lib/js/_utils/_show-output');
+jest.mock('@springernature/util-cli-reporter');
 
 const mockfs = require('../../../__mocks__/fs');
 const MOCK_PACKAGES = mockfs.__fsMockFiles();

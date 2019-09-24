@@ -4,6 +4,7 @@
  */
 'use strict';
 
+console.log = jest.fn();
 jest.mock('../../../lib/js/_utils/_get-remote-file');
 
 const getExtendedFileList = require('../../../lib/js/_utils/_get-extended-file-list');
