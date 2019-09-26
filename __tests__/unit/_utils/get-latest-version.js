@@ -4,6 +4,7 @@
  */
 'use strict';
 
+console.log = jest.fn();
 jest.mock('../../../lib/js/_utils/_npm-registry-request');
 
 const getLatestVersion = require('../../../lib/js/_utils/_get-latest-version');

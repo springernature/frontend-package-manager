@@ -4,6 +4,8 @@
  */
 'use strict';
 
+console.log = jest.fn();
+
 const checkNewVersion = require('../../../lib/js/_utils/_check-new-version');
 
 describe('Check for a valid semver version', () => {

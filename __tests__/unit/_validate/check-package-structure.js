@@ -7,6 +7,7 @@
 const mockfs = require('../../../__mocks__/fs');
 const MOCK_PACKAGES = mockfs.__fsMockFiles();
 
+jest.mock('@springernature/util-cli-reporter');
 jest.mock('gitignore-globs');
 jest.mock('glob');
 

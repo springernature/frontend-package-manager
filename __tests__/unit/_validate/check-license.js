@@ -4,6 +4,7 @@
  */
 'use strict';
 
+jest.mock('@springernature/util-cli-reporter');
 jest.mock('path/to/global-package/package.json', () => ({
 	license: 'license-name'
 }), {virtual: true});

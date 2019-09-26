@@ -17,6 +17,7 @@ const mockConfigJson = {
 	]
 };
 
+console.log = jest.fn();
 jest.mock('../../../lib/js/_utils/_check-exists');
 jest.mock('../../../config/default.json', () => (mockConfigJson), { virtual: true });
 

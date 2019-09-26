@@ -14,6 +14,8 @@ mySpawn.sequence.add(function (cb) {
 });
 mySpawn.sequence.add(mySpawn.simple(1));
 
+jest.mock('@springernature/util-cli-reporter');
+
 const publish = require('../../../lib/js/_publish/_publish-package');
 
 describe('Publish a package to NPM', () => {

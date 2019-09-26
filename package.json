@@ -19,7 +19,7 @@
     "sn-package-publish": "./bin/publish.js"
   },
   "scripts": {
-    "test": "jest --colors --verbose --coverage --silent",
+    "test": "jest --colors --verbose --coverage",
     "lint": "eslint ."
   },
   "devDependencies": {
@@ -41,6 +41,8 @@
     "strip-ansi": "^4.0.0"
   },
   "dependencies": {
+    "@springernature/util-cli-reporter": "0.0.2",
+    "@springernature/util-package-extender": "0.0.4",
     "chalk": "^2.4.2",
     "fs-extra": "^7.0.1",
     "gitignore-globs": "^0.1.1",

@@ -4,6 +4,7 @@
  */
 'use strict';
 
+console.log = jest.fn();
 jest.mock('path/to/package.json', () => ({}), {virtual: true});
 
 const getLicense = require('../../../lib/js/_utils/_get-license');
