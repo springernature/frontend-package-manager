@@ -1,5 +1,10 @@
 # History
 
+## 3.0.0 (2019-09-26)
+	* Move some functionality into reuseable utility modules
+		* Package extension
+		* CLI reporting
+
 ## 2.1.0 (2019-08-07)
 	* Feature: Allow multiple retries on CDN requests
 
