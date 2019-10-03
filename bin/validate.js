@@ -31,8 +31,8 @@ reporter.title('validating packages');
 reporter.info('searching for toolkits', '');
 
 getToolkitLocations(argv)
-	.then(toolkitLocations => {
-		generateConfig(packageJsonPath, toolkitLocations)
+	.then(toolkitInfoObject => {
+		generateConfig(packageJsonPath, toolkitInfoObject)
 			// .then(configs => validatePackages(packageJsonPath, configs, argv));
 			.then(result => {
 				console.log(result);
