@@ -48,6 +48,7 @@
     "fs-extra": "^7.0.1",
     "gitignore-globs": "^0.1.1",
     "glob": "^7.1.4",
+    "globby": "^10.0.1",
     "got": "^9.6.0",
     "inquirer": "^6.4.1",
     "listr": "^0.14.3",

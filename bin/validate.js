@@ -30,12 +30,13 @@ const packageJsonPath = path.resolve(process.cwd(), 'package.json');
 reporter.title('validating packages');
 reporter.info('searching for toolkits', '');
 
-getToolkitLocations(argv)
-	.then(toolkitInfoObject => {
-		generateConfig(packageJsonPath, toolkitInfoObject)
-			// .then(configs => validatePackages(packageJsonPath, configs, argv));
-			.then(result => {
-				console.log(result);
-			}).catch(err => error(err));
-	})
-	.catch(err => error(err));
+(async () => {
+	try {
+		const toolkitInfoObject = await getToolkitLocations(argv);
+		const configs = await generateConfig(packageJsonPath, toolkitInfoObject);
+		// .then(configs => validatePackages(packageJsonPath, configs, argv));
+		console.log(configs);
+	} catch (err) {
+		error(err);
+	}
+})();
