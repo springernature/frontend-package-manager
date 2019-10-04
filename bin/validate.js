@@ -35,7 +35,8 @@ reporter.info('searching for toolkits', '');
 		const toolkitInfoObject = await getToolkitLocations(argv);
 		const configs = await generateConfig(packageJsonPath, toolkitInfoObject);
 		// .then(configs => validatePackages(packageJsonPath, configs, argv));
-		console.log(configs);
+		const util = require('util');
+		console.log(util.inspect(configs, false, null, true));
 	} catch (err) {
 		error(err);
 	}
