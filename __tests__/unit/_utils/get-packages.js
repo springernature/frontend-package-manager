@@ -18,7 +18,7 @@ describe('Query Packages directory', () => {
 	});
 
 	test('An array of package paths is returned', () => {
-		const fileSummary = getPackages('path/to');
+		const fileSummary = getPackages('path/', 'to/');
 		const dir = path.resolve(__dirname, '../../..');
 		const expected = [`${dir}/path/to/global-package`, `${dir}/path/to/global-package-b`];
 		expect.assertions(2);
@@ -37,7 +37,7 @@ describe('Query Packages directory (empty)', () => {
 	});
 
 	test('An empty array is returned', () => {
-		const fileSummary = getPackages('path/to');
+		const fileSummary = getPackages('path/', 'to/');
 		const expected = [];
 		expect.assertions(2);
 		expect(fileSummary.length).toBe(0);
