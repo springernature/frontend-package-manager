@@ -12,7 +12,7 @@ const publishPackages = require('../lib/js/_publish');
 const packageJsonPath = path.resolve(process.cwd(), 'package.json');
 
 reporter.title('package publication');
-reporter.info('searching for toolkits', '');
+reporter.info('searching for toolkits');
 
 (async () => {
 	try {

@@ -28,7 +28,7 @@ const validatePackages = require('../lib/js/_validate');
 const packageJsonPath = path.resolve(process.cwd(), 'package.json');
 
 reporter.title('validating packages');
-reporter.info('searching for toolkits', '');
+reporter.info('searching for toolkits');
 
 (async () => {
 	try {
