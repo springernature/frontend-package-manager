@@ -17,8 +17,8 @@ describe('Query Packages directory', () => {
 		mockfs(MOCK_PACKAGES);
 	});
 
-	test('An array of package paths is returned', () => {
-		const fileSummary = getPackages('path/', 'to/');
+	test('An array of package paths is returned', async () => {
+		const fileSummary = await getPackages('path/', 'to/');
 		const dir = path.resolve(__dirname, '../../..');
 		const expected = [`${dir}/path/to/global-package`, `${dir}/path/to/global-package-b`];
 		expect.assertions(2);
@@ -36,8 +36,8 @@ describe('Query Packages directory (empty)', () => {
 		mockfs(MOCK_PACKAGES_EMPTY);
 	});
 
-	test('An empty array is returned', () => {
-		const fileSummary = getPackages('path/', 'to/');
+	test('An empty array is returned', async () => {
+		const fileSummary = await getPackages('path/', 'to/');
 		const expected = [];
 		expect.assertions(2);
 		expect(fileSummary.length).toBe(0);
