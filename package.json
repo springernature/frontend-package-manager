@@ -41,7 +41,7 @@
     "strip-ansi": "^4.0.0"
   },
   "dependencies": {
-    "@springernature/util-cli-reporter": "^1.0.0",
+    "@springernature/util-cli-reporter": "^1.1.0",
     "@springernature/util-package-extender": "^0.0.4",
     "chalk": "^2.4.2",
     "deepmerge": "^4.0.0",

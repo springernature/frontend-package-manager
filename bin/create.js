@@ -10,9 +10,10 @@ const createPackage = require('../lib/js/_create');
 
 const packageJsonPath = path.resolve(process.cwd(), 'package.json');
 
-reporter.title('getting toolkit information');
-
 (async () => {
+	// Suppress CLI reporting
+	reporter.init('none');
+
 	try {
 		const toolkitInfoObject = await getToolkitLocations('', 'toolkits');
 		reporter.title('create a new package');
