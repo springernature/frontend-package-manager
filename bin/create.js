@@ -16,7 +16,6 @@ const packageJsonPath = path.resolve(process.cwd(), 'package.json');
 
 	try {
 		const toolkitInfoObject = await getToolkitLocations('', 'toolkits');
-		reporter.title('create a new package');
 		createPackage(packageJsonPath, toolkitInfoObject);
 	} catch (err) {
 		error(err);
