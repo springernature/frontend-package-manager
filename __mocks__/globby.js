@@ -9,19 +9,17 @@ const results = require('./glob-results');
 const resultsToolkits = results.toolkitFiles();
 const resultsPackage = results.packageFiles();
 
-const globby = (path, _options) => {
-	return new Promise((resolve, reject) => {
-		// Check toolkit results
-		if (path.includes('toolkits')) {
-			if (path.includes('toolkits-no-globby')) {
-				reject(new Error('globby error'));
-			}
-			resolve(resultsToolkits[path]);
+async function globby(path, _options) {
+	// Check toolkit results
+	if (path.includes('toolkits')) {
+		if (path.includes('toolkits-no-globby')) {
+			throw new Error('globby error');
 		}
+		return resultsToolkits[path];
+	}
 
-		// Check package results
-		resolve(resultsPackage[path]);
-	});
-};
+	// Check package results
+	return resultsPackage[path];
+}
 
 module.exports = globby;
