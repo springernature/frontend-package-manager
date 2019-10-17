@@ -4,28 +4,28 @@
  */
 'use strict';
 
-console.log = jest.fn();
+jest.mock('@springernature/util-cli-reporter');
 jest.mock('../../../lib/js/_utils/_npm-registry-request');
 
 const getLatestVersion = require('../../../lib/js/_utils/_get-latest-version');
 
 describe('Get latest version of package published on NPM', () => {
-	test('The data is a valid version number', () => {
+	test('The data is a valid version number', async () => {
 		expect.assertions(1);
-		return getLatestVersion('valid').then(data => {
+		await getLatestVersion('valid').then(data => {
 			expect(data).toBe('1.0.0');
 		});
 	});
 
-	test('The data is null when no package found', () => {
+	test('The data is null when no package found', async () => {
 		expect.assertions(1);
-		return getLatestVersion('empty').then(data => {
+		await getLatestVersion('empty').then(data => {
 			expect(data).toBe(null);
 		});
 	});
 
-	test('Rejects when there is a problem with the registry', () => {
+	test('Rejects when there is a problem with the registry', async () => {
 		expect.assertions(1);
-		return expect(getLatestVersion('error')).rejects.toBeInstanceOf(Error);
+		await expect(getLatestVersion('error')).rejects.toBeInstanceOf(Error);
 	});
 });

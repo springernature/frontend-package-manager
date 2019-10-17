@@ -4,15 +4,13 @@
  */
 'use strict';
 
-const q = require('q');
-
 function setAuthToken(path) {
-	const deferred = q.defer();
-	if (path === 'path/to/fail') {
-		deferred.reject();
-	}
-	deferred.resolve();
-	return deferred.promise;
+	return new Promise((resolve, reject) => {
+		if (path === 'path/to/fail') {
+			reject();
+		}
+		resolve();
+	});
 }
 
 const publish = () => null;

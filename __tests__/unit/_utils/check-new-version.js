@@ -4,6 +4,7 @@
  */
 'use strict';
 
+// Hide CLI output when testing error reporting
 console.log = jest.fn();
 
 const checkNewVersion = require('../../../lib/js/_utils/_check-new-version');

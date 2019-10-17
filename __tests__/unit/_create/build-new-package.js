@@ -27,10 +27,11 @@ describe('Create task object based on config and answers', () => {
 		const result = tasks(
 			{
 				scope: 'scope',
-				required: ['filea.md']
+				required: ['filea.md'],
+				packagesDirectory: 'path/to'
 			},
+			'.',
 			'license',
-			{},
 			{
 				pkgname: 'package',
 				description: 'this is a description',
@@ -42,7 +43,7 @@ describe('Create task object based on config and answers', () => {
 		expect.assertions(3);
 		expect(stripAnsi(result[0].title)).toBe('Create folder package');
 		expect(stripAnsi(result[1].title)).toBe('Create folder package/scss');
-		expect(stripAnsi(result[2].title)).toBe('Create file filea.md');
+		expect(stripAnsi(result[2].title)).toBe('Create file package/filea.md');
 	});
 
 	afterEach(() => {
@@ -68,9 +69,7 @@ describe('Create contents for package.json file', () => {
 		expect.assertions(1);
 		return expect(
 			configurePackageJson(
-				{
-					scope: 'scope'
-				},
+				'scope',
 				'license',
 				{
 					pkgname: 'package',
@@ -110,9 +109,7 @@ describe('Create folder tasks based on answers', () => {
 		mockfs(MOCK_PACKAGES);
 
 		const result = generateFolders({
-			CSSDirectoryStructure: {
-				"scss": ["A", "B"]
-			}
+				'scss': ['A', 'B']
 			}, {
 				pkgname: 'package',
 				folders: ['scss', 'view']
@@ -141,17 +138,15 @@ describe('Create files based on config', () => {
 		mockfs(MOCK_PACKAGES);
 
 		const result = generateFiles(
-			{
-				required: ['filea.md', 'fileb.md']
-			},
+			['filea.md', 'fileb.md'],
 			{
 				pkgname: 'package'
 			}
 		);
 
 		expect.assertions(2);
-		expect(stripAnsi(result[0].title)).toBe('Create file filea.md');
-		expect(stripAnsi(result[1].title)).toBe('Create file fileb.md');
+		expect(stripAnsi(result[0].title)).toBe('Create file package/filea.md');
+		expect(stripAnsi(result[1].title)).toBe('Create file package/fileb.md');
 	});
 
 	afterEach(() => {

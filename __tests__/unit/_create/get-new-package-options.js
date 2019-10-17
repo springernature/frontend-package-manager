@@ -17,7 +17,7 @@ describe('Check for valid package names', () => {
 
 		expect.assertions(1);
 		return expect(
-			prefixName({prefix: 'test'}, 'package')
+			prefixName('test', 'package')
 		).toBe('test-package');
 	});
 
@@ -26,7 +26,7 @@ describe('Check for valid package names', () => {
 
 		expect.assertions(1);
 		return expect(
-			prefixName({prefix: 'test'}, '<package>')
+			prefixName('test', '<package>')
 		).toBe('test-package');
 	});
 
@@ -35,7 +35,7 @@ describe('Check for valid package names', () => {
 
 		expect.assertions(1);
 		return expect(
-			prefixName({}, 'package')
+			prefixName('', 'package')
 		).toBe('package');
 	});
 
@@ -44,7 +44,7 @@ describe('Check for valid package names', () => {
 
 		expect.assertions(1);
 		return expect(
-			prefixName({}, '<package>')
+			prefixName('', '<package>')
 		).toBe('package');
 	});
 
@@ -53,7 +53,7 @@ describe('Check for valid package names', () => {
 
 		expect.assertions(1);
 		return expect(
-			checkValidName({prefix: 'test'}, ['test-package-a', 'test-package-b'], 'test-')
+			checkValidName('test', ['test-package-a', 'test-package-b'], 'test-')
 		).toBe('Component is invalid: name is blank');
 	});
 
@@ -62,7 +62,7 @@ describe('Check for valid package names', () => {
 
 		expect.assertions(1);
 		return expect(
-			checkValidName({}, ['test-package-a', 'test-package-b'], '')
+			checkValidName('', ['test-package-a', 'test-package-b'], '')
 		).toBe('Component is invalid: name is blank');
 	});
 
@@ -71,7 +71,7 @@ describe('Check for valid package names', () => {
 
 		expect.assertions(1);
 		return expect(
-			checkValidName({prefix: 'test'}, ['test-package-a', 'test-package-b'], 'test-test')
+			checkValidName('test', ['test-package-a', 'test-package-b'], 'test-test')
 		).toBe('Component `test-test` is invalid. Must not contain the prefix name');
 	});
 
@@ -80,7 +80,7 @@ describe('Check for valid package names', () => {
 
 		expect.assertions(1);
 		return expect(
-			checkValidName({prefix: 'test'}, ['test-package-a', 'test-package-b'], 'test-testpackage')
+			checkValidName('test', ['test-package-a', 'test-package-b'], 'test-testpackage')
 		).toBe('Component `test-testpackage` is invalid. Must not contain the prefix name');
 	});
 
@@ -89,7 +89,7 @@ describe('Check for valid package names', () => {
 
 		expect.assertions(1);
 		return expect(
-			checkValidName({prefix: 'test'}, ['test-package-a', 'test-package-b'], 'test-package-a')
+			checkValidName('test', ['test-package-a', 'test-package-b'], 'test-package-a')
 		).toBe('Component `test-package-a` already exists');
 	});
 
@@ -98,7 +98,7 @@ describe('Check for valid package names', () => {
 
 		expect.assertions(1);
 		return expect(
-			checkValidName({prefix: 'test'}, ['test-package-a', 'test-package-b'], 'test-Package~name')
+			checkValidName('test', ['test-package-a', 'test-package-b'], 'test-Package~name')
 		).toBe('Component `test-Package~name` is not a valid NPM package name');
 	});
 });
@@ -111,23 +111,10 @@ describe('Get a list of valid sub-folders', () => {
 		expect.assertions(1);
 		return expect(
 			getValidFolders({
-				folders: {
-					'folder-a': [],
-					'folder-b': []
-				}
+				'folder-a': [],
+				'folder-b': []
 			})
 		).toEqual(expect.arrayContaining(['folder-a', 'folder-b']));
-	});
-
-	test('Returns empty array when not present', () => {
-		const getValidFolders = tasks.__get__('getValidFolders');
-
-		expect.assertions(1);
-		return expect(
-			getValidFolders({
-				nofolders: {}
-			})
-		).toEqual(expect.arrayContaining([]));
 	});
 
 	test('Returns empty array when folders array is empty', () => {
@@ -135,9 +122,7 @@ describe('Get a list of valid sub-folders', () => {
 
 		expect.assertions(1);
 		return expect(
-			getValidFolders({
-				folders: {}
-			})
+			getValidFolders({})
 		).toEqual(expect.arrayContaining([]));
 	});
 });
