@@ -9,7 +9,8 @@ const generateConfig = require('../lib/js/_utils/_generate-config');
 const getToolkitLocations = require('../lib/js/_utils/_get-toolkit-locations');
 const publishPackages = require('../lib/js/_publish');
 
-const packageJsonPath = path.resolve(process.cwd(), 'package.json');
+const rootPath = process.cwd();
+const packageJsonPath = path.resolve(rootPath, 'package.json');
 
 reporter.title('package publication');
 reporter.info('searching for toolkits');
@@ -18,7 +19,7 @@ reporter.info('searching for toolkits');
 	try {
 		const toolkitInfoObject = await getToolkitLocations({}, 'toolkits');
 		const configs = await generateConfig(packageJsonPath, toolkitInfoObject);
-		publishPackages(configs);
+		publishPackages(configs, rootPath);
 	} catch (err) {
 		error(err);
 	}
