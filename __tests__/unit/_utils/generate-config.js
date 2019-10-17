@@ -4,7 +4,7 @@
  */
 'use strict';
 
-console.log = jest.fn();
+jest.mock('@springernature/util-cli-reporter');
 
 const mockDefaultConfig = {
 	defaultKey: 'value',

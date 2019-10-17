@@ -4,6 +4,7 @@
  */
 'use strict';
 
+// Hide CLI output when testing error reporting
 console.log = jest.fn();
 
 const error = require('../../../lib/js/_utils/_error');

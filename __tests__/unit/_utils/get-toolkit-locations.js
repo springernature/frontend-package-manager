@@ -4,7 +4,7 @@
  */
 'use strict';
 
-console.log = jest.fn();
+jest.mock('@springernature/util-cli-reporter');
 jest.mock('globby');
 jest.mock('../../../lib/js/_utils/_check-exists');
 
