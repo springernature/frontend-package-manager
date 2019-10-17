@@ -4,13 +4,10 @@
  */
 'use strict';
 
-function setAuthToken(path) {
-	return new Promise((resolve, reject) => {
-		if (path === 'path/to/fail') {
-			reject();
-		}
-		resolve();
-	});
+async function setAuthToken(path) {
+	if (path === 'path/to/fail') {
+		throw new Error('setAuthToken fail');
+	}
 }
 
 const publish = () => null;
