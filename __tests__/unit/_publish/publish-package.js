@@ -19,23 +19,23 @@ jest.mock('@springernature/util-cli-reporter');
 const publish = require('../../../lib/js/_publish/_publish-package');
 
 describe('Publish a package to NPM', () => {
-	test('Successfully publish package', () => {
+	test('Successfully publish package', async () => {
 		expect.assertions(1);
-		return expect(
+		await expect(
 			publish()
 		).resolves.toEqual();
 	});
 
-	test('Error publishing package', () => {
+	test('Error publishing package', async () => {
 		expect.assertions(1);
-		return expect(
+		await expect(
 			publish()
 		).rejects.toBeInstanceOf(Error);
 	});
 
-	test('Exit publishing with error', () => {
+	test('Exit publishing with error', async () => {
 		expect.assertions(1);
-		return expect(
+		await expect(
 			publish()
 		).rejects.toBeInstanceOf(Error);
 	});
