@@ -12,16 +12,16 @@ jest.mock('path/to/global-package/package.json', () => ({
 const checkLicense = require('../../../lib/js/_validate/_check-license');
 
 describe('Check for correct license', () => {
-	test('License matches global license', () => {
+	test('License matches global license', async () => {
 		expect.assertions(1);
-		return expect(
+		await expect(
 			checkLicense('path/to/global-package', 'license-name')
 		).resolves.toEqual();
 	});
 
-	test('Reject if license does not match global license', () => {
+	test('Reject if license does not match global license', async () => {
 		expect.assertions(1);
-		return expect(
+		await expect(
 			checkLicense('path/to/global-package', 'wrong-license-name')
 		).rejects.toBeInstanceOf(Error);
 	});

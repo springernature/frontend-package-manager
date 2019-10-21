@@ -12,9 +12,9 @@ jest.mock('path/to/global-package/package.json', () => ({
 const checkFiles = require('../../../lib/js/_validate/_check-changed-files');
 
 describe('Check correct files appear in CI changed files list', () => {
-	test('Reject if changelog not updated', () => {
+	test('Reject if changelog not updated', async () => {
 		expect.assertions(1);
-		return expect(
+		await expect(
 			checkFiles(
 				'path/to/global-package',
 				'global-package/package.json',
@@ -23,9 +23,9 @@ describe('Check correct files appear in CI changed files list', () => {
 		).rejects.toBeInstanceOf(Error);
 	});
 
-	test('Reject if package.json not updated', () => {
+	test('Reject if package.json not updated', async () => {
 		expect.assertions(1);
-		return expect(
+		await expect(
 			checkFiles(
 				'path/to/global-package',
 				'global-package/HISTORY.md',
@@ -34,9 +34,9 @@ describe('Check correct files appear in CI changed files list', () => {
 		).rejects.toBeInstanceOf(Error);
 	});
 
-	test('Resolve if both changelog & package.json are updated', () => {
+	test('Resolve if both changelog & package.json are updated', async () => {
 		expect.assertions(1);
-		return expect(
+		await expect(
 			checkFiles(
 				'path/to/global-package',
 				'global-package/HISTORY.md\nglobal-package/package.json',

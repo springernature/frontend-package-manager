@@ -12,9 +12,9 @@ jest.mock('path/to/global-package/package.json', () => ({
 const checkNaming = require('../../../lib/js/_validate/_check-naming');
 
 describe('Check naming conventions', () => {
-	test('Package and folder names are valid (with prefix)', () => {
+	test('Package and folder names are valid (with prefix)', async () => {
 		expect.assertions(1);
-		return expect(
+		await expect(
 			checkNaming(
 				{
 					scope: 'springernature',
@@ -26,9 +26,9 @@ describe('Check naming conventions', () => {
 		).resolves.toEqual();
 	});
 
-	test('Reject if Package name is not valid (with prefix)', () => {
+	test('Reject if Package name is not valid (with prefix)', async () => {
 		expect.assertions(1);
-		return expect(
+		await expect(
 			checkNaming(
 				{
 					scope: 'fail',
@@ -40,9 +40,9 @@ describe('Check naming conventions', () => {
 		).rejects.toBeInstanceOf(Error);
 	});
 
-	test('Reject if Folder name is not valid (with prefix)', () => {
+	test('Reject if Folder name is not valid (with prefix)', async () => {
 		expect.assertions(1);
-		return expect(
+		await expect(
 			checkNaming(
 				{
 					scope: 'springernature',
@@ -54,9 +54,9 @@ describe('Check naming conventions', () => {
 		).rejects.toBeInstanceOf(Error);
 	});
 
-	test('Package and folder names are valid (without prefix)', () => {
+	test('Package and folder names are valid (without prefix)', async () => {
 		expect.assertions(1);
-		return expect(
+		await expect(
 			checkNaming(
 				{
 					scope: 'springernature',
@@ -68,9 +68,9 @@ describe('Check naming conventions', () => {
 		).resolves.toEqual();
 	});
 
-	test('Reject if Package name is not valid (without prefix)', () => {
+	test('Reject if Package name is not valid (without prefix)', async () => {
 		expect.assertions(1);
-		return expect(
+		await expect(
 			checkNaming(
 				{
 					scope: 'fail',

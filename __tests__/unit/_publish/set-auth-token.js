@@ -29,10 +29,10 @@ describe('Set the auth token inside the correct .npmrc file', () => {
 		mockfs(MOCK_PACKAGES);
 	});
 	
-	test('Save new contents', () => {
+	test('Save new contents', async () => {
 		mockos({'homedir': 'home/user'});
 		expect.assertions(1);
-		return expect(
+		await expect(
 			setAuthToken('path/to/auth-package', null)
 		).resolves.toEqual({
 			description: 'npmrc file saved',
@@ -40,10 +40,10 @@ describe('Set the auth token inside the correct .npmrc file', () => {
 		});
 	});
 
-	test('Save new contents using custom registry', () => {
+	test('Save new contents using custom registry', async () => {
 		mockos({'homedir': 'home/user'});
 		expect.assertions(1);
-		return expect(
+		await expect(
 			setAuthToken('path/to/auth-package-custom', null)
 		).resolves.toEqual({
 			description: 'npmrc file saved',
@@ -51,10 +51,10 @@ describe('Set the auth token inside the correct .npmrc file', () => {
 		});
 	});
 
-	test('Contents already exists', () => {
+	test('Contents already exists', async () => {
 		mockos({'homedir': 'home/user-b'});
 		expect.assertions(1);
-		return expect(
+		await expect(
 			setAuthToken('path/to/auth-package', null)
 		).resolves.toEqual({
 			description: 'npmrc file already has correct contents',
@@ -62,10 +62,10 @@ describe('Set the auth token inside the correct .npmrc file', () => {
 		});
 	});
 
-	test('Auth token already set', () => {
+	test('Auth token already set', async () => {
 		mockos({'homedir': 'home/user-c'});
 		expect.assertions(1);
-		return expect(
+		await expect(
 			setAuthToken('path/to/auth-package', null)
 		).rejects.toBeInstanceOf(Error);
 	});
