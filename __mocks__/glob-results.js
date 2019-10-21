@@ -1,6 +1,7 @@
 /**
  * __mocks__/glob-results.js
  * Mock filsystem results when globbing
+ * Object keys refer to glob search terms
  */
 'use strict';
 
@@ -37,80 +38,80 @@ const toolkitFiles = () => {
 
 const packageFiles = () => {
 	return {
-		pass: [
-			'path/to/global-package/required.md',
-			'path/to/global-package/folder1',
-			'path/to/global-package/folder1/file.scss',
-			'path/to/global-package/folder1/file.css',
-			'path/to/global-package/folder2',
-			'path/to/global-package/folder2/file.js',
-			'path/to/global-package/folder2/file.spec.js',
-			'path/to/global-package/folder2/file.json',
-			'path/to/global-package/folder2/subfolder',
-			'path/to/global-package/folder2/subfolder/file.js'
+		'packages/package/pass/**/*': [
+			'packages/package/pass/required.md',
+			'packages/package/pass/folder1',
+			'packages/package/pass/folder1/file.scss',
+			'packages/package/pass/folder1/file.css',
+			'packages/package/pass/folder2',
+			'packages/package/pass/folder2/file.js',
+			'packages/package/pass/folder2/file.spec.js',
+			'packages/package/pass/folder2/file.json',
+			'packages/package/pass/folder2/subfolder',
+			'packages/package/pass/folder2/subfolder/file.js'
 		],
-		passGitIgnore: [
-			'path/to/global-package/required.md',
-			'path/to/global-package/folder1',
-			'path/to/global-package/folder1/file.scss',
-			'path/to/global-package/folder1/file.css',
-			'path/to/global-package/folder2',
-			'path/to/global-package/folder2/file.js',
-			'path/to/global-package/folder2/file.json',
-			'path/to/global-package/folder2/subfolder',
-			'path/to/global-package/folder2/subfolder/file.js',
-			'path/to/global-package/folder3',
-			'path/to/global-package/folder3/file.scss',
-			'path/to/global-package/folder3/file.js'
+		'packages/package/passGitIgnore/**/*': [
+			'packages/package/passGitIgnore/required.md',
+			'packages/package/passGitIgnore/folder1',
+			'packages/package/passGitIgnore/folder1/file.scss',
+			'packages/package/passGitIgnore/folder1/file.css',
+			'packages/package/passGitIgnore/folder2',
+			'packages/package/passGitIgnore/folder2/file.js',
+			'packages/package/passGitIgnore/folder2/file.json',
+			'packages/package/passGitIgnore/folder2/subfolder',
+			'packages/package/passGitIgnore/folder2/subfolder/file.js',
+			'packages/package/passGitIgnore/folder3',
+			'packages/package/passGitIgnore/folder3/file.scss',
+			'packages/package/passGitIgnore/folder3/file.js'
 		],
-		passDotfiles: [
-			'path/to/global-package/required.md',
-			'path/to/global-package/.adotfile',
-			'path/to/global-package/folder1',
-			'path/to/global-package/folder1/.anotherdotfile'
+		'packages/package/passDotfiles/**/*': [
+			'packages/package/passDotfiles/required.md',
+			'packages/package/passDotfiles/.adotfile',
+			'packages/package/passDotfiles/folder1',
+			'packages/package/passDotfiles/folder1/.anotherdotfile'
 		],
-		failIsRequired: [
-			'path/to/global-package/folder1',
-			'path/to/global-package/folder1/file.scss',
-			'path/to/global-package/folder1/file.css',
-			'path/to/global-package/folder2',
-			'path/to/global-package/folder2/file.js',
-			'path/to/global-package/folder2/file.json',
-			'path/to/global-package/folder2/subfolder',
-			'path/to/global-package/folder2/subfolder/file.js'
+		'packages/package/failIsRequired/**/*': [
+			'packages/package/failIsRequired/folder1',
+			'packages/package/failIsRequired/folder1/file.scss',
+			'packages/package/failIsRequired/folder1/file.css',
+			'packages/package/failIsRequired/folder2',
+			'packages/package/failIsRequired/folder2/file.js',
+			'packages/package/failIsRequired/folder2/file.json',
+			'packages/package/failIsRequired/folder2/subfolder',
+			'packages/package/failIsRequired/folder2/subfolder/file.js'
 		],
-		failIsFolder: [
-			'path/to/global-package/required.md',
-			'path/to/global-package/folderfail',
-			'path/to/global-package/folderfail/file.md',
-			'path/to/global-package/folder2',
-			'path/to/global-package/folder2/file.js',
-			'path/to/global-package/folder2/file.json',
-			'path/to/global-package/folder2/subfolder',
-			'path/to/global-package/folder2/subfolder/file.js'
+		'packages/package/failIsFolder/**/*': [
+			'packages/package/failIsFolder/required.md',
+			'packages/package/failIsFolder/folderfail',
+			'packages/package/failIsFolder/folderfail/file.md',
+			'packages/package/failIsFolder/folder2',
+			'packages/package/failIsFolder/folder2/file.js',
+			'packages/package/failIsFolder/folder2/file.json',
+			'packages/package/failIsFolder/folder2/subfolder',
+			'packages/package/failIsFolder/folder2/subfolder/file.js'
 		],
-		failIsFileType: [
-			'path/to/global-package/required.md',
-			'path/to/global-package/folder1',
-			'path/to/global-package/folder1/file.scss',
-			'path/to/global-package/folder1/file.js',
-			'path/to/global-package/folder2',
-			'path/to/global-package/folder2/file.js',
-			'path/to/global-package/folder2/file.json',
-			'path/to/global-package/folder2/subfolder',
-			'path/to/global-package/folder2/subfolder/file.js'
+		'packages/package/failIsFileType/**/*': [
+			'packages/package/failIsFileType/required.md',
+			'packages/package/failIsFileType/folder1',
+			'packages/package/failIsFileType/folder1/file.scss',
+			'packages/package/failIsFileType/folder1/file.js',
+			'packages/package/failIsFileType/folder2',
+			'packages/package/failIsFileType/folder2/file.js',
+			'packages/package/failIsFileType/folder2/file.json',
+			'packages/package/failIsFileType/folder2/subfolder',
+			'packages/package/failIsFileType/folder2/subfolder/file.js'
 		],
-		failIsTopLevelFile: [
-			'path/to/global-package/required.md',
-			'path/to/global-package/fail.md',
-			'path/to/global-package/folder1',
-			'path/to/global-package/folder1/file.scss',
-			'path/to/global-package/folder1/file.css',
-			'path/to/global-package/folder2',
-			'path/to/global-package/folder2/file.js',
-			'path/to/global-package/folder2/file.json',
-			'path/to/global-package/folder2/subfolder',
-			'path/to/global-package/folder2/subfolder/file.js'
+		'packages/package/failIsTopLevelFile/**/*': [
+			'packages/package/failIsTopLevelFile/required.md',
+			'packages/package/failIsTopLevelFile/fail.md',
+			'packages/package/failIsTopLevelFile/folder1',
+			'packages/package/failIsTopLevelFile/folder1/file.scss',
+			'packages/package/failIsTopLevelFile/folder1/file.css',
+			'packages/package/failIsTopLevelFile/folder2',
+			'packages/package/failIsTopLevelFile/folder2/file.js',
+			'packages/package/failIsTopLevelFile/folder2/file.json',
+			'packages/package/failIsTopLevelFile/folder2/subfolder',
+			'packages/package/failIsTopLevelFile/folder2/subfolder/file.js'
 		]
 	};
 };

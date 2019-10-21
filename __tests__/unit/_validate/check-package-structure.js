@@ -9,7 +9,7 @@ const MOCK_PACKAGES = mockfs.__fsMockFiles();
 
 jest.mock('@springernature/util-cli-reporter');
 jest.mock('gitignore-globs');
-jest.mock('glob');
+jest.mock('globby');
 
 const checkValidation = require('../../../lib/js/_validate/_check-package-structure');
 
@@ -29,80 +29,79 @@ describe('Check validation', () => {
 	beforeEach(() => {
 		mockfs(MOCK_PACKAGES);
 		jest.resetModules();
-
 	});
 
-	test('Error returned from glob', async () => {
+	afterEach(() => {
+		mockfs.restore();
+	});
+
+	test('Error returned from globby', async () => {
 		expect.assertions(1);
 		await expect(
-			checkValidation(validationConfig, 'path/to/global-package', 'error')
+			checkValidation(validationConfig, 'packages/package/error')
 		).rejects.toBeInstanceOf(Error);
 	});
 
 	test('Resolves when filesystem matches config', async () => {
 		expect.assertions(1);
 		await expect(
-			checkValidation(validationConfig, 'path/to/global-package', 'pass')
+			checkValidation(validationConfig, 'packages/package/pass')
 		).resolves.toEqual();
 	});
 
 	test('Resolves when filesystem matches config ignore files in .gitignore', async () => {
 		expect.assertions(1);
 		await expect(
-			checkValidation(validationConfig, 'path/to/global-package', 'passGitIgnore')
+			checkValidation(validationConfig, 'packages/package/passGitIgnore')
 		).resolves.toEqual();
 	});
 
 	test('Rejects when required file missing', async () => {
 		expect.assertions(1);
 		await expect(
-			checkValidation(validationConfig, 'path/to/global-package', 'failIsRequired')
+			checkValidation(validationConfig, 'packages/package/failIsRequired')
 		).rejects.toBeInstanceOf(Error);
 	});
 
 	test('Does not reject when dotfiles included', async () => {
 		expect.assertions(1);
 		await expect(
-			checkValidation(validationConfig, 'path/to/global-package', 'passDotfiles')
+			checkValidation(validationConfig, 'packages/package/passDotfiles')
 		).resolves.toEqual();
 	});
 
 	test('Rejects when invalid folder present', async () => {
 		expect.assertions(1);
 		await expect(
-			checkValidation(validationConfig, 'path/to/global-package', 'failIsFolder')
+			checkValidation(validationConfig, 'packages/package/failIsFolder')
 		).rejects.toBeInstanceOf(Error);
 	});
 
 	test('Rejects when invalid file type present in a valid folder', async () => {
 		expect.assertions(1);
 		await expect(
-			checkValidation(validationConfig, 'path/to/global-package', 'failIsFileType')
+			checkValidation(validationConfig, 'packages/package/failIsFileType')
 		).rejects.toBeInstanceOf(Error);
 	});
 
 	test('Rejects when invalid file present at top level', async () => {
 		expect.assertions(1);
 		await expect(
-			checkValidation(validationConfig, 'path/to/global-package', 'failIsTopLevelFile')
+			checkValidation(validationConfig, 'packages/package/failIsTopLevelFile')
 		).rejects.toBeInstanceOf(Error);
 	});
 
 	test('Resolves with any folders when no folder config', async () => {
 		expect.assertions(1);
 		await expect(
-			checkValidation(validationConfigNoFolders, 'path/to/global-package', 'failIsFolder')
+			checkValidation(validationConfigNoFolders, 'packages/package/failIsFolder')
 		).resolves.toEqual();
 	});
 
 	test('Resolves with any files when no folder config', async () => {
 		expect.assertions(1);
 		await expect(
-			checkValidation(validationConfigNoFolders, 'path/to/global-package', 'failIsFileType')
+			checkValidation(validationConfigNoFolders, 'packages/package/failIsFileType')
 		).resolves.toEqual();
-	});
-
-	afterEach(() => {
-		mockfs.restore();
 	});
 });
