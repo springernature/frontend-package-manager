@@ -6,34 +6,43 @@
 
 const fs = require('mock-fs');
 
+const defaultPackageContents = {
+	'required.md': 'file content',
+	'fail.md': 'file content',
+	'.adotfile': 'file content',
+	folder1: {
+		'file.scss': 'file content',
+		'file.css': 'file content',
+		'file.js': 'file content',
+		'.anotherdotfile': 'nested dotfile content'
+	},
+	folder2: {
+		'file.js': 'file content',
+		'file.spec.js': 'file content',
+		'file.json': 'file content',
+		subfolder: {
+			'file.js': 'file content'
+		}
+	},
+	folder3: {
+		'file.scss': 'file content',
+		'file.js': 'file content'
+	},
+	folderfail: {
+		'file.md': 'file content'
+	}
+};
+
 const __fsMockFiles = () => {
 	return {
-		'path/to/global-package': {
-			'required.md': 'file content',
-			'fail.md': 'file content',
-			'.adotfile': 'file content',
-			folder1: {
-				'file.scss': 'file content',
-				'file.css': 'file content',
-				'file.js': 'file content',
-				'.anotherdotfile': 'nested dotfile content'
-			},
-			folder2: {
-				'file.js': 'file content',
-				'file.spec.js': 'file content',
-				'file.json': 'file content',
-				subfolder: {
-					'file.js': 'file content'
-				}
-			},
-			folder3: {
-				'file.scss': 'file content',
-				'file.js': 'file content'
-			},
-			folderfail: {
-				'file.md': 'file content'
-			}
-		},
+		'packages/package/pass': defaultPackageContents,
+		'packages/package/passGitIgnore': defaultPackageContents,
+		'packages/package/passDotfiles': defaultPackageContents,
+		'packages/package/failIsRequired': defaultPackageContents,
+		'packages/package/failIsFolder': defaultPackageContents,
+		'packages/package/failIsFileType': defaultPackageContents,
+		'packages/package/failIsTopLevelFile': defaultPackageContents,
+		'path/to/global-package': defaultPackageContents,
 		'path/to/global-package-b': {
 			'some-file.txt': 'file content here',
 			'empty-dir': {/** empty directory */}
