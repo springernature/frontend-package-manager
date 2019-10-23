@@ -1,6 +1,6 @@
 /**
- * __tests__/unit/_utils/generate-config.test.js
- * Test: js/_utils/_generate-config.js
+ * __tests__/unit/_utils/generate-configs.test.js
+ * Test: js/_utils/_generate-configs.js
  */
 'use strict';
 
@@ -37,7 +37,7 @@ jest.mock('toolkits/toolkit2/package-manager.json', () => ({
 	toolkitKey: 'value'
 }), {virtual: true});
 
-const configGenerator = require('../../../lib/js/_utils/_generate-config');
+const configGenerator = require('../../../lib/js/_utils/_generate-configs');
 
 describe('Generate valid config files', () => {
 	test('Resolves with default config if no other configs found', async () => {
