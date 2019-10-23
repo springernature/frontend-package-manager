@@ -1,5 +1,5 @@
 /**
- * __tests__/unit/_utils/get-latest-version.js
+ * __tests__/unit/_utils/get-latest-version.test.js
  * Test: js/_utils/_get-latest-version.js
  */
 'use strict';

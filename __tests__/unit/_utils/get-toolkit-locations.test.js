@@ -1,5 +1,5 @@
 /**
- * __tests__/unit/_utils/get-toolkit-locations.js
+ * __tests__/unit/_utils/get-toolkit-locations.test.js
  * Test: js/_utils/_get-toolkit-locations.js
  */
 'use strict';

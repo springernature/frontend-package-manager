@@ -1,5 +1,5 @@
 /**
- * __tests__/unit/_validate/check-publish-file.js
+ * __tests__/unit/_validate/check-publish-file.test.js
  * Test: js/_validate/_check-publish-file.js
  */
 'use strict';

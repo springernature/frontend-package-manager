@@ -1,5 +1,5 @@
 /**
- * __tests__/unit/_validate/check-package-structure.js
+ * __tests__/unit/_validate/check-package-structure.test.js
  * Test: js/_validate/_check-package-structure.js
  */
 'use strict';

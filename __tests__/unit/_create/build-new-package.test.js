@@ -1,5 +1,5 @@
 /**
- * __tests__/unit/_create/build-new-package.js
+ * __tests__/unit/_create/build-new-package.test.js
  * Test: js/_create/_build-new-package.js
  */
 'use strict';

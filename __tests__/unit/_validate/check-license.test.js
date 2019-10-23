@@ -1,5 +1,5 @@
 /**
- * __tests__/unit/_validate/check-license.js
+ * __tests__/unit/_validate/check-license.test.js
  * Test: js/_validate/_check-license.js
  */
 'use strict';

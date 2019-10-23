@@ -1,5 +1,5 @@
 /**
- * __tests__/unit/_utils/error.js
+ * __tests__/unit/_utils/error.test.js
  * Test: js/_utils/_error.js
  */
 'use strict';

@@ -1,5 +1,5 @@
 /**
- * __tests__/unit/_utils/generate-config.js
+ * __tests__/unit/_utils/generate-config.test.js
  * Test: js/_utils/_generate-config.js
  */
 'use strict';

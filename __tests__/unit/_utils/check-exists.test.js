@@ -1,5 +1,5 @@
 /**
- * __tests__/unit/_utils/check-exists.js
+ * __tests__/unit/_utils/check-exists.test.js
  * Test: js/_utils/_check-exists.js
  */
 'use strict';

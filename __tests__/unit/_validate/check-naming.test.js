@@ -1,5 +1,5 @@
 /**
- * __tests__/unit/_validate/check-naming.js
+ * __tests__/unit/_validate/check-naming.test.js
  * Test: js/_validate/_check-naming.js
  */
 'use strict';

@@ -1,5 +1,5 @@
 /**
- * __tests__/unit/_publish/set-auth-token.js
+ * __tests__/unit/_publish/set-auth-token.test.js
  * Test: js/_publish/_set-auth-token.js
  */
 'use strict';
