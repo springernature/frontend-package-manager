@@ -4,105 +4,182 @@
  */
 'use strict';
 
-const path = require('path');
+// const path = require('path');
 
-const rewire = require('rewire');
+const getNewPackageOptions = require('../../../lib/js/_create/_get-new-package-options');
 
-const tasks = rewire(path.resolve(__dirname, '../../../lib/js/_create/_get-new-package-options'));
+describe('Get a valid package name', () => {
+	test('Prefix in input, and in config', () => {
+		const result = getNewPackageOptions({prefix: 'prefix'}, []);
 
-// Test for a valid package name
-describe('Check for valid package names', () => {
-	test('valid package name & prefix', () => {
-		const prefixName = tasks.__get__('prefixName');
+		const prefixName = result[0].filter('prefix-packagename');
+		const validName = result[0].validate('prefix-packagename');
 
-		expect.assertions(1);
-		return expect(
-			prefixName('test', 'package')
-		).toBe('test-package');
+		expect.assertions(2);
+		expect(prefixName).toBe('prefix-packagename');
+		expect(validName).toBe(true);
 	});
 
-	test('valid sanitized package name & prefix', () => {
-		const prefixName = tasks.__get__('prefixName');
+	test('No prefix in input, prefix in config', () => {
+		const result = getNewPackageOptions({prefix: 'prefix'}, []);
 
-		expect.assertions(1);
-		return expect(
-			prefixName('test', '<package>')
-		).toBe('test-package');
+		const prefixName = result[0].filter('packagename');
+		const validName = result[0].validate('packagename');
+
+		expect.assertions(2);
+		expect(prefixName).toBe('prefix-packagename');
+		expect(validName).toBe(true);
 	});
 
-	test('valid package name & no prefix', () => {
-		const prefixName = tasks.__get__('prefixName');
+	test('Prefix in input, not in config', () => {
+		const result = getNewPackageOptions({}, []);
 
-		expect.assertions(1);
-		return expect(
-			prefixName('', 'package')
-		).toBe('package');
+		const prefixName = result[0].filter('prefix-packagename');
+		const validName = result[0].validate('prefix-packagename');
+
+		expect.assertions(2);
+		expect(prefixName).toBe('prefix-packagename');
+		expect(validName).toBe(true);
 	});
 
-	test('valid sanitized package name & no prefix', () => {
-		const prefixName = tasks.__get__('prefixName');
+	test('No prefix in input, not in config', () => {
+		const result = getNewPackageOptions({}, []);
 
-		expect.assertions(1);
-		return expect(
-			prefixName('', '<package>')
-		).toBe('package');
+		const prefixName = result[0].filter('packagename');
+		const validName = result[0].validate('packagename');
+
+		expect.assertions(2);
+		expect(prefixName).toBe('packagename');
+		expect(validName).toBe(true);
 	});
 
-	test('invalid with empty name & prefix', () => {
-		const checkValidName = tasks.__get__('checkValidName');
+	test('Remove unsafe characters', () => {
+		var UNSAFE_USER_INPUT = '/\u0000packagename?<>\:*|"';
+		const result = getNewPackageOptions({prefix: 'prefix'}, []);
 
-		expect.assertions(1);
-		return expect(
-			checkValidName('test', ['test-package-a', 'test-package-b'], 'test-')
-		).toBe('Component is invalid: name is blank');
+		const prefixName = result[0].filter(UNSAFE_USER_INPUT);
+		const validName = result[0].validate(UNSAFE_USER_INPUT);
+
+		expect.assertions(2);
+		expect(prefixName).toBe('prefix-packagename');
+		expect(validName).toBe(true);
 	});
 
-	test('invalid with empty name & no prefix', () => {
-		const checkValidName = tasks.__get__('checkValidName');
+	test('Remove unsafe characters, no prefix in config', () => {
+		var UNSAFE_USER_INPUT = '/\u0000packagename?<>\:*|"';
+		const result = getNewPackageOptions({}, []);
 
-		expect.assertions(1);
-		return expect(
-			checkValidName('', ['test-package-a', 'test-package-b'], '')
-		).toBe('Component is invalid: name is blank');
-	});
+		const prefixName = result[0].filter(UNSAFE_USER_INPUT);
+		const validName = result[0].validate(UNSAFE_USER_INPUT);
 
-	test('invalid if name is the same as the prefix', () => {
-		const checkValidName = tasks.__get__('checkValidName');
-
-		expect.assertions(1);
-		return expect(
-			checkValidName('test', ['test-package-a', 'test-package-b'], 'test-test')
-		).toBe('Component `test-test` is invalid. Must not contain the prefix name');
-	});
-
-	test('invalid if name starts with the prefix', () => {
-		const checkValidName = tasks.__get__('checkValidName');
-
-		expect.assertions(1);
-		return expect(
-			checkValidName('test', ['test-package-a', 'test-package-b'], 'test-testpackage')
-		).toBe('Component `test-testpackage` is invalid. Must not contain the prefix name');
-	});
-
-	test('invalid if package already exists', () => {
-		const checkValidName = tasks.__get__('checkValidName');
-
-		expect.assertions(1);
-		return expect(
-			checkValidName('test', ['test-package-a', 'test-package-b'], 'test-package-a')
-		).toBe('Component `test-package-a` already exists');
-	});
-
-	test('invalid if not a valid NPM package name', () => {
-		const checkValidName = tasks.__get__('checkValidName');
-
-		expect.assertions(1);
-		return expect(
-			checkValidName('test', ['test-package-a', 'test-package-b'], 'test-Package~name')
-		).toBe('Component `test-Package~name` is not a valid NPM package name');
+		expect.assertions(2);
+		expect(prefixName).toBe('packagename');
+		expect(validName).toBe(true);
 	});
 });
 
+describe('Warn of invalid package name', () => {
+	test('Empty input, prefix in config', () => {
+		const result = getNewPackageOptions({prefix: 'prefix'}, []);
+
+		const prefixName = result[0].filter('');
+		const validName = result[0].validate('');
+
+		expect.assertions(2);
+		expect(prefixName).toBe('prefix-');
+		expect(validName).toBe('Component is invalid: name is blank');
+	});
+
+	test('Empty input, empty config', () => {
+		const result = getNewPackageOptions({}, []);
+
+		const prefixName = result[0].filter('');
+		const validName = result[0].validate('');
+
+		expect.assertions(2);
+		expect(prefixName).toBe('');
+		expect(validName).toBe('Component is invalid: name is blank');
+	});
+
+	test('Prefix only in input, prefix in config', () => {
+		const result = getNewPackageOptions({prefix: 'prefix'}, []);
+
+		const prefixName = result[0].filter('prefix-');
+		const validName = result[0].validate('prefix-');
+
+		expect.assertions(2);
+		expect(prefixName).toBe('prefix-');
+		expect(validName).toBe('Component is invalid: name is blank');
+	});
+
+	test('Input contains the prefix', () => {
+		const result = getNewPackageOptions({prefix: 'prefix'}, []);
+
+		const prefixName = result[0].filter('nameincludesprefix');
+		const validName = result[0].validate('nameincludesprefix');
+
+		expect.assertions(2);
+		expect(prefixName).toBe('prefix-nameincludesprefix');
+		expect(validName).toBe('Component \`nameincludesprefix\` is invalid. Must not contain the prefix name');
+	});
+
+	test('Input contains the prefix, except at the start', () => {
+		const result = getNewPackageOptions({prefix: 'prefix'}, []);
+
+		const prefixName = result[0].filter('prefix-nameincludesprefix');
+		const validName = result[0].validate('prefix-nameincludesprefix');
+
+		expect.assertions(2);
+		expect(prefixName).toBe('prefix-nameincludesprefix');
+		expect(validName).toBe('Component `nameincludesprefix` is invalid. Must not contain the prefix name');
+	});
+
+	test('Package name already exists, with prefix', () => {
+		const result = getNewPackageOptions({prefix: 'prefix'}, ['prefix-nameofpackage']);
+
+		const prefixName = result[0].filter('prefix-nameofpackage');
+		const validName = result[0].validate('prefix-nameofpackage');
+
+		expect.assertions(2);
+		expect(prefixName).toBe('prefix-nameofpackage');
+		expect(validName).toBe('Component `prefix-nameofpackage` already exists');
+	});
+
+	test('Package name already exists, without prefix', () => {
+		const result = getNewPackageOptions({prefix: 'prefix'}, ['prefix-nameofpackage']);
+
+		const prefixName = result[0].filter('nameofpackage');
+		const validName = result[0].validate('nameofpackage');
+
+		expect.assertions(2);
+		expect(prefixName).toBe('prefix-nameofpackage');
+		expect(validName).toBe('Component `prefix-nameofpackage` already exists');
+	});
+
+	test('Invalid NPM package name, with prefix', () => {
+		const result = getNewPackageOptions({prefix: 'prefix'}, []);
+
+		const prefixName = result[0].filter('prefix-Package~name');
+		const validName = result[0].validate('prefix-Package~name');
+
+		expect.assertions(2);
+		expect(prefixName).toBe('prefix-Package~name');
+		expect(validName).toBe('Component `prefix-Package~name` is not a valid NPM package name');
+	});
+
+	test('Invalid NPM package name, without prefix', () => {
+		const result = getNewPackageOptions({prefix: 'prefix'}, []);
+
+		const prefixName = result[0].filter('Package~name');
+		const validName = result[0].validate('Package~name');
+
+		expect.assertions(2);
+		expect(prefixName).toBe('prefix-Package~name');
+		expect(validName).toBe('Component `prefix-Package~name` is not a valid NPM package name');
+	});
+});
+
+/*
 // Get valid subfolders
 describe('Get a list of valid sub-folders', () => {
 	test('Returns array of folders when present', () => {
@@ -194,4 +271,4 @@ describe('Check if package exists in folder structure', () => {
 			checkPackageExists(['test-package-a', 'test-package-b'], 'test-package-a')
 		).toBe(true);
 	});
-});
+});*/
