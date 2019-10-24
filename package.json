@@ -35,7 +35,6 @@
     "mock-fs": "^4.10.2",
     "mock-os": "0.0.1",
     "mock-spawn": "^0.2.6",
-    "rewire": "^4.0.1",
     "strip-ansi": "^5.2.0"
   },
   "dependencies": {
