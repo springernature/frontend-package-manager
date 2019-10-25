@@ -15,7 +15,7 @@ const packageJsonPath = path.resolve(process.cwd(), 'package.json');
 	reporter.init('none');
 
 	try {
-		const allToolkitsInfo = await getToolkitLocations('', 'toolkits');
+		const allToolkitsInfo = await getToolkitLocations();
 		createPackage(packageJsonPath, allToolkitsInfo);
 	} catch (error) {
 		exitWithError(error);

@@ -10,11 +10,17 @@ const mockDefaultConfig = {
 	defaultKey: 'value',
 	defaultBooleanKey: true,
 	defaultArrayKey: ['a', 'b', 'c'],
-	packagesDirectory: './packages',
+	toolkitsDirectory: 'toolkits',
+	packagesDirectory: 'packages',
 };
 
+const mockMissingPackagesConfig = {
+	packagesDirectory: 'no-packages',
+};
+
+let configGenerator;
+
 jest.mock('../../../lib/js/_utils/_check-exists');
-jest.mock('../../../config/default.json', () => mockDefaultConfig, {virtual: true});
 
 jest.mock('path/to/toolkits/repo-config/package-manager.json', () => ({
 	repoKey: 'value'
@@ -29,17 +35,38 @@ jest.mock('path/to/toolkits/repo-config-deep/package-manager.json', () => ({
 	defaultArrayKey: ['c', 'd', 'e'],
 }), {virtual: true});
 
-jest.mock('path/to/toolkits/toolkit-config/package-manager.json', () => ({
-	repoKey: 'value'
+jest.mock('path/to/toolkits/repo-config-toolkitsDirectory/package-manager.json', () => ({
+	repoKey: 'value',
+	toolkitsDirectory: 'value'
+}), {virtual: true});
+
+jest.mock('path/to/toolkits/repo-config-packagesDirectory/package-manager.json', () => ({
+	repoKey: 'value',
+	packagesDirectory: 'value'
 }), {virtual: true});
 
 jest.mock('toolkits/toolkit2/package-manager.json', () => ({
 	toolkitKey: 'value'
 }), {virtual: true});
 
-const configGenerator = require('../../../lib/js/_utils/_generate-configs');
+jest.mock('toolkits/toolkit3/package-manager.json', () => ({
+	toolkitsDirectory: 'toolkits'
+}), {virtual: true});
+
+jest.mock('toolkits/toolkit4/package-manager.json', () => ({
+	packagesDirectory: 'packages'
+}), {virtual: true});
 
 describe('Generate valid config files', () => {
+	beforeEach(() => {
+		jest.mock('../../../config/default.json', () => mockDefaultConfig, {virtual: true});
+		configGenerator = require('../../../lib/js/_utils/_generate-configs');
+	});
+
+	afterEach(() => {
+		jest.resetModules();
+	});
+
 	test('Resolves with default config if no other configs found', async () => {
 		expect.assertions(1);
 		await expect(
@@ -104,7 +131,7 @@ describe('Generate valid config files', () => {
 	test('Merge default, repo, and toolkit level configs', async () => {
 		expect.assertions(1);
 		await expect(
-			configGenerator('path/to/toolkits/toolkit-config/package.json', {
+			configGenerator('path/to/toolkits/repo-config/package.json', {
 				toolkit2: {path: 'toolkits/toolkit2'}
 			})
 		).resolves.toEqual({
@@ -120,12 +147,54 @@ describe('Generate valid config files', () => {
 });
 
 describe('Fail to generate valid config files', () => {
-	test('Errors when no packages directory found in configured toolkit', async () => {
+	beforeEach(() => {
+		jest.mock('../../../config/default.json', () => mockMissingPackagesConfig, {virtual: true});
+		configGenerator = require('../../../lib/js/_utils/_generate-configs');
+	});
+
+	afterEach(() => {
+		jest.resetModules();
+	});
+
+	test('Error when try to overwrite toolkitsDirectory at repo level', async () => {
 		expect.assertions(1);
 		await expect(
-			configGenerator('path/to/toolkits/no-packages-dir/package.json', {
+			configGenerator('path/to/toolkits/repo-config-toolkitsDirectory/package.json', {})
+		).rejects.toThrowError(new Error('the `toolkitsDirectory` key is reserved and cannot be set'));
+	});
+
+	test('Error when try to overwrite packagesDirectory at repo level', async () => {
+		expect.assertions(1);
+		await expect(
+			configGenerator('path/to/toolkits/repo-config-packagesDirectory/package.json', {})
+		).rejects.toThrowError(new Error('the `packagesDirectory` key is reserved and cannot be set'));
+	});
+
+	test('Error when try to overwrite toolkitsDirectory at toolkit level', async () => {
+		expect.assertions(1);
+		await expect(
+			configGenerator('path/to/toolkits/repo-config/package-manager.json', {
 				toolkit3: {path: 'toolkits/toolkit3'}
 			})
-		).rejects.toBeInstanceOf(Error);
+		).rejects.toThrowError(new Error('the `toolkitsDirectory` key is reserved and cannot be set'));
+	});
+
+	test('Error when try to overwrite packagesDirectory at toolkit level', async () => {
+		expect.assertions(1);
+		await expect(
+			configGenerator('path/to/toolkits/repo-config/package-manager.json', {
+				toolkit4: {path: 'toolkits/toolkit4'}
+			})
+		).rejects.toThrowError(new Error('the `packagesDirectory` key is reserved and cannot be set'));
+	});
+
+	test('Error when packages directory doesn\'t exist', async () => {
+		jest.mock('../../../config/default.json', () => mockMissingPackagesConfig, {virtual: true});
+		expect.assertions(1);
+		await expect(
+			configGenerator('path/to/toolkits/repo-config/package-manager.json', {
+				toolkit1: {path: 'toolkits/toolkit1'}
+			})
+		).rejects.toThrowError(new Error('invalid folder: toolkits/toolkit1/no-packages'));
 	});
 });

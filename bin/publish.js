@@ -17,7 +17,7 @@ reporter.info('searching for toolkits');
 
 (async () => {
 	try {
-		const allToolkitsInfo = await getToolkitLocations({}, 'toolkits');
+		const allToolkitsInfo = await getToolkitLocations();
 		const configs = await generateConfigs(packageJsonPath, allToolkitsInfo);
 		publishPackages(configs, rootPath);
 	} catch (error) {

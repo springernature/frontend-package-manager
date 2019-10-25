@@ -28,7 +28,6 @@ The package manager is configurable to enforce consistency across packages that 
 ```json
 {
   "scope": "springernature",
-  "packagesDirectory": "./packages",
   "changelog": "HISTORY.md",
   "allowExtends": false,
   "required": [
@@ -40,9 +39,6 @@ The package manager is configurable to enforce consistency across packages that 
 
 #### scope
 All packages must be published under an [organisation scope](https://docs.npmjs.com/misc/scope) on NPM. Packages within the Springer Nature ecosystem are published to the company scope and this **MUST NOT** be changed.
-
-#### packagesDirectory
-Packages should be self-contained units of code that all live within a specific directory within your repository.
 
 #### changelog
 All packages **MUST** have a changelog file in their root directory.

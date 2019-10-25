@@ -32,7 +32,7 @@ reporter.info('searching for toolkits');
 
 (async () => {
 	try {
-		const allToolkitsInfo = await getToolkitLocations(argv, 'toolkits');
+		const allToolkitsInfo = await getToolkitLocations(argv);
 		const configs = await generateConfigs(packageJsonPath, allToolkitsInfo);
 		validatePackages(packageJsonPath, configs, argv.npm);
 	} catch (error) {
