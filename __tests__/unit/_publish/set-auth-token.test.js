@@ -33,7 +33,7 @@ describe('Set the auth token inside the correct .npmrc file', () => {
 		mockos({'homedir': 'home/user'});
 		expect.assertions(1);
 		await expect(
-			setAuthToken('path/to/auth-package', null)
+			setAuthToken('path/to/auth-package')
 		).resolves.toEqual({
 			description: 'npmrc file saved',
 			text: 'home/user/.npmrc'
@@ -44,7 +44,7 @@ describe('Set the auth token inside the correct .npmrc file', () => {
 		mockos({'homedir': 'home/user'});
 		expect.assertions(1);
 		await expect(
-			setAuthToken('path/to/auth-package-custom', null)
+			setAuthToken('path/to/auth-package-custom')
 		).resolves.toEqual({
 			description: 'npmrc file saved',
 			text: 'home/user/.npmrc'
@@ -55,7 +55,7 @@ describe('Set the auth token inside the correct .npmrc file', () => {
 		mockos({'homedir': 'home/user-b'});
 		expect.assertions(1);
 		await expect(
-			setAuthToken('path/to/auth-package', null)
+			setAuthToken('path/to/auth-package')
 		).resolves.toEqual({
 			description: 'npmrc file already has correct contents',
 			text: 'skipping file generation'
@@ -66,7 +66,7 @@ describe('Set the auth token inside the correct .npmrc file', () => {
 		mockos({'homedir': 'home/user-c'});
 		expect.assertions(1);
 		await expect(
-			setAuthToken('path/to/auth-package', null)
+			setAuthToken('path/to/auth-package')
 		).rejects.toThrowError(new Error('Authentication token already set for https://registry.npmjs.org/'));
 	});
 
