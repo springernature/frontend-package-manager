@@ -8,13 +8,23 @@ jest.mock('@springernature/util-cli-reporter');
 jest.mock('globby');
 jest.mock('../../../lib/js/_utils/_check-exists');
 
-const getToolkitLocations = require('../../../lib/js/_utils/_get-toolkit-locations');
+jest.restoreAllMocks();
+
+let getToolkitLocations;
 
 describe('Find toolkits within a repository', () => {
+	beforeEach(() => {
+		getToolkitLocations = require('../../../lib/js/_utils/_get-toolkit-locations');
+	});
+
+	afterEach(() => {
+		jest.resetModules();
+	});
+
 	test('Default options', async () => {
 		expect.assertions(1);
 		await expect(
-			getToolkitLocations({}, 'toolkits')
+			getToolkitLocations()
 		).resolves.toEqual({
 			toolkit1: {path: 'toolkits/toolkit1'},
 			toolkit2: {path: 'toolkits/toolkit2'},
@@ -28,7 +38,7 @@ describe('Find toolkits within a repository', () => {
 		await expect(
 			getToolkitLocations({
 				toolkits: 'toolkit2'
-			}, 'toolkits')
+			})
 		).resolves.toEqual({
 			toolkit2: {path: 'toolkits/toolkit2'}
 		});
@@ -82,54 +92,82 @@ describe('Find toolkits within a repository', () => {
 });
 
 describe('Cannot find toolkits within a repository', () => {
+	afterEach(() => {
+		jest.resetModules();
+	});
+
 	test('Error when top-level toolkit folder doesn\'t exist', async () => {
+		jest.mock('../../../config/default.json', () => ({toolkitsDirectory: 'no-toolkits'}), {virtual: true});
+		const getToolkitLocationsLocal = require('../../../lib/js/_utils/_get-toolkit-locations');
+
 		expect.assertions(1);
 		await expect(
-			getToolkitLocations({}, 'no-toolkits')
-		).rejects.toBeInstanceOf(Error);
+			getToolkitLocationsLocal({})
+		).rejects.toThrowError(new Error('invalid folder: no-toolkits'));
 	});
 
 	test('Error when globby fails', async () => {
+		jest.mock('../../../config/default.json', () => ({toolkitsDirectory: 'toolkits-no-globby'}), {virtual: true});
+		const getToolkitLocationsLocal = require('../../../lib/js/_utils/_get-toolkit-locations');
+
 		expect.assertions(1);
 		await expect(
-			getToolkitLocations({}, 'toolkits-no-globby')
-		).rejects.toBeInstanceOf(Error);
+			getToolkitLocationsLocal({})
+		).rejects.toThrowError(new Error('globby error'));
 	});
 
 	test('Filter by single toolkit - none found', async () => {
+		jest.mock('../../../config/default.json', () => ({toolkitsDirectory: 'toolkits'}), {virtual: true});
+		const getToolkitLocationsLocal = require('../../../lib/js/_utils/_get-toolkit-locations');
+
 		expect.assertions(1);
 		await expect(
-			getToolkitLocations({
+			getToolkitLocationsLocal({
 				toolkits: 'toolkit5'
-			}, 'toolkits')
+			})
 		).resolves.toEqual({});
 	});
 
 	test('Filter by multiple toolkits - none found', async () => {
+		jest.mock('../../../config/default.json', () => ({toolkitsDirectory: 'toolkits'}), {virtual: true});
+		const getToolkitLocationsLocal = require('../../../lib/js/_utils/_get-toolkit-locations');
+
 		expect.assertions(1);
 		await expect(
-			getToolkitLocations({
+			getToolkitLocationsLocal({
 				toolkits: 'toolkit5,toolkit6'
-			}, 'toolkits')
+			})
 		).resolves.toEqual({});
 	});
 
 	test('Filter by package - none found', async () => {
+		jest.mock('../../../config/default.json', () => ({
+			toolkitsDirectory: 'toolkits',
+			packagesDirectory: 'packages'
+		}), {virtual: true});
+		const getToolkitLocationsLocal = require('../../../lib/js/_utils/_get-toolkit-locations');
+
 		expect.assertions(1);
 		await expect(
-			getToolkitLocations({
+			getToolkitLocationsLocal({
 				package: 'toolkit5-package'
-			}, 'toolkits')
+			})
 		).resolves.toEqual({});
 	});
 
 	test('Filter by toolkit and package - none found', async () => {
+		jest.mock('../../../config/default.json', () => ({
+			toolkitsDirectory: 'toolkits',
+			packagesDirectory: 'packages'
+		}), {virtual: true});
+		const getToolkitLocationsLocal = require('../../../lib/js/_utils/_get-toolkit-locations');
+
 		expect.assertions(1);
 		await expect(
-			getToolkitLocations({
+			getToolkitLocationsLocal({
 				toolkits: 'toolkit3',
 				package: 'toolkit3-package'
-			}, 'toolkits')
+			})
 		).resolves.toEqual({});
 	});
 });
