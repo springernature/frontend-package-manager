@@ -26,7 +26,7 @@ describe('Check for updating of file when publishing', () => {
 				'filename.ext\npath/to/other-package/file.ext\nothername.ext',
 				'global-package/file.ext'
 			)
-		).rejects.toBeInstanceOf(Error);
+		).rejects.toThrowError(new Error('global-package/file.ext file must be updated'));
 	});
 
 	test('Reject if wrong file has been updated', async () => {
@@ -36,7 +36,7 @@ describe('Check for updating of file when publishing', () => {
 				'filename.ext\npath/to/global-package/file.ext\nothername.ext',
 				'global-package/other.ext'
 			)
-		).rejects.toBeInstanceOf(Error);
+		).rejects.toThrowError(new Error('global-package/other.ext file must be updated'));
 	});
 
 	test('Reject if error in retrieving changed files', async () => {

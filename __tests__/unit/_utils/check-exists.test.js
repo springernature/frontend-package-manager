@@ -45,15 +45,15 @@ describe('Check if files/folders exist on the filesystem', () => {
 	test('Reject if file when checking directory', async () => {
 		expect.assertions(1);
 		await expect(
-			exists.directoryExists('path/to/other.png')
-		).rejects.toBeInstanceOf(Error);
+			exists.directoryExists('path/to/some.png')
+		).rejects.toThrowError(new Error('Not a directory `path/to/some.png`'));
 	});
 
 	test('Reject if directory when checking file', async () => {
 		expect.assertions(1);
 		await expect(
 			exists.fileExists('some/other/path')
-		).rejects.toBeInstanceOf(Error);
+		).rejects.toThrowError(new Error('Not a file `some/other/path`'));
 	});
 
 	afterEach(() => {

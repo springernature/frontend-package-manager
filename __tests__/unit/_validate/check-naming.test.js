@@ -37,7 +37,7 @@ describe('Check naming conventions', () => {
 				},
 				'path/to/global-package'
 			)
-		).rejects.toBeInstanceOf(Error);
+		).rejects.toThrowError(new Error('Invalid package name: @springernature/global-package'));
 	});
 
 	test('Reject if Folder name is not valid (with prefix)', async () => {
@@ -51,7 +51,7 @@ describe('Check naming conventions', () => {
 				},
 				'path/to/global-package'
 			)
-		).rejects.toBeInstanceOf(Error);
+		).rejects.toThrowError(new Error('Invalid folder name: global-package'));
 	});
 
 	test('Package and folder names are valid (without prefix)', async () => {
@@ -79,6 +79,6 @@ describe('Check naming conventions', () => {
 				},
 				'path/to/global-package'
 			)
-		).rejects.toBeInstanceOf(Error);
+		).rejects.toThrowError(new Error('Invalid package name: @springernature/global-package'));
 	});
 });

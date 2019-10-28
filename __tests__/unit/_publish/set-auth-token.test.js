@@ -67,7 +67,7 @@ describe('Set the auth token inside the correct .npmrc file', () => {
 		expect.assertions(1);
 		await expect(
 			setAuthToken('path/to/auth-package', null)
-		).rejects.toBeInstanceOf(Error);
+		).rejects.toThrowError(new Error('Authentication token already set for https://registry.npmjs.org/'));
 	});
 
 	afterEach(() => {

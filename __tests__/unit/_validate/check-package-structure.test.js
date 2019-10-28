@@ -39,7 +39,7 @@ describe('Check validation', () => {
 		expect.assertions(1);
 		await expect(
 			checkValidation(validationConfig, 'packages/package/error')
-		).rejects.toBeInstanceOf(Error);
+		).rejects.toThrowError(new Error('globby error'));
 	});
 
 	test('Resolves when filesystem matches config', async () => {
@@ -60,7 +60,7 @@ describe('Check validation', () => {
 		expect.assertions(1);
 		await expect(
 			checkValidation(validationConfig, 'packages/package/failIsRequired')
-		).rejects.toBeInstanceOf(Error);
+		).rejects.toThrowError(new Error('Invalid files or folders in failIsRequired'));
 	});
 
 	test('Does not reject when dotfiles included', async () => {
@@ -74,21 +74,21 @@ describe('Check validation', () => {
 		expect.assertions(1);
 		await expect(
 			checkValidation(validationConfig, 'packages/package/failIsFolder')
-		).rejects.toBeInstanceOf(Error);
+		).rejects.toThrowError(new Error('Invalid files or folders in failIsFolder'));
 	});
 
 	test('Rejects when invalid file type present in a valid folder', async () => {
 		expect.assertions(1);
 		await expect(
 			checkValidation(validationConfig, 'packages/package/failIsFileType')
-		).rejects.toBeInstanceOf(Error);
+		).rejects.toThrowError(new Error('Invalid files or folders in failIsFileType'));
 	});
 
 	test('Rejects when invalid file present at top level', async () => {
 		expect.assertions(1);
 		await expect(
 			checkValidation(validationConfig, 'packages/package/failIsTopLevelFile')
-		).rejects.toBeInstanceOf(Error);
+		).rejects.toThrowError(new Error('Invalid files or folders in failIsTopLevelFile'));
 	});
 
 	test('Resolves with any folders when no folder config', async () => {

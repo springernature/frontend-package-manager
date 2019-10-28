@@ -22,7 +22,7 @@ describe('Check for correct license', () => {
 	test('Reject if license does not match global license', async () => {
 		expect.assertions(1);
 		await expect(
-			checkLicense('path/to/global-package', 'wrong-license-name')
-		).rejects.toBeInstanceOf(Error);
+			checkLicense('path/to/global-package', 'global-license-name')
+		).rejects.toThrowError(new Error('Invalid license `license-name`. Should be `global-license-name`'));
 	});
 });
