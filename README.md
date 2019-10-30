@@ -157,9 +157,9 @@ The package creation script is a CLI based tool that can be used to quickly crea
 $ ./node_modules/.bin/sn-package-create
 ```
 
-<img src="auto-generate.gif" width="600">
+<img src="img/create.gif" width="600">
 
-> Example from Springer Nature [Front-End Global Toolkit](https://github.com/springernature/frontend-global-toolkit)
+> Example from Springer Nature [Front-End Toolkits](https://github.com/springernature/frontend-toolkits)
 
 ### Package validation
 
