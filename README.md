@@ -5,11 +5,34 @@
 [![Build Status][badge-build]][info-build]
 [![LGPL 3.0 licensed][badge-license]][info-license]
 
-Handles the **creation**, **validation**, and **publication** of packages built as part of the Springer Nature Front-End Toolkits.
+Handles the **creation**, **validation**, and **publication** of packages built as part of the Springer Nature Elements Design System.
 
-Packages are bundles of front-end assets (HTML, CSS, JS, Images) that are published via NPM and used within the Springer Nature ecosystem. It is expected that multiple packages live within one repository ([monorepo](https://medium.com/@maoberlehner/monorepos-in-the-wild-33c6eb246cb9)).
+The Design System is made up of different `toolkits` that contain `packages` designed for use with different brands within the Springer Nature ecosystem.
 
-An example of this package in use can be found in the [Springer Nature Front-End Global Toolkit](https://github.com/springernature/frontend-global-toolkit)
+Packages are bundles of front-end assets (HTML, CSS, JS, images, tests etc...) that are published via NPM and used within the Springer Nature ecosystem. It is expected that multiple packages live within one repository ([monorepo](https://medium.com/@maoberlehner/monorepos-in-the-wild-33c6eb246cb9)).
+
+## Repository structure
+
+The package manager expects the following repository structure:
+
+```
+repository-monorepo
+  └── toolkits
+    ├── name-of-toolkit
+      └── packages
+        ├── name-of-package
+        └── name-of-other-package
+    ├── name-of-toolkit
+      └── packages
+       └── name-of-package
+    └── name-of-toolkit
+      └── packages
+       └── name-of-package
+```
+
+Where each individual toolkit (collection of packages) lives within a `toolkits` folder, and the packages within that toolkit live within a `packages` folder.
+
+The package manager is used within the [Springer Nature Front-End Toolkits](https://github.com/springernature/frontend-toolkits) repository.
 
 ## Install
 
@@ -21,14 +44,15 @@ Installing `frontend-package-manager` adds package management exectuables to `./
 
 ## Configuration
 
-The package manager is configurable to enforce consistency across packages that are created. Below is the default configuration that is supplied for Springer Nature toolkit packages.
+The package manager is configurable to enforce consistency across packages that are created. Below is the default configuration that is supplied:
 
 ### Default configuration
 
 ```json
 {
   "scope": "springernature",
-  "packagesDirectory": "./packages",
+  "toolkitsDirectory": "toolkits",
+  "packagesDirectory": "packages",
   "changelog": "HISTORY.md",
   "allowExtends": false,
   "required": [
@@ -39,10 +63,15 @@ The package manager is configurable to enforce consistency across packages that 
 ```
 
 #### scope
-All packages must be published under an [organisation scope](https://docs.npmjs.com/misc/scope) on NPM. Packages within the Springer Nature ecosystem are published to the company scope and this **MUST NOT** be changed.
+All packages must be published under an [organisation scope](https://docs.npmjs.com/misc/scope) on NPM. By default packages within the Springer Nature ecosystem are published to the company scope.
+
+#### toolkitsDirectory
+
+Defines the parent folder under which toolkits live (see example structure above), and can **NOT** be changed.
 
 #### packagesDirectory
-Packages should be self-contained units of code that all live within a specific directory within your repository.
+
+Defines the parent folder under which packages live within a specific toolkit (see example structure above), and can **NOT** be changed.
 
 #### changelog
 All packages **MUST** have a changelog file in their root directory.
@@ -55,7 +84,19 @@ An array of file paths that **MUST** appear in any package. There is no need to 
 
 ### Extending the default configuration
 
-You have the ability to override the default configuration, and extend it with a number of other options by providing a `package-manager.json` file in the root of your repository, in the same location as your `package.json` file. This user configuration file should take the same format as the default configuration, and can also add the following options:
+The default configuration options provided can be overriden and/or extended in one of two ways:
+
+#### Repository
+
+By providing a `package-manager.json` file in the root of your repository, in the same location as your `package.json` file. Configuration options defined here will extend/override those in the default (with the exception of the `toolkitsDirectory` and `packagesDirectory` options), and are inherited by _all_ toolkits.
+
+#### Toolkit
+
+By providing a `package-manager.json` file in a specific toolkit folder e.g. `toolkits > name-of-toolkit`. Configuration options defined here will extend/override those at both the default and repository level (with the exception of the `toolkitsDirectory` and `packagesDirectory` options), and are used by just a single toolkit.
+
+### Configuration options
+
+The configuration files should take the same format as the default configuration, and can also add the following options:
 
 #### prefix
 Package names can specify a prefix that namespaces them within NPM based on where within the Springer Nature ecosystem they originate.
@@ -116,9 +157,9 @@ The package creation script is a CLI based tool that can be used to quickly crea
 $ ./node_modules/.bin/sn-package-create
 ```
 
-<img src="auto-generate.gif" width="600">
+<img src="img/create.gif" width="600">
 
-> Example from Springer Nature [Front-End Global Toolkit](https://github.com/springernature/frontend-global-toolkit)
+> Example from Springer Nature [Front-End Toolkits](https://github.com/springernature/frontend-toolkits)
 
 ### Package validation
 
@@ -130,29 +171,43 @@ Running this script will validate _all_ the packages in the provided packages di
 $ ./node_modules/.bin/sn-package-validate
 ```
 
- Running with the `-p` or `--package` argument will validate the package named after the argument:
+#### Filter by toolkits
 
- ```
- $ ./node_modules/.bin/sn-package-validate -p name-of-package
- ```
+Running with the `-t` or `--toolkits` argument will validate only packages named after the argument:
 
- Running with the `-n` or `--npm` argument will validate for publication to NPM. This is designed to validate the [publication step on your CI environment](#package-publication) and should not be run locally:
+```
+$ ./node_modules/.bin/sn-package-validate -t toolkita,toolkitb,toolkitc
+```
 
- ```
- $ ./node_modules/.bin/sn-package-validate -n
- ```
+#### Filter by package
 
- If you are running via [NPM Scripts](https://docs.npmjs.com/cli/run-script), remember to forward on your arguments using the format `npm run <command> [-- <args>]`. For example:
+Running with the `-p` or `--package` argument will validate the package named after the argument:
 
- ```
- $ npm run validate -- -p name-of-package
- ```
+```
+$ ./node_modules/.bin/sn-package-validate -p name-of-package
+```
 
- To view all the options:
+#### Validation publication
 
- ```
- $ ./node_modules/.bin/sn-package-validate -h
- ```
+Running with the `-n` or `--npm` argument will validate for publication to NPM. This is designed to validate the [publication step on your CI environment](#package-publication) and should not be run locally:
+
+```
+$ ./node_modules/.bin/sn-package-validate -n
+```
+
+#### Running via NPM Scripts
+
+If you are running via [NPM Scripts](https://docs.npmjs.com/cli/run-script), remember to forward on your arguments using the format `npm run <command> [-- <args>]`. For example:
+
+```
+$ npm run validate -- -p name-of-package
+```
+
+To view all the options:
+
+```
+$ ./node_modules/.bin/sn-package-validate -h
+```
 
 ### Package publication
 

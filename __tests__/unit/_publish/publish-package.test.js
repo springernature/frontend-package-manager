@@ -1,5 +1,5 @@
 /**
- * __tests__/unit/_publish/publish-package.js
+ * __tests__/unit/_publish/publish-package.test.js
  * Test: js/_publish/_publish-package.js
  */
 'use strict';

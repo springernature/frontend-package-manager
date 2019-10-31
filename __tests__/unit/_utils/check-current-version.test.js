@@ -1,5 +1,5 @@
 /**
- * __tests__/unit/_utils/check-current-version.js
+ * __tests__/unit/_utils/check-current-version.test.js
  * Test: js/_utils/_check-current-version.js
  */
 'use strict';

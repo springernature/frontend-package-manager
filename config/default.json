@@ -1,6 +1,7 @@
 {
-	"scope": "springernature",
-	"packagesDirectory": "./packages",
+  "scope": "springernature",
+  "toolkitsDirectory": "toolkits",
+  "packagesDirectory": "packages",
 	"changelog": "HISTORY.md",
 	"allowExtends": false,
 	"required": [

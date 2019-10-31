@@ -1,5 +1,5 @@
 /**
- * __tests__/unit/_validate/check-changed-files.js
+ * __tests__/unit/_validate/check-changed-files.test.js
  * Test: js/_validate/_check-changed-files.js
  */
 'use strict';

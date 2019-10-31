@@ -62,7 +62,25 @@ const __fsMockFilesEmpty = () => {
 	};
 };
 
+const __fsMkdir = (path, callback) => {
+	if (path.includes('package-error') || path.includes('package-css-folders/scss/A')) {
+		callback('mkdir error');
+	} else {
+		callback();
+	}
+};
+
+const __fsWriteFile = (path, _contents, callback) => {
+	if (path.includes('package-error') || path.includes('package-file-error')) {
+		callback('writefile error');
+	} else {
+		callback();
+	}
+};
+
 fs.__fsMockFiles = __fsMockFiles;
 fs.__fsMockFilesEmpty = __fsMockFilesEmpty;
+fs.mkdir = __fsMkdir;
+fs.writeFile = __fsWriteFile;
 
 module.exports = fs;
