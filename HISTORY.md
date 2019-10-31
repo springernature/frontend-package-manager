@@ -1,5 +1,11 @@
 # History
 
+## 4.0.0 (2019-10-31)
+	* BREAKING: Major rewrite that requires a change to repo structures
+		* Handles multiple toolkits per repo
+	* BREAKING: Remove the ability to configure the `packagesDirectory`
+	* Switches from Promise to Async/Await
+
 ## 3.0.0 (2019-09-26)
 	* Move some functionality into reuseable utility modules
 		* Package extension
