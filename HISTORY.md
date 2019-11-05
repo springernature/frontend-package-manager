@@ -1,5 +1,8 @@
 # History
 
+## 4.0.1 (2019-11-05)
+	* BUG: null being passed for token access instead of NPM_TOKEN
+
 ## 4.0.0 (2019-10-31)
 	* BREAKING: Major rewrite that requires a change to repo structures
 		* Handles multiple toolkits per repo
