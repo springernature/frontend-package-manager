@@ -64,6 +64,21 @@ const packageFiles = () => {
 			'packages/package/passGitIgnore/folder3/file.scss',
 			'packages/package/passGitIgnore/folder3/file.js'
 		],
+		'packages/package/passWithBuildFiles/**/*': [
+			'packages/package/passWithBuildFiles/required.md',
+			'packages/package/passWithBuildFiles/package-lock.json',
+			'packages/package/passWithBuildFiles/folder1',
+			'packages/package/passWithBuildFiles/folder1/file.scss',
+			'packages/package/passWithBuildFiles/folder1/file.css',
+			'packages/package/passWithBuildFiles/folder2',
+			'packages/package/passWithBuildFiles/folder2/file.js',
+			'packages/package/passWithBuildFiles/folder2/file.json',
+			'packages/package/passWithBuildFiles/folder2/subfolder',
+			'packages/package/passWithBuildFiles/folder2/subfolder/file.js',
+			'packages/package/passWithBuildFiles/folder3',
+			'packages/package/passWithBuildFiles/folder3/file.scss',
+			'packages/package/passWithBuildFiles/folder3/file.js'
+		],
 		'packages/package/passDotfiles/**/*': [
 			'packages/package/passDotfiles/required.md',
 			'packages/package/passDotfiles/.adotfile',

@@ -56,6 +56,13 @@ describe('Check validation', () => {
 		).resolves.toEqual();
 	});
 
+	test('Resolves when filesystem matches config ignore build files', async () => {
+		expect.assertions(1);
+		await expect(
+			checkValidation(validationConfig, 'packages/package/passWithBuildFiles')
+		).resolves.toEqual();
+	});
+
 	test('Rejects when required file missing', async () => {
 		expect.assertions(1);
 		await expect(
