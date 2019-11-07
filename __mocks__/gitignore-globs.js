@@ -5,5 +5,5 @@
 'use strict';
 
 module.exports = () => {
-	return ['**/folder3', '**/folder3/**'];
+	return ['**/folder3', '**/folder3/**', '**/packages/**/package-lock.json'];
 };
