@@ -42,21 +42,21 @@ describe('Check validation', () => {
 		).rejects.toThrowError(new Error('globby error'));
 	});
 
-	test('Resolves when filesystem matches config', async () => {
+	test('Resolves when filesystem matches validationConfig', async () => {
 		expect.assertions(1);
 		await expect(
 			checkValidation(validationConfig, 'packages/package/pass')
 		).resolves.toEqual();
 	});
 
-	test('Resolves when filesystem matches config ignore files in .gitignore', async () => {
+	test('Resolves when filesystem matches validationConfig & ignores files in .gitignore', async () => {
 		expect.assertions(1);
 		await expect(
 			checkValidation(validationConfig, 'packages/package/passGitIgnore')
 		).resolves.toEqual();
 	});
 
-	test('Resolves when filesystem matches config ignore build files', async () => {
+	test('Resolves when filesystem matches validationConfig & ignores any package lock files', async () => {
 		expect.assertions(1);
 		await expect(
 			checkValidation(validationConfig, 'packages/package/passWithBuildFiles')
@@ -98,14 +98,14 @@ describe('Check validation', () => {
 		).rejects.toThrowError(new Error('Invalid files or folders in failIsTopLevelFile'));
 	});
 
-	test('Resolves with any folders when no folder config', async () => {
+	test('Resolves with any folders when no folders specified in config', async () => {
 		expect.assertions(1);
 		await expect(
 			checkValidation(validationConfigNoFolders, 'packages/package/failIsFolder')
 		).resolves.toEqual();
 	});
 
-	test('Resolves with any files when no folder config', async () => {
+	test('Resolves with any files when no folders specified in config', async () => {
 		expect.assertions(1);
 		await expect(
 			checkValidation(validationConfigNoFolders, 'packages/package/failIsFileType')
