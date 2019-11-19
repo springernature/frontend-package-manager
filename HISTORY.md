@@ -1,5 +1,8 @@
 # History
 
+## 4.0.2 (2019-11-06)
+	* BUG: package level package-lock.json files not being ignored during validation
+
 ## 4.0.1 (2019-11-05)
 	* BUG: null being passed for token access instead of NPM_TOKEN
 

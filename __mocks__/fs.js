@@ -36,6 +36,7 @@ const defaultPackageContents = {
 const __fsMockFiles = () => {
 	return {
 		'packages/package/pass': defaultPackageContents,
+		'packages/package/passWithBuildFiles': {...defaultPackageContents, ...{'package-lock.json': 'file content'}},
 		'packages/package/passGitIgnore': defaultPackageContents,
 		'packages/package/passDotfiles': defaultPackageContents,
 		'packages/package/failIsRequired': defaultPackageContents,
