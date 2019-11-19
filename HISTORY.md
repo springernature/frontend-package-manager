@@ -1,5 +1,8 @@
 # History
 
+## 4.0.3 (2019-11-19)
+	* BUG: globby pattern fails as NPM module
+
 ## 4.0.2 (2019-11-06)
 	* BUG: package level package-lock.json files not being ignored during validation
 

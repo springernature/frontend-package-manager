@@ -13,7 +13,7 @@ const toolkitFiles = () => {
 			'toolkits/toolkit3',
 			'toolkits/toolkit4'
 		],
-		'toolkits/(toolkit2)': [
+		'toolkits/toolkit2': [
 			'toolkits/toolkit2'
 		],
 		'toolkits/(toolkit2|toolkit3)': [
@@ -26,13 +26,13 @@ const toolkitFiles = () => {
 		'toolkits/*/packages/toolkit1-package': [
 			'toolkits/toolkit1/packages/toolkit1-package'
 		],
-		'toolkits/(toolkit1)/packages/toolkit1-package': [
+		'toolkits/toolkit1/packages/toolkit1-package': [
 			'toolkits/toolkit1/packages/toolkit1-package'
 		],
-		'toolkits/(toolkit5)': [],
+		'toolkits/toolkit5': [],
 		'toolkits/(toolkit5|toolkit6)': [],
 		'toolkits/*/packages/toolkit5-package': [],
-		'toolkits/(toolkit3)/packages/toolkit3-package': []
+		'toolkits/toolkit3/packages/toolkit3-package': []
 	};
 };
 
