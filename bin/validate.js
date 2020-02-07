@@ -23,18 +23,20 @@ const argv = require('yargs')
 const exitWithError = require('../lib/js/_utils/_error');
 const generateConfigs = require('../lib/js/_utils/_generate-configs');
 const getToolkitLocations = require('../lib/js/_utils/_get-toolkit-locations');
+const getAllToolkitNames = require('../lib/js/_utils/_get-toolkit-names');
 const validatePackages = require('../lib/js/_validate');
 
 const packageJsonPath = path.resolve(process.cwd(), 'package.json');
 
 reporter.title('validating packages');
-reporter.info('searching for toolkits');
+reporter.info('searching for all toolkits');
 
 (async () => {
 	try {
-		const allToolkitsInfo = await getToolkitLocations(argv);
-		const configs = await generateConfigs(packageJsonPath, allToolkitsInfo);
-		validatePackages(packageJsonPath, configs, argv.npm);
+		const allToolkitNames = await getAllToolkitNames();
+		const toolkitLocationInfo = await getToolkitLocations(allToolkitNames, argv);
+		const configs = await generateConfigs(packageJsonPath, toolkitLocationInfo);
+		validatePackages(packageJsonPath, allToolkitNames, configs, argv.npm);
 	} catch (error) {
 		exitWithError(error);
 	}
