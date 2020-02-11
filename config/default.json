@@ -1,6 +1,7 @@
 {
   "scope": "springernature",
   "toolkitsDirectory": "toolkits",
+  "contextsDirectory": "contexts",
   "packagesDirectory": "packages",
 	"changelog": "HISTORY.md",
 	"allowExtends": false,
