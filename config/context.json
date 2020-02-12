@@ -1,8 +1,9 @@
 {
   "prefix": "brand",
   "contextDirectory": "context",
-  "changelog": "HISTORY.md",
+  "brandContextName": "brand-context",
   "brands": [],
+  "changelog": "HISTORY.md",
   "required": [
     "README.md",
     "package.json"

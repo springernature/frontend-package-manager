@@ -2,7 +2,6 @@
   "scope": "springernature",
   "toolkitsDirectory": "toolkits",
   "packagesDirectory": "packages",
-  "brandContextName": "brand-context",
 	"changelog": "HISTORY.md",
 	"required": [
 		"README.md",
