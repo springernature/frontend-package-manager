@@ -28,15 +28,16 @@ const getAllToolkitNames = require('../lib/js/_utils/_get-toolkit-names');
 const validatePackages = require('../lib/js/_validate');
 
 const packageJsonPath = path.resolve(process.cwd(), 'package.json');
+const defaultConfig = require('../config/default.json');
 
 reporter.title('validating packages');
 reporter.info('searching for all toolkits');
 
 (async () => {
 	try {
-		const allToolkitNames = await getAllToolkitNames();
-		const toolkitLocationInfo = await getToolkitLocations(allToolkitNames, argv);
-		const toolkitConfig = await generateToolkitConfig(packageJsonPath, toolkitLocationInfo);
+		const allToolkitNames = await getAllToolkitNames(defaultConfig);
+		const toolkitLocationInfo = await getToolkitLocations(defaultConfig, allToolkitNames, argv);
+		const toolkitConfig = await generateToolkitConfig(defaultConfig, packageJsonPath, toolkitLocationInfo);
 		const contextConfig = await generateContextConfig(packageJsonPath, toolkitLocationInfo);
 		const allConfigs = {context: contextConfig, toolkit: toolkitConfig};
 		validatePackages(packageJsonPath, allConfigs, argv.npm);
