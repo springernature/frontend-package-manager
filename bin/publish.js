@@ -5,7 +5,7 @@ const path = require('path');
 const reporter = require('@springernature/util-cli-reporter');
 
 const exitWithError = require('../lib/js/_utils/_error');
-const generateConfigs = require('../lib/js/_utils/_generate-configs');
+const generateConfigs = require('../lib/js/_utils/_generate-toolkit-config');
 const getToolkitLocations = require('../lib/js/_utils/_get-toolkit-locations');
 const publishPackages = require('../lib/js/_publish');
 

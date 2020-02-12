@@ -1,0 +1,10 @@
+{
+  "prefix": "brand",
+  "contextDirectory": "context",
+  "changelog": "HISTORY.md",
+  "brands": [],
+  "required": [
+    "README.md",
+    "package.json"
+  ]
+}

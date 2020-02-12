@@ -1,6 +1,6 @@
 /**
- * __tests__/unit/_utils/generate-configs.test.js
- * Test: js/_utils/_generate-configs.js
+ * __tests__/unit/_utils/generate-toolkit-config.test.js
+ * Test: js/_utils/_generate-toolkit-config.js
  */
 'use strict';
 
