@@ -39,7 +39,7 @@ reporter.info('searching for all toolkits');
 		const toolkitConfig = await generateToolkitConfig(packageJsonPath, toolkitLocationInfo);
 		const contextConfig = await generateContextConfig(packageJsonPath, toolkitLocationInfo);
 		const allConfigs = {context: contextConfig, toolkit: toolkitConfig};
-		validatePackages(packageJsonPath, allToolkitNames, allConfigs, argv.npm);
+		validatePackages(packageJsonPath, allConfigs, argv.npm);
 	} catch (error) {
 		exitWithError(error);
 	}
