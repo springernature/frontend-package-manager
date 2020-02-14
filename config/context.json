@@ -1,4 +1,5 @@
 {
+  "scope": "springernature",
   "prefix": "brand",
   "contextDirectory": "context",
   "brandContextName": "brand-context",
