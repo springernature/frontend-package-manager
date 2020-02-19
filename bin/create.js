@@ -19,7 +19,7 @@ const defaultConfig = require('../config/default.json');
 	try {
 		const allToolkitNames = await getAllToolkitNames(defaultConfig);
 		const toolkitLocationInfo = await getToolkitLocations(defaultConfig, allToolkitNames);
-		createPackage(packageJsonPath, toolkitLocationInfo);
+		createPackage(defaultConfig, packageJsonPath, toolkitLocationInfo);
 	} catch (error) {
 		exitWithError(error);
 	}
