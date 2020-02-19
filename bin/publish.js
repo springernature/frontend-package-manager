@@ -13,15 +13,16 @@ const publishPackages = require('../lib/js/_publish');
 
 const rootPath = process.cwd();
 const packageJsonPath = path.resolve(rootPath, 'package.json');
+const defaultConfig = require('../config/default.json');
 
 reporter.title('package publication');
 reporter.info('searching for toolkits');
 
 (async () => {
 	try {
-		const allToolkitNames = await getAllToolkitNames();
-		const toolkitLocationInfo = await getToolkitLocations(allToolkitNames);
-		const toolkitConfig = await generateToolkitConfig(packageJsonPath, toolkitLocationInfo);
+		const allToolkitNames = await getAllToolkitNames(defaultConfig);
+		const toolkitLocationInfo = await getToolkitLocations(defaultConfig, allToolkitNames);
+		const toolkitConfig = await generateToolkitConfig(defaultConfig, packageJsonPath, toolkitLocationInfo);
 		const contextConfig = await generateContextConfig(packageJsonPath, toolkitLocationInfo);
 		const allConfigs = {context: contextConfig, toolkit: toolkitConfig};
 		publishPackages(allConfigs, rootPath);
