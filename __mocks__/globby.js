@@ -4,26 +4,39 @@
  */
 'use strict';
 
+const path = require('path');
+
 const results = require('./glob-results');
 
 const resultsToolkits = results.toolkitFiles();
 const resultsPackage = results.packageFiles();
+const resultsFolder = results.folderFiles();
 
-async function globby(path) {
+async function globby(globPath) {
 	// Check toolkit results
-	if (path.includes('toolkits')) {
-		if (path.includes('toolkits-no-globby')) {
+	if (globPath.includes('toolkits')) {
+		if (globPath.includes('toolkits-no-globby')) {
 			throw new Error('globby error');
 		}
-		return resultsToolkits[path];
+		return resultsToolkits[globPath];
 	}
 
 	// Check package results
-	if (path.includes('packages')) {
-		if (path.includes('error')) {
+	if (globPath.includes('packages')) {
+		if (globPath.includes('error')) {
 			throw new Error('globby error');
 		}
-		return resultsPackage[path];
+		return resultsPackage[globPath];
+	}
+
+	// Check context folder results
+	if (globPath.includes('folder')) {
+		const relativePath = path.relative(process.cwd(), globPath);
+
+		if (globPath.includes('error')) {
+			throw new Error('globby error');
+		}
+		return resultsFolder[relativePath];
 	}
 }
 

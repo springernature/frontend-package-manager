@@ -131,7 +131,21 @@ const packageFiles = () => {
 	};
 };
 
+const folderFiles = () => {
+	return {
+		'package/valid-folder': [
+			'nature.scss',
+			'_springer.scss'
+		],
+		'package/valid-other-folder': [
+			'_nature.scss',
+			'springer.scss'
+		]
+	};
+};
+
 module.exports = {
 	toolkitFiles,
-	packageFiles
+	packageFiles,
+	folderFiles
 };
