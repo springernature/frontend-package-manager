@@ -19,8 +19,6 @@ const mockMissingPackagesConfig = {
 	packagesDirectory: 'no-packages',
 };
 
-let configGenerator;
-
 jest.mock('../../../lib/js/_utils/_check-exists');
 
 jest.mock('repo-config/toolkits/package-manager.json', () => ({
