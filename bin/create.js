@@ -4,12 +4,13 @@
 const path = require('path');
 const reporter = require('@springernature/util-cli-reporter');
 
+const currentWorkingDirectory = require('../lib/js/_utils/_current-working-directory');
 const exitWithError = require('../lib/js/_utils/_error');
 const getToolkitLocations = require('../lib/js/_utils/_get-toolkit-locations');
 const getAllToolkitNames = require('../lib/js/_utils/_get-toolkit-names');
 const createPackage = require('../lib/js/_create');
 
-const packageJsonPath = path.resolve(process.cwd(), 'package.json');
+const packageJsonPath = path.resolve(currentWorkingDirectory, 'package.json');
 const defaultConfig = require('../config/default.json');
 
 (async () => {

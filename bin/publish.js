@@ -4,6 +4,7 @@
 const path = require('path');
 const reporter = require('@springernature/util-cli-reporter');
 
+const currentWorkingDirectory = require('../lib/js/_utils/_current-working-directory');
 const exitWithError = require('../lib/js/_utils/_error');
 const generateToolkitConfig = require('../lib/js/_utils/_generate-toolkit-config');
 const generateContextConfig = require('../lib/js/_utils/_generate-context-config');
@@ -11,8 +12,7 @@ const getToolkitLocations = require('../lib/js/_utils/_get-toolkit-locations');
 const getAllToolkitNames = require('../lib/js/_utils/_get-toolkit-names');
 const publishPackages = require('../lib/js/_publish');
 
-const rootPath = process.cwd();
-const packageJsonPath = path.resolve(rootPath, 'package.json');
+const packageJsonPath = path.resolve(currentWorkingDirectory, 'package.json');
 const defaultConfig = require('../config/default.json');
 const defaultContextConfig = require('../config/context.json');
 
@@ -26,7 +26,7 @@ reporter.info('searching for toolkits');
 		const toolkitConfig = await generateToolkitConfig(defaultConfig, packageJsonPath, toolkitLocationInfo);
 		const contextConfig = await generateContextConfig(defaultContextConfig);
 		const allConfigs = {context: contextConfig, toolkit: toolkitConfig};
-		publishPackages(allConfigs, rootPath);
+		publishPackages(allConfigs);
 	} catch (error) {
 		exitWithError(error);
 	}

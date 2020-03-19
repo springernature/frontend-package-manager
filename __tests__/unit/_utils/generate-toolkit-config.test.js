@@ -20,6 +20,7 @@ const mockMissingPackagesConfig = {
 };
 
 jest.mock('../../../lib/js/_utils/_check-exists');
+jest.mock('../../../lib/js/_utils/_current-working-directory.js', () => '/path/to');
 
 jest.mock('repo-config/toolkits/package-manager.json', () => ({
 	repoKey: 'value'
@@ -58,8 +59,6 @@ jest.mock('toolkits/toolkit4/package-manager.json', () => ({
 
 describe('Generate valid config files', () => {
 	test('Resolves with default config if no other configs found', async () => {
-		// Mock the current working directory before import
-		jest.spyOn(process, "cwd").mockImplementation(() => "/path/to");
 		const configGenerator = require('../../../lib/js/_utils/_generate-toolkit-config');
 
 		expect.assertions(1);
@@ -80,8 +79,6 @@ describe('Generate valid config files', () => {
 	});
 
 	test('Merge default and repo level config', async () => {
-		// Mock the current working directory before import
-		jest.spyOn(process, "cwd").mockImplementation(() => "/path/to");
 		const configGenerator = require('../../../lib/js/_utils/_generate-toolkit-config');
 
 		expect.assertions(1);
@@ -102,8 +99,6 @@ describe('Generate valid config files', () => {
 	});
 
 	test('Merge default and repo level config, repo overwrites', async () => {
-		// Mock the current working directory before import
-		jest.spyOn(process, "cwd").mockImplementation(() => "/path/to");
 		const configGenerator = require('../../../lib/js/_utils/_generate-toolkit-config');
 
 		expect.assertions(1);
@@ -127,8 +122,6 @@ describe('Generate valid config files', () => {
 	});
 
 	test('Merge default and repo level config, deep merge', async () => {
-		// Mock the current working directory before import
-		jest.spyOn(process, "cwd").mockImplementation(() => "/path/to");
 		const configGenerator = require('../../../lib/js/_utils/_generate-toolkit-config');
 
 		expect.assertions(1);
@@ -151,8 +144,6 @@ describe('Generate valid config files', () => {
 	});
 
 	test('Merge default, repo, and toolkit level configs', async () => {
-		// Mock the current working directory before import
-		jest.spyOn(process, "cwd").mockImplementation(() => "/path/to");
 		const configGenerator = require('../../../lib/js/_utils/_generate-toolkit-config');
 
 		expect.assertions(1);
@@ -178,8 +169,6 @@ describe('Generate valid config files', () => {
 
 describe('Fail to generate valid config files', () => {
 	test('Error when try to overwrite toolkitsDirectory at repo level', async () => {
-		// Mock the current working directory before import
-		jest.spyOn(process, "cwd").mockImplementation(() => "/path/to");
 		const configGenerator = require('../../../lib/js/_utils/_generate-toolkit-config');
 
 		expect.assertions(1);
@@ -193,8 +182,6 @@ describe('Fail to generate valid config files', () => {
 	});
 
 	test('Error when try to overwrite packagesDirectory at repo level', async () => {
-		// Mock the current working directory before import
-		jest.spyOn(process, "cwd").mockImplementation(() => "/path/to");
 		const configGenerator = require('../../../lib/js/_utils/_generate-toolkit-config');
 
 		expect.assertions(1);
@@ -208,8 +195,6 @@ describe('Fail to generate valid config files', () => {
 	});
 
 	test('Error when try to overwrite toolkitsDirectory at toolkit level', async () => {
-		// Mock the current working directory before import
-		jest.spyOn(process, "cwd").mockImplementation(() => "/path/to");
 		const configGenerator = require('../../../lib/js/_utils/_generate-toolkit-config');
 
 		expect.assertions(1);
@@ -225,8 +210,6 @@ describe('Fail to generate valid config files', () => {
 	});
 
 	test('Error when try to overwrite packagesDirectory at toolkit level', async () => {
-		// Mock the current working directory before import
-		jest.spyOn(process, "cwd").mockImplementation(() => "/path/to");
 		const configGenerator = require('../../../lib/js/_utils/_generate-toolkit-config');
 
 		expect.assertions(1);
@@ -242,8 +225,6 @@ describe('Fail to generate valid config files', () => {
 	});
 
 	test('Error when packages directory doesn\'t exist', async () => {
-		// Mock the current working directory before import
-		jest.spyOn(process, "cwd").mockImplementation(() => "/path/to");
 		const configGenerator = require('../../../lib/js/_utils/_generate-toolkit-config');
 
 		expect.assertions(1);
