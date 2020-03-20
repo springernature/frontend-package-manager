@@ -5,6 +5,8 @@
 'use strict';
 
 jest.mock('@springernature/util-cli-reporter');
+jest.mock('../../../lib/js/_utils/_current-working-directory.js', () => () => '/path/to');
+
 jest.mock('path/to/global-package/package.json', () => ({
 	name: '@springernature/global-package'
 }), {virtual: true});
@@ -21,7 +23,7 @@ describe('Check naming conventions', () => {
 					prefix: 'global',
 					packagesDirectory: 'packages'
 				},
-				'path/to/global-package'
+				'global-package'
 			)
 		).resolves.toEqual();
 	});
@@ -35,7 +37,7 @@ describe('Check naming conventions', () => {
 					prefix: 'global',
 					packagesDirectory: 'packages'
 				},
-				'path/to/global-package'
+				'global-package'
 			)
 		).rejects.toThrowError(new Error('Invalid package name: @springernature/global-package'));
 	});
@@ -49,7 +51,7 @@ describe('Check naming conventions', () => {
 					prefix: 'fail',
 					packagesDirectory: 'packages'
 				},
-				'path/to/global-package'
+				'global-package'
 			)
 		).rejects.toThrowError(new Error('Invalid folder name: global-package'));
 	});
@@ -63,7 +65,7 @@ describe('Check naming conventions', () => {
 					prefix: null,
 					packagesDirectory: 'packages'
 				},
-				'path/to/global-package'
+				'global-package'
 			)
 		).resolves.toEqual();
 	});
@@ -77,7 +79,7 @@ describe('Check naming conventions', () => {
 					prefix: null,
 					packagesDirectory: 'packages'
 				},
-				'path/to/global-package'
+				'global-package'
 			)
 		).rejects.toThrowError(new Error('Invalid package name: @springernature/global-package'));
 	});
