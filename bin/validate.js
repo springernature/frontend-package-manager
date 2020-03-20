@@ -20,7 +20,7 @@ const argv = require('yargs')
 	.alias('h', 'help')
 	.argv;
 
-const currentWorkingDirectory = require('../lib/js/_utils/_current-working-directory');
+const currentWorkingDirectory = require('../lib/js/_utils/_current-working-directory')();
 const exitWithError = require('../lib/js/_utils/_error');
 const generateToolkitConfig = require('../lib/js/_utils/_generate-toolkit-config');
 const generateContextConfig = require('../lib/js/_utils/_generate-context-config');

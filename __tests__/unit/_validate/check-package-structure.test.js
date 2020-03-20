@@ -10,6 +10,7 @@ const MOCK_PACKAGES = mockfs.__fsMockFiles();
 jest.mock('@springernature/util-cli-reporter');
 jest.mock('gitignore-globs');
 jest.mock('globby');
+jest.mock('../../../lib/js/_utils/_current-working-directory', () => () => '/path/to');
 
 const checkValidation = require('../../../lib/js/_validate/_check-package-structure');
 

@@ -7,6 +7,7 @@
 jest.mock('@springernature/util-cli-reporter');
 jest.mock('globby');
 jest.mock('../../../lib/js/_utils/_check-exists');
+jest.mock('../../../lib/js/_utils/_current-working-directory', () => () => '/path/to');
 
 jest.restoreAllMocks();
 

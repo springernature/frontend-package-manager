@@ -4,7 +4,7 @@
 const path = require('path');
 const reporter = require('@springernature/util-cli-reporter');
 
-const currentWorkingDirectory = require('../lib/js/_utils/_current-working-directory');
+const currentWorkingDirectory = require('../lib/js/_utils/_current-working-directory')();
 const exitWithError = require('../lib/js/_utils/_error');
 const generateToolkitConfig = require('../lib/js/_utils/_generate-toolkit-config');
 const generateContextConfig = require('../lib/js/_utils/_generate-context-config');

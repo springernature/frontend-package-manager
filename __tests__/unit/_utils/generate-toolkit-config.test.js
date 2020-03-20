@@ -20,7 +20,7 @@ const mockMissingPackagesConfig = {
 };
 
 jest.mock('../../../lib/js/_utils/_check-exists');
-jest.mock('../../../lib/js/_utils/_current-working-directory.js', () => '/path/to');
+jest.mock('../../../lib/js/_utils/_current-working-directory.js', () => () => '/path/to');
 
 jest.mock('repo-config/toolkits/package-manager.json', () => ({
 	repoKey: 'value'
