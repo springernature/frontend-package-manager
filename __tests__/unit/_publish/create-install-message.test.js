@@ -8,17 +8,18 @@ const fs = require('fs');
 
 jest.mock('../../../lib/js/_utils/_check-context-version');
 jest.mock('@springernature/util-cli-reporter');
+jest.mock('../../../lib/js/_utils/_current-working-directory.js', () => () => '/path/to');
 
-jest.mock('path/to/old-package/package.json', () => ({
+jest.mock('/path/to/old-package/package.json', () => ({
 	name: 'old-style-component'
 }), {virtual: true});
 
-jest.mock('path/to/package/package.json', () => ({
+jest.mock('/path/to/package/package.json', () => ({
 	name: 'new-style-component',
 	brandContext: '^1.0.0'
 }), {virtual: true});
 
-jest.mock('path/to/other-package/package.json', () => ({
+jest.mock('/path/to/other-package/package.json', () => ({
 	name: 'new-style-component',
 	brandContext: '^1.0.0',
 	scripts: {test: null}
@@ -31,7 +32,7 @@ describe('No context defined', () => {
 		expect.assertions(1);
 		await expect(
 			createInstallMessage(
-				'path/to/old-package',
+				'old-package',
 				'@springernature',
 				'brand-context'
 			)
@@ -54,7 +55,7 @@ describe('Context defined', () => {
 		expect.assertions(2);
 		await expect(
 			createInstallMessage(
-				'path/to/package',
+				'package',
 				'@springernature',
 				'valid-context'
 			)
@@ -66,7 +67,7 @@ describe('Context defined', () => {
 		expect.assertions(2);
 		await expect(
 			createInstallMessage(
-				'path/to/other-package',
+				'other-package',
 				'@springernature',
 				'valid-context'
 			)
@@ -78,7 +79,7 @@ describe('Context defined', () => {
 		expect.assertions(2);
 		await expect(
 			createInstallMessage(
-				'path/to/package',
+				'package',
 				'@springernature',
 				'invalid-context'
 			)
