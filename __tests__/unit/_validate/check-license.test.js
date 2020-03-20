@@ -5,7 +5,9 @@
 'use strict';
 
 jest.mock('@springernature/util-cli-reporter');
-jest.mock('path/to/global-package/package.json', () => ({
+jest.mock('../../../lib/js/_utils/_current-working-directory.js', () => () => '/path/to');
+
+jest.mock('/path/to/global-package/package.json', () => ({
 	license: 'license-name'
 }), {virtual: true});
 
@@ -15,14 +17,14 @@ describe('Check for correct license', () => {
 	test('License matches global license', async () => {
 		expect.assertions(1);
 		await expect(
-			checkLicense('path/to/global-package', 'license-name')
+			checkLicense('global-package', 'license-name')
 		).resolves.toEqual();
 	});
 
 	test('Reject if license does not match global license', async () => {
 		expect.assertions(1);
 		await expect(
-			checkLicense('path/to/global-package', 'global-license-name')
+			checkLicense('global-package', 'global-license-name')
 		).rejects.toThrowError(new Error('Invalid license `license-name`. Should be `global-license-name`'));
 	});
 });
