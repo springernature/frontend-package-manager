@@ -7,7 +7,7 @@
 jest.mock('@springernature/util-cli-reporter');
 jest.mock('../../../lib/js/_utils/_current-working-directory.js', () => () => '/path/to');
 
-jest.mock('path/to/global-package/package.json', () => ({
+jest.mock('/path/to/global-package/package.json', () => ({
 	name: '@springernature/global-package'
 }), {virtual: true});
 
