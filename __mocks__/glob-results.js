@@ -50,6 +50,19 @@ const packageFiles = () => {
 			'packages/package/pass/folder2/subfolder',
 			'packages/package/pass/folder2/subfolder/file.js'
 		],
+		'packages/package/passWithChangelog/**/*': [
+			'packages/package/passWithChangelog/required.md',
+			'packages/package/passWithChangelog/HISTORY.md',
+			'packages/package/passWithChangelog/folder1',
+			'packages/package/passWithChangelog/folder1/file.scss',
+			'packages/package/passWithChangelog/folder1/file.css',
+			'packages/package/passWithChangelog/folder2',
+			'packages/package/passWithChangelog/folder2/file.js',
+			'packages/package/passWithChangelog/folder2/file.spec.js',
+			'packages/package/passWithChangelog/folder2/file.json',
+			'packages/package/passWithChangelog/folder2/subfolder',
+			'packages/package/passWithChangelog/folder2/subfolder/file.js'
+		],
 		'packages/package/passGitIgnore/**/*': [
 			'packages/package/passGitIgnore/required.md',
 			'packages/package/passGitIgnore/folder1',
@@ -127,6 +140,21 @@ const packageFiles = () => {
 			'packages/package/failIsTopLevelFile/folder2/file.json',
 			'packages/package/failIsTopLevelFile/folder2/subfolder',
 			'packages/package/failIsTopLevelFile/folder2/subfolder/file.js'
+		],
+		'packages/package/passContext/*': [
+			'packages/package/passContext/required.md',
+			'packages/package/passContext/HISTORY.md'
+		],
+		'packages/package/passContext/brandA/**/*': [
+			'packages/package/passContext/brandA/folder1',
+			'packages/package/passContext/brandA/folder1/file.scss',
+			'packages/package/passContext/brandA/folder1/file.css',
+			'packages/package/passContext/brandA/folder2',
+			'packages/package/passContext/brandA/folder2/file.js',
+			'packages/package/passContext/brandA/folder2/file.spec.js',
+			'packages/package/passContext/brandA/folder2/file.json',
+			'packages/package/passContext/brandA/folder2/subfolder',
+			'packages/package/passContext/brandA/folder2/subfolder/file.js'
 		]
 	};
 };

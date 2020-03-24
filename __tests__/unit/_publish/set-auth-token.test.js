@@ -10,13 +10,12 @@ const mockfs = require('../../../__mocks__/fs');
 const MOCK_PACKAGES = mockfs.__fsMockFiles();
 
 jest.mock('@springernature/util-cli-reporter');
-jest.mock('../../../lib/js/_utils/_current-working-directory.js', () => () => '/path/to');
 
-jest.mock('/path/to/auth-package/package.json', () => ({
+jest.mock('path/to/auth-package/package.json', () => ({
 	name: 'global-package'
 }), {virtual: true});
 
-jest.mock('/path/to/auth-package-custom/package.json', () => ({
+jest.mock('path/to/auth-package-custom/package.json', () => ({
 	name: 'global-package-custom',
 	publishConfig: {
 		registry: 'http://custom-registry.com/'
@@ -34,7 +33,7 @@ describe('Set the auth token inside the correct .npmrc file', () => {
 		mockos({'homedir': 'home/user'});
 		expect.assertions(1);
 		await expect(
-			setAuthToken('auth-package')
+			setAuthToken('path/to/auth-package')
 		).resolves.toEqual({
 			description: 'npmrc file saved',
 			text: 'home/user/.npmrc'
@@ -45,7 +44,7 @@ describe('Set the auth token inside the correct .npmrc file', () => {
 		mockos({'homedir': 'home/user'});
 		expect.assertions(1);
 		await expect(
-			setAuthToken('auth-package-custom')
+			setAuthToken('path/to/auth-package-custom')
 		).resolves.toEqual({
 			description: 'npmrc file saved',
 			text: 'home/user/.npmrc'
@@ -56,7 +55,7 @@ describe('Set the auth token inside the correct .npmrc file', () => {
 		mockos({'homedir': 'home/user-b'});
 		expect.assertions(1);
 		await expect(
-			setAuthToken('auth-package')
+			setAuthToken('path/to/auth-package')
 		).resolves.toEqual({
 			description: 'npmrc file already has correct contents',
 			text: 'skipping file generation'
@@ -67,7 +66,7 @@ describe('Set the auth token inside the correct .npmrc file', () => {
 		mockos({'homedir': 'home/user-c'});
 		expect.assertions(1);
 		await expect(
-			setAuthToken('auth-package')
+			setAuthToken('path/to/auth-package')
 		).rejects.toThrowError(new Error('Authentication token already set for https://registry.npmjs.org/'));
 	});
 

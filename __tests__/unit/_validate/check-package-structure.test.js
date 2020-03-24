@@ -10,12 +10,21 @@ const MOCK_PACKAGES = mockfs.__fsMockFiles();
 jest.mock('@springernature/util-cli-reporter');
 jest.mock('gitignore-globs');
 jest.mock('globby');
-jest.mock('../../../lib/js/_utils/_current-working-directory', () => () => '/path/to');
+jest.mock('../../../lib/js/_utils/_current-working-directory', () => () => '.');
 
 const checkValidation = require('../../../lib/js/_validate/_check-package-structure');
 
 const validationConfig = {
 	required: ['required.md'],
+	folders: {
+		folder1: ['scss', 'css'],
+		folder2: ['js', 'json']
+	}
+};
+
+const validationConfigWithChangelog = {
+	required: ['required.md'],
+	changelog: 'HISTORY.md',
 	folders: {
 		folder1: ['scss', 'css'],
 		folder2: ['js', 'json']
@@ -50,6 +59,13 @@ describe('Check validation', () => {
 		).resolves.toEqual();
 	});
 
+	test('Resolves when filesystem matches validationConfigWithChangelog', async () => {
+		expect.assertions(1);
+		await expect(
+			checkValidation(validationConfigWithChangelog, 'packages/package/passWithChangelog')
+		).resolves.toEqual();
+	});
+
 	test('Resolves when filesystem matches validationConfig & ignores files in .gitignore', async () => {
 		expect.assertions(1);
 		await expect(
@@ -68,7 +84,7 @@ describe('Check validation', () => {
 		expect.assertions(1);
 		await expect(
 			checkValidation(validationConfig, 'packages/package/failIsRequired')
-		).rejects.toThrowError(new Error('Invalid files or folders in failIsRequired'));
+		).rejects.toThrowError(new Error('Required file(s) missing from failIsRequired'));
 	});
 
 	test('Does not reject when dotfiles included', async () => {
@@ -110,6 +126,13 @@ describe('Check validation', () => {
 		expect.assertions(1);
 		await expect(
 			checkValidation(validationConfigNoFolders, 'packages/package/failIsFileType')
+		).resolves.toEqual();
+	});
+
+	test('Resolves for context organised into brands', async () => {
+		expect.assertions(1);
+		await expect(
+			checkValidation(validationConfigWithChangelog, 'packages/package/passContext', ['brandA'])
 		).resolves.toEqual();
 	});
 });
