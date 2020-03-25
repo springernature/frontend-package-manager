@@ -8,7 +8,6 @@ const path = require('path');
 const stripAnsi = require('strip-ansi');
 
 jest.mock('fs');
-jest.mock('../../../lib/js/_utils/_current-working-directory.js', () => () => '/path/to');
 
 const buildNewPackage = require('../../../lib/js/_create/_build-new-package');
 

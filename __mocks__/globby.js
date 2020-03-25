@@ -4,9 +4,6 @@
  */
 'use strict';
 
-const path = require('path');
-
-const currentWorkingDirectory = require('../lib/js/_utils/_current-working-directory')();
 const results = require('./glob-results');
 
 const resultsToolkits = results.toolkitFiles();
@@ -32,12 +29,10 @@ async function globby(globPath) {
 
 	// Check context folder results
 	if (globPath.includes('folder')) {
-		const relativePath = path.relative(currentWorkingDirectory, globPath);
-
 		if (globPath.includes('error')) {
 			throw new Error('globby error');
 		}
-		return resultsFolder[relativePath];
+		return resultsFolder[globPath];
 	}
 }
 

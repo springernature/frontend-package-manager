@@ -1,7 +1,6 @@
 #! /usr/bin/env node
 'use strict';
 
-const path = require('path');
 const reporter = require('@springernature/util-cli-reporter');
 const argv = require('yargs')
 	.usage('Usage: $0 [options]')
@@ -28,7 +27,7 @@ const getToolkitLocations = require('../lib/js/_utils/_get-toolkit-locations');
 const getAllToolkitNames = require('../lib/js/_utils/_get-toolkit-names');
 const validatePackages = require('../lib/js/_validate');
 
-const packageJsonPath = path.resolve(currentWorkingDirectory, 'package.json');
+// const packageJsonPath = path.resolve(currentWorkingDirectory, 'package.json');
 const defaultConfig = require('../config/default.json');
 const defaultContextConfig = require('../config/context.json');
 
@@ -37,12 +36,12 @@ reporter.info('searching for all toolkits');
 
 (async () => {
 	try {
-		const allToolkitNames = await getAllToolkitNames(defaultConfig);
+		const allToolkitNames = await getAllToolkitNames(defaultConfig, currentWorkingDirectory);
 		const toolkitLocationInfo = await getToolkitLocations(defaultConfig, allToolkitNames, argv);
-		const toolkitConfig = await generateToolkitConfig(defaultConfig, packageJsonPath, toolkitLocationInfo);
-		const contextConfig = await generateContextConfig(defaultContextConfig);
+		const toolkitConfig = await generateToolkitConfig(defaultConfig, currentWorkingDirectory, toolkitLocationInfo);
+		const contextConfig = await generateContextConfig(defaultContextConfig, currentWorkingDirectory);
 		const allConfigs = {context: contextConfig, toolkit: toolkitConfig};
-		validatePackages(packageJsonPath, allConfigs, argv.npm);
+		validatePackages(currentWorkingDirectory, allConfigs, argv.npm);
 	} catch (error) {
 		exitWithError(error);
 	}

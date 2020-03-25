@@ -20,7 +20,6 @@ const mockMissingPackagesConfig = {
 };
 
 jest.mock('../../../lib/js/_utils/_check-exists');
-jest.mock('../../../lib/js/_utils/_current-working-directory.js', () => () => '/path/to');
 
 jest.mock('repo-config/toolkits/package-manager.json', () => ({
 	repoKey: 'value'
@@ -45,27 +44,27 @@ jest.mock('repo-config-packagesDirectory/toolkits/package-manager.json', () => (
 	packagesDirectory: 'value'
 }), {virtual: true});
 
-jest.mock('toolkits/toolkit2/package-manager.json', () => ({
+jest.mock('repo-config/toolkits/toolkit2/package-manager.json', () => ({
 	toolkitKey: 'value'
 }), {virtual: true});
 
-jest.mock('toolkits/toolkit3/package-manager.json', () => ({
+jest.mock('repo-config/toolkits/toolkit3/package-manager.json', () => ({
 	toolkitsDirectory: 'toolkits'
 }), {virtual: true});
 
-jest.mock('toolkits/toolkit4/package-manager.json', () => ({
+jest.mock('repo-config/toolkits/toolkit4/package-manager.json', () => ({
 	packagesDirectory: 'packages'
 }), {virtual: true});
 
+const configGenerator = require('../../../lib/js/_utils/_generate-toolkit-config');
+
 describe('Generate valid config files', () => {
 	test('Resolves with default config if no other configs found', async () => {
-		const configGenerator = require('../../../lib/js/_utils/_generate-toolkit-config');
-
 		expect.assertions(1);
 		await expect(
 			configGenerator(
 				mockDefaultConfig,
-				'no-repo-config/package.json',
+				'no-repo-config',
 				{
 					toolkit1: {path: 'toolkits/toolkit1'}
 				}
@@ -79,13 +78,11 @@ describe('Generate valid config files', () => {
 	});
 
 	test('Merge default and repo level config', async () => {
-		const configGenerator = require('../../../lib/js/_utils/_generate-toolkit-config');
-
 		expect.assertions(1);
 		await expect(
 			configGenerator(
 				mockDefaultConfig,
-				'repo-config/package.json',
+				'repo-config',
 				{
 					toolkit1: {path: 'toolkits/toolkit1'}
 				}
@@ -99,13 +96,11 @@ describe('Generate valid config files', () => {
 	});
 
 	test('Merge default and repo level config, repo overwrites', async () => {
-		const configGenerator = require('../../../lib/js/_utils/_generate-toolkit-config');
-
 		expect.assertions(1);
 		await expect(
 			configGenerator(
 				mockDefaultConfig,
-				'repo-config-overwrite/package.json',
+				'repo-config-overwrite',
 				{
 					toolkit1: {path: 'toolkits/toolkit1'}
 				}
@@ -122,13 +117,11 @@ describe('Generate valid config files', () => {
 	});
 
 	test('Merge default and repo level config, deep merge', async () => {
-		const configGenerator = require('../../../lib/js/_utils/_generate-toolkit-config');
-
 		expect.assertions(1);
 		await expect(
 			configGenerator(
 				mockDefaultConfig,
-				'repo-config-deep/package.json',
+				'repo-config-deep',
 				{
 					toolkit1: {path: 'toolkits/toolkit1'}
 				}
@@ -144,13 +137,11 @@ describe('Generate valid config files', () => {
 	});
 
 	test('Merge default, repo, and toolkit level configs', async () => {
-		const configGenerator = require('../../../lib/js/_utils/_generate-toolkit-config');
-
 		expect.assertions(1);
 		await expect(
 			configGenerator(
 				mockDefaultConfig,
-				'repo-config/package.json',
+				'repo-config',
 				{
 					toolkit2: {path: 'toolkits/toolkit2'}
 				}
@@ -169,39 +160,33 @@ describe('Generate valid config files', () => {
 
 describe('Fail to generate valid config files', () => {
 	test('Error when try to overwrite toolkitsDirectory at repo level', async () => {
-		const configGenerator = require('../../../lib/js/_utils/_generate-toolkit-config');
-
 		expect.assertions(1);
 		await expect(
 			configGenerator(
 				mockDefaultConfig,
-				'repo-config-toolkitsDirectory/package.json',
+				'repo-config-toolkitsDirectory',
 				{}
 			)
 		).rejects.toThrowError(new Error('the `toolkitsDirectory` key is reserved and cannot be set'));
 	});
 
 	test('Error when try to overwrite packagesDirectory at repo level', async () => {
-		const configGenerator = require('../../../lib/js/_utils/_generate-toolkit-config');
-
 		expect.assertions(1);
 		await expect(
 			configGenerator(
 				mockDefaultConfig,
-				'repo-config-packagesDirectory/package.json',
+				'repo-config-packagesDirectory',
 				{}
 			)
 		).rejects.toThrowError(new Error('the `packagesDirectory` key is reserved and cannot be set'));
 	});
 
 	test('Error when try to overwrite toolkitsDirectory at toolkit level', async () => {
-		const configGenerator = require('../../../lib/js/_utils/_generate-toolkit-config');
-
 		expect.assertions(1);
 		await expect(
 			configGenerator(
 				mockDefaultConfig,
-				'repo-config/package-manager.json',
+				'repo-config',
 				{
 					toolkit3: {path: 'toolkits/toolkit3'}
 				}
@@ -210,13 +195,11 @@ describe('Fail to generate valid config files', () => {
 	});
 
 	test('Error when try to overwrite packagesDirectory at toolkit level', async () => {
-		const configGenerator = require('../../../lib/js/_utils/_generate-toolkit-config');
-
 		expect.assertions(1);
 		await expect(
 			configGenerator(
 				mockDefaultConfig,
-				'repo-config/package-manager.json',
+				'repo-config',
 				{
 					toolkit4: {path: 'toolkits/toolkit4'}
 				}
@@ -225,17 +208,15 @@ describe('Fail to generate valid config files', () => {
 	});
 
 	test('Error when packages directory doesn\'t exist', async () => {
-		const configGenerator = require('../../../lib/js/_utils/_generate-toolkit-config');
-
 		expect.assertions(1);
 		await expect(
 			configGenerator(
 				mockMissingPackagesConfig,
-				'repo-config/package-manager.json',
+				'repo-config',
 				{
 					toolkit1: {path: 'toolkits/toolkit1'}
 				}
 			)
-		).rejects.toThrowError(new Error('invalid folder: toolkits/toolkit1/no-packages'));
+		).rejects.toThrowError(new Error('invalid folder: repo-config/toolkits/toolkit1/no-packages'));
 	});
 });

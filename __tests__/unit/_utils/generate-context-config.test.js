@@ -33,58 +33,51 @@ const mockDefaultConfigError = {
 };
 
 jest.mock('../../../lib/js/_utils/_check-exists');
-jest.mock('../../../lib/js/_utils/_current-working-directory.js', () => () => '/path/to');
 
-jest.mock('context/package-manager.json', () => ({
+jest.mock('path/to/context/package-manager.json', () => ({
 	repoKey: 'value'
 }), {virtual: true});
 
-jest.mock('context-overwrite/package-manager.json', () => ({
+jest.mock('path/to/context-overwrite/package-manager.json', () => ({
 	brandContextName: 'other-brand-context'
 }), {virtual: true});
 
-jest.mock('context-deep/package-manager.json', () => ({
+jest.mock('path/to/context-deep/package-manager.json', () => ({
 	defaultArrayKey: ['a', 'b', 'c', 'd', 'e']
 }), {virtual: true});
 
-jest.mock('context-error/package-manager.json', () => ({
+jest.mock('path/to/context-error/package-manager.json', () => ({
 	contextDirectory: 'fail'
 }), {virtual: true});
 
+const configGenerator = require('../../../lib/js/_utils/_generate-context-config');
+
 describe('Generate valid config files', () => {
 	test('Resolves with default config if no other configs found', async () => {
-		const configGenerator = require('../../../lib/js/_utils/_generate-context-config');
-
 		expect.assertions(1);
 		await expect(
-			configGenerator(mockDefaultConfig)
+			configGenerator(mockDefaultConfig, 'path/to')
 		).resolves.toEqual(mockDefaultConfig);
 	});
 
 	test('Merge default and repo level config', async () => {
-		const configGenerator = require('../../../lib/js/_utils/_generate-context-config');
-
 		expect.assertions(1);
 		await expect(
-			configGenerator(mockDefaultConfigWithRepo)
+			configGenerator(mockDefaultConfigWithRepo, 'path/to')
 		).resolves.toEqual(Object.assign({}, mockDefaultConfigWithRepo, {repoKey: 'value'}));
 	});
 
 	test('Merge default and repo level config, repo overwrites', async () => {
-		const configGenerator = require('../../../lib/js/_utils/_generate-context-config');
-
 		expect.assertions(1);
 		await expect(
-			configGenerator(mockDefaultConfigOverwrite)
+			configGenerator(mockDefaultConfigOverwrite, 'path/to')
 		).resolves.toEqual(Object.assign({}, mockDefaultConfigOverwrite, {brandContextName: 'other-brand-context'}));
 	});
 
 	test('Merge default and repo level config, deep merge', async () => {
-		const configGenerator = require('../../../lib/js/_utils/_generate-context-config');
-
 		expect.assertions(1);
 		await expect(
-			configGenerator(mockDefaultConfigDeep)
+			configGenerator(mockDefaultConfigDeep, 'path/to')
 		).resolves.toEqual(Object.assign({}, mockDefaultConfigDeep, {
 			defaultArrayKey: ['a', 'b', 'c', 'd', 'e'],
 		}));
@@ -93,11 +86,9 @@ describe('Generate valid config files', () => {
 
 describe('Fail to generate valid config files', () => {
 	test('Error when try to overwrite contextDirectory at repo level', async () => {
-		const configGenerator = require('../../../lib/js/_utils/_generate-context-config');
-
 		expect.assertions(1);
 		await expect(
-			configGenerator(mockDefaultConfigError)
+			configGenerator(mockDefaultConfigError, 'path/to')
 		).rejects.toThrowError(new Error('the `contextDirectory` key is reserved and cannot be set'));
 	});
 });
