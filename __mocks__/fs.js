@@ -58,7 +58,27 @@ const __fsMockFiles = () => {
 		'some/other/path': {/** another empty directory */},
 		'home/user/.npmrc': '//mock-registry.npmjs.org/:_authToken=xyz',
 		'home/user-b/.npmrc': `//registry.npmjs.org/:_authToken=$\{NPM_TOKEN}`,
-		'home/user-c/.npmrc': `//registry.npmjs.org/:_authToken=$\{OTHER_NPM_TOKEN}`
+		'home/user-c/.npmrc': `//registry.npmjs.org/:_authToken=$\{OTHER_NPM_TOKEN}`,
+		'context/brand-context': {
+			brandA: {
+				'fileA.ext': 'file content here'
+			},
+			brandB: {
+				'fileB.ext': 'file content here'
+			}
+		},
+		'context/brand-context-disallowed': {
+			brandA: {
+				'fileA.ext': 'file content here'
+			},
+			brandB: {
+				'fileB.ext': 'file content here'
+			},
+			brandC: {
+				'fileB.ext': 'file content here'
+			}
+		},
+		'context/brand-context-empty': {/** empty directory */}
 	};
 };
 
