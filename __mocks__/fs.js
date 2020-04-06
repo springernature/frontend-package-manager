@@ -78,7 +78,15 @@ const __fsMockFiles = () => {
 				'fileB.ext': 'file content here'
 			}
 		},
-		'context/brand-context-empty': {/** empty directory */}
+		'context/brand-context-empty': {/** empty directory */},
+		'valid-context/brand-context': {
+			brandA: {
+				'fileA.ext': 'file content here'
+			},
+			brandB: {
+				'fileB.ext': 'file content here'
+			}
+		}
 	};
 };
 
