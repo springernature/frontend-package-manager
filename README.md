@@ -7,9 +7,9 @@
 
 Handles the **creation**, **validation**, and **publication** of packages built as part of the Springer Nature Elements Design System.
 
-The Design System is made up of different `toolkits` that contain `packages` designed for use with different brands within the Springer Nature ecosystem.
+The Design System is made up of different `toolkits` that contain `packages` designed for use with different `brands` within the Springer Nature ecosystem.
 
-Packages are bundles of front-end assets (HTML, CSS, JS, images, tests etc...) that are published via NPM and used within the Springer Nature ecosystem. It is expected that multiple packages live within one repository ([monorepo](https://medium.com/@maoberlehner/monorepos-in-the-wild-33c6eb246cb9)).
+Packages are bundles of front-end assets (HTML, CSS, JS, images, tests etc...) that are published via NPM and used within the Springer Nature ecosystem. It is expected that multiple toolkits and packages live within one repository ([monorepo](https://medium.com/@maoberlehner/monorepos-in-the-wild-33c6eb246cb9)).
 
 ## Repository structure
 
@@ -18,7 +18,7 @@ The package manager expects the following repository structure:
 ```
 repository-monorepo
   └── context
-	└── name-of-context-package
+    └── name-of-context-package
   └── toolkits
     ├── name-of-toolkit
       └── packages
@@ -126,7 +126,7 @@ The following example would allow a folder with the name `js` that contains file
 
 #### CSSDirectoryStructure
 
-This option allows you to specify a custom CSS folder structure. This is used in the [package creation](#package-creation) step to generate a sub-folder structure within a specified folder, to assist in quickly spinning up a new package. It is not used in the validation or publication steps.
+This option allows you to specify a custom CSS folder structure. This is used in the [package creation](#package-creation) step to generate a sub-folder structure within a specified folder, to assist in quickly spinning up a new package. It is not used in the validation or publication steps (more on those steps later).
 
 The following shows an example folder structure, taken from the [Springer Nature Front-End Toolkits](https://github.com/springernature/frontend-toolkits) repository:
 
@@ -147,7 +147,7 @@ In the above example, the object key `scss`, needs to match a key of the same na
 
 #### enforceBrandFileNaming
 
-This option accepts an array of folder paths that is used to enforce that all files contained in those folders are named after a valid brand (See the [context](#context) section for more information).
+This option accepts an array of folder paths that is used to enforce that all files contained in those folders are named after a valid brand (See the [context](#context) section below for more information on branding).
 
 ```json
 "enforceBrandFileNaming": [
@@ -163,14 +163,14 @@ If we have the brands `brandA` and `brandB` configured, then in the above exampl
 
 ## Context
 
-In addition to the `toolkits` folder there is also a `context` folder. This folder contains a single package that is split into `brands` and contains brand specific configurations and baseline styles that are used by other packages. The folder structure looks something like this:
+In addition to the `toolkits` folder there is also a `context` folder. This folder contains a single package that is split into `brands` and contains brand specific configurations and baseline styles that are used by other packages. The folder structure looks like this:
 
 ```
 repository-monorepo
   └── context
-	└── name-of-context-package
-		├── brand-name
-        └── other-brand-name
+    └── name-of-context-package
+      ├── brand-name
+      └── other-brand-name
 ```
 
 The context package accepts the following default configuration which can be extended/overriden using a `package-manager.json` configuration within the `context` folder:
@@ -218,7 +218,7 @@ Defines an array of brand names. These must map to the folder names that live wi
 
 ### Using the context package within a toolkit package
 
-Each of the packages inside the `toolkits` folder must map to a version of the context package that is used as a baseline for when that package is compiled. This is defined in the `package.json` file for a toolkit package using the key `brandContext`, where the value maps to a semver version. Below is an example `package.json` file:
+Each of the packages inside the `toolkits` folder must map to a version of the context package that is used as a baseline for when that package is compiled. This is defined in the `package.json` file for a toolkit package using the key `brandContext`, where the value maps to a valid semver version from the context package. Below is an example `package.json` file:
 
 ```json
 {
@@ -260,7 +260,7 @@ $ ./node_modules/.bin/sn-package-validate
 
 #### Filter by toolkits
 
-Running with the `-t` or `--toolkits` argument will validate only packages named after the argument:
+Running with the `-t` or `--toolkits` argument will validate only packages from the toolkits named after the argument:
 
 ```
 $ ./node_modules/.bin/sn-package-validate -t toolkita,toolkitb,toolkitc
