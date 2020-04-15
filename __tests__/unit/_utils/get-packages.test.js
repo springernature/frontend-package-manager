@@ -17,6 +17,10 @@ describe('Query Packages directory', () => {
 		mockfs(MOCK_PACKAGES);
 	});
 
+	afterEach(() => {
+		mockfs.restore();
+	});
+
 	test('An array of package paths is returned', async () => {
 		const fileSummary = await getPackages('path/', 'to/');
 		const dir = path.resolve(__dirname, '../../..');
@@ -25,15 +29,15 @@ describe('Query Packages directory', () => {
 		expect(fileSummary.length).toBe(2);
 		expect(fileSummary).toEqual(expect.arrayContaining(expected));
 	});
-
-	afterEach(() => {
-		mockfs.restore();
-	});
 });
 
 describe('Query Packages directory (empty)', () => {
 	beforeEach(() => {
 		mockfs(MOCK_PACKAGES_EMPTY);
+	});
+
+	afterEach(() => {
+		mockfs.restore();
 	});
 
 	test('An empty array is returned', async () => {
@@ -42,9 +46,5 @@ describe('Query Packages directory (empty)', () => {
 		expect.assertions(2);
 		expect(fileSummary.length).toBe(0);
 		expect(fileSummary).toEqual(expect.arrayContaining(expected));
-	});
-
-	afterEach(() => {
-		mockfs.restore();
 	});
 });

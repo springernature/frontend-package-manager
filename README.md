@@ -7,9 +7,9 @@
 
 Handles the **creation**, **validation**, and **publication** of packages built as part of the Springer Nature Elements Design System.
 
-The Design System is made up of different `toolkits` that contain `packages` designed for use with different brands within the Springer Nature ecosystem.
+The Design System is made up of different `toolkits` that contain `packages` designed for use with different `brands` within the Springer Nature ecosystem.
 
-Packages are bundles of front-end assets (HTML, CSS, JS, images, tests etc...) that are published via NPM and used within the Springer Nature ecosystem. It is expected that multiple packages live within one repository ([monorepo](https://medium.com/@maoberlehner/monorepos-in-the-wild-33c6eb246cb9)).
+Packages are bundles of front-end assets (HTML, CSS, JS, images, tests etc...) that are published via NPM and used within the Springer Nature ecosystem. It is expected that multiple toolkits and packages live within one repository ([monorepo](https://medium.com/@maoberlehner/monorepos-in-the-wild-33c6eb246cb9)).
 
 ## Repository structure
 
@@ -17,6 +17,8 @@ The package manager expects the following repository structure:
 
 ```
 repository-monorepo
+  └── context
+    └── name-of-context-package
   └── toolkits
     ├── name-of-toolkit
       └── packages
@@ -54,7 +56,6 @@ The package manager is configurable to enforce consistency across packages that 
   "toolkitsDirectory": "toolkits",
   "packagesDirectory": "packages",
   "changelog": "HISTORY.md",
-  "allowExtends": false,
   "required": [
     "README.md",
     "package.json"
@@ -63,6 +64,7 @@ The package manager is configurable to enforce consistency across packages that 
 ```
 
 #### scope
+
 All packages must be published under an [organisation scope](https://docs.npmjs.com/misc/scope) on NPM. By default packages within the Springer Nature ecosystem are published to the company scope.
 
 #### toolkitsDirectory
@@ -74,12 +76,11 @@ Defines the parent folder under which toolkits live (see example structure above
 Defines the parent folder under which packages live within a specific toolkit (see example structure above), and can **NOT** be changed.
 
 #### changelog
+
 All packages **MUST** have a changelog file in their root directory.
 
-#### allowExtends
-Can packages in this repository [extend other packages](#extending-other-packages)
-
 #### required
+
 An array of file paths that **MUST** appear in any package. There is no need to specify the changelog file here, it is added automatically.
 
 ### Extending the default configuration
@@ -88,7 +89,7 @@ The default configuration options provided can be overriden and/or extended in o
 
 #### Repository
 
-By providing a `package-manager.json` file in the root of your repository, in the same location as your `package.json` file. Configuration options defined here will extend/override those in the default (with the exception of the `toolkitsDirectory` and `packagesDirectory` options), and are inherited by _all_ toolkits.
+By providing a `package-manager.json` file at the root of the **`toolkits`** folder of your repository. Configuration options defined here will extend/override those in the default (with the exception of the `toolkitsDirectory` and `packagesDirectory` options), and are inherited by _all_ toolkits.
 
 #### Toolkit
 
@@ -99,11 +100,13 @@ By providing a `package-manager.json` file in a specific toolkit folder e.g. `to
 The configuration files should take the same format as the default configuration, and can also add the following options:
 
 #### prefix
-Package names can specify a prefix that namespaces them within NPM based on where within the Springer Nature ecosystem they originate.
 
-For example all Springer Nature packages published via the [frontend-global-toolkit](https://github.com/springernature/frontend-global-toolkit) use the prefix `global`, they will appear on NPM as `@springernature/global-name-of-component`
+Package names can specify a prefix that namespaces them within NPM, based on which toolkit they live within.
+
+For example all Springer Nature packages published via the global toolkit use the prefix `global`, they will appear on NPM as `@springernature/global-name-of-component`
 
 #### folders
+
 A folders object can be added to the config. This contains keys that map to any folder names that are allowed within a package, with their value being an array of allowed file extensions within that folder.
 
 If the `folders` key is present then these folders are the only ones allowed (but are optional). The folders can contain any number of sub-folders with no restriction on naming, but the file extensions within these sub-folders must match the array.
@@ -122,9 +125,10 @@ The following example would allow a folder with the name `js` that contains file
 ```
 
 #### CSSDirectoryStructure
-This option allows you to specify a custom CSS folder structure. This is used in the [package creation](#package-creation) step to generate a sub-folder structure within a specified folder, to assist in quickly spinning up a new package. It is not used in the validation or publication steps.
 
-The following shows an example folder structure, taken from the [frontend-global-toolkit](https://github.com/springernature/frontend-global-toolkit):
+This option allows you to specify a custom CSS folder structure. This is used in the [package creation](#package-creation) step to generate a sub-folder structure within a specified folder, to assist in quickly spinning up a new package. It is not used in the [validation](#package-validation) or [publication](#package-publication) steps.
+
+The following shows an example folder structure, taken from the [Springer Nature Front-End Toolkits](https://github.com/springernature/frontend-toolkits) repository:
 
 ```json
 "CSSDirectoryStructure": {
@@ -140,6 +144,89 @@ The following shows an example folder structure, taken from the [frontend-global
 ```
 
 In the above example, the object key `scss`, needs to match a key of the same name from the [folders](#folders) option mentioned above, to enable the sub-folders to be created in the correct parent.
+
+#### enforceBrandFileNaming
+
+This option accepts an array of folder paths that is used to enforce that all files contained in those folders are named after a valid brand (See the [context](#context) section below for more information on branding).
+
+```json
+"enforceBrandFileNaming": [
+  "scss/10-settings"
+]
+```
+
+If we have the brands `brandA` and `brandB` configured, then in the above example the only filenames allowed (where `ext` can be any file extension) within the `scss/10-settings` folder would be:
+- `brandA.ext`
+- `_brandA.ext`
+- `brandB.ext`
+- `_brandB.ext`
+
+## Context
+
+In addition to the `toolkits` folder there is also a `context` folder. This folder contains a single package that is split into `brands` and contains brand specific configurations and baseline styles that are used by other packages. The folder structure looks like this:
+
+```
+repository-monorepo
+  └── context
+    └── name-of-context-package
+      ├── brand-name
+      └── other-brand-name
+```
+
+The context package accepts the following default configuration which can be extended/overriden using a `package-manager.json` configuration within the `context` folder:
+
+### Default configuration
+
+```json
+{
+  "scope": "springernature",
+  "prefix": "brand",
+  "contextDirectory": "context",
+  "brandContextName": "brand-context",
+  "brands": [],
+  "changelog": "HISTORY.md",
+  "required": [
+    "README.md",
+    "package.json"
+  ]
+}
+```
+
+In addition to the configuration options defined for regular packages, the context package accepts the following additional configuration items:
+
+#### contextDirectory
+
+Defines the parent folder under which the context package lives (see example structure above), and can **NOT** be changed.
+
+#### brandContextName
+
+Defines the name of the context package, by default this is `brand-context`.
+
+#### brands
+
+Defines an array of brand names. These must map to the folder names that live within the context package. For example:
+
+```json
+{
+  "brands": [
+	"brandA",
+	"brandB",
+	"brandC"
+  ]
+}
+```
+
+### Using the context package within a toolkit package
+
+Each of the packages inside the `toolkits` folder must map to a version of the context package that is used as a baseline for when that package is compiled. This is defined in the `package.json` file for a toolkit package using the key `brandContext`, where the value maps to a valid semver version from the context package. Below is an example `package.json` file:
+
+```json
+{
+  "name": "@springernature/toolkit-name-of-component",
+  "version": "0.0.0",
+  "brandContext": "^1.0.0"
+}
+```
 
 ## Package licensing
 
@@ -173,7 +260,7 @@ $ ./node_modules/.bin/sn-package-validate
 
 #### Filter by toolkits
 
-Running with the `-t` or `--toolkits` argument will validate only packages named after the argument:
+Running with the `-t` or `--toolkits` argument will validate only packages from the toolkits named after the argument:
 
 ```
 $ ./node_modules/.bin/sn-package-validate -t toolkita,toolkitb,toolkitc
@@ -217,66 +304,6 @@ The package publication script is a CLI based tool that will publish new or upda
 $ ./node_modules/.bin/sn-package-publish
 ```
 
-### Extending other packages
-
-If the `allowExtends` option is set to `TRUE` then packages within the current repository can extend other (remote) packages _from the same [scope](#scope)_.
-
-To extend another package, you need to define the package you wish to extend as a dependency within the `package.json` file of the local package. This should take the form `"extendsPackage": "name@version"`. In the following example we would extend version `1.0.0` of the package `global-button` from NPM:
-
-```json
-{
-  "extendsPackage": "global-button@1.0.0"
-}
-```
-
-You _do not_ need to specify the scope as this is taken from the configuration, but you must specify a specific version using valid semver.
-
-Extending works by merging any files from the dependency package into the local package if they do not already exist. This process is designed to [run on your CI environment](#continuous-integration) during the publication stage. Take the following example file structures for a local package, and it's dependency:
-
-```
-local-package
-  └── view
-    └── file.html
-  └── HISTORY.md
-  └── package.json
-  └── README.md
-
-dependency-package
-  └── scss
-    └── file.scss
-  └── js
-    └── file.js
-  └── HISTORY.md
-  └── package.json
-  └── README.md
-```
-
-In this case the folders `scss` and `js` are created within the local package, then the files `scss/file.scss` and `js/file.js` are copied from the dependency package to create the following file structure:
-
-```
-local-package
-  └── scss
-    └── file.scss
-  └── js
-    └── file.js
-  └── view
-    └── file.html
-  └── HISTORY.md
-  └── package.json
-  └── README.md
-```
-
-#### validation
-
-At the validation stage, if a package extends another package (the `extendsPackage` key exists), then validation passes if the `allowExtends` option is set to `TRUE`, and the correct version of the specified dependency exists on NPM.
-
-#### publication
-
-At the publication stage, an extended package will be published to NPM after the successfull completion of the following steps:
-
-- A complete list of the files is retrieved from NPM for the dependency package, at the specified version
-- For all files within the dependency package, if a file with the _same path_ is **not** found within the local package, then the file is copied from the dependency package to the local package
-
 ## Continuous Integration
 
 It is intended that the validation and publication scripts are run on your CI environment to ensure the safe and correct publication of packages.
@@ -296,12 +323,12 @@ Valid packages within the specified packages directory are identified, and a new
 
 It is also required that the package `changelog` has been updated, and appears in the list of `CHANGED_FILES`, otherwise publication will not happen.
 
-#### travis
+#### Travis
 
-This package has been written to work with [TRAVIS CI](https://travis-ci.org/) and an example of the CI setup can be found in the Springer Nature [frontend-global-toolkit](https://github.com/springernature/frontend-global-toolkit):
-- [`package.json`](https://github.com/springernature/frontend-global-toolkit/blob/master/package.json)
-- [`package-manager.json`](https://github.com/springernature/frontend-global-toolkit/blob/master/package-manager.json)
-- [`.travis.yml`](https://github.com/springernature/frontend-global-toolkit/blob/master/.travis.yml)
+This package has been written to work with [TRAVIS CI](https://travis-ci.org/) and an example of the CI setup can be found in the Springer Nature [frontend-toolkits](https://github.com/springernature/frontend-toolkits):
+- [`package.json`](https://github.com/springernature/frontend-toolkits/blob/master/package.json)
+- [`package-manager.json`](https://github.com/springernature/frontend-toolkits/blob/master/toolkits/package-manager.json)
+- [`.travis.yml`](https://github.com/springernature/frontend-toolkits/blob/master/.travis.yml)
 
 ## Testing
 

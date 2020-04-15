@@ -1,0 +1,12 @@
+{
+  "scope": "springernature",
+  "prefix": "brand",
+  "contextDirectory": "context",
+  "brandContextName": "brand-context",
+  "brands": [],
+  "changelog": "HISTORY.md",
+  "required": [
+    "README.md",
+    "package.json"
+  ]
+}

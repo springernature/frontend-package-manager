@@ -6,10 +6,7 @@
 
 const fs = require('mock-fs');
 
-const defaultPackageContents = {
-	'required.md': 'file content',
-	'fail.md': 'file content',
-	'.adotfile': 'file content',
+const defaultFolders = {
 	folder1: {
 		'file.scss': 'file content',
 		'file.css': 'file content',
@@ -33,12 +30,21 @@ const defaultPackageContents = {
 	}
 };
 
+const defaultPackageContents = {...{
+	'required.md': 'file content',
+	'fail.md': 'file content',
+	'.adotfile': 'file content'
+}, ...defaultFolders};
+
 const __fsMockFiles = () => {
 	return {
 		'packages/package/pass': defaultPackageContents,
+		'packages/package/passWithChangelog': {...defaultPackageContents, ...{'HISTORY.md': 'file content'}},
 		'packages/package/passWithBuildFiles': {...defaultPackageContents, ...{'package-lock.json': 'file content'}},
 		'packages/package/passGitIgnore': defaultPackageContents,
 		'packages/package/passDotfiles': defaultPackageContents,
+		'packages/package/passContext': {'required.md': 'file content', 'HISTORY.md': 'file content'},
+		'packages/package/passContext/brandA': defaultFolders,
 		'packages/package/failIsRequired': defaultPackageContents,
 		'packages/package/failIsFolder': defaultPackageContents,
 		'packages/package/failIsFileType': defaultPackageContents,
@@ -52,7 +58,35 @@ const __fsMockFiles = () => {
 		'some/other/path': {/** another empty directory */},
 		'home/user/.npmrc': '//mock-registry.npmjs.org/:_authToken=xyz',
 		'home/user-b/.npmrc': `//registry.npmjs.org/:_authToken=$\{NPM_TOKEN}`,
-		'home/user-c/.npmrc': `//registry.npmjs.org/:_authToken=$\{OTHER_NPM_TOKEN}`
+		'home/user-c/.npmrc': `//registry.npmjs.org/:_authToken=$\{OTHER_NPM_TOKEN}`,
+		'context/brand-context': {
+			brandA: {
+				'fileA.ext': 'file content here'
+			},
+			brandB: {
+				'fileB.ext': 'file content here'
+			}
+		},
+		'context/brand-context-disallowed': {
+			brandA: {
+				'fileA.ext': 'file content here'
+			},
+			brandB: {
+				'fileB.ext': 'file content here'
+			},
+			brandC: {
+				'fileB.ext': 'file content here'
+			}
+		},
+		'context/brand-context-empty': {/** empty directory */},
+		'valid-context/brand-context': {
+			brandA: {
+				'fileA.ext': 'file content here'
+			},
+			brandB: {
+				'fileB.ext': 'file content here'
+			}
+		}
 	};
 };
 

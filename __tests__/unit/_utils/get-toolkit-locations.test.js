@@ -5,26 +5,26 @@
 'use strict';
 
 jest.mock('@springernature/util-cli-reporter');
-jest.mock('globby');
-jest.mock('../../../lib/js/_utils/_check-exists');
 
 jest.restoreAllMocks();
 
-let getToolkitLocations;
+const defaultConfigMock = {
+	"toolkitsDirectory": "toolkits",
+	"packagesDirectory": "packages"
+}
+
+const allToolkitsMock = ['toolkit1', 'toolkit2', 'toolkit3', 'toolkit4'];
+
+const getToolkitLocations = require('../../../lib/js/_utils/_get-toolkit-locations');
 
 describe('Find toolkits within a repository', () => {
-	beforeEach(() => {
-		getToolkitLocations = require('../../../lib/js/_utils/_get-toolkit-locations');
-	});
-
-	afterEach(() => {
-		jest.resetModules();
-	});
-
 	test('Default options', async () => {
 		expect.assertions(1);
 		await expect(
-			getToolkitLocations()
+			getToolkitLocations(
+				defaultConfigMock,
+				allToolkitsMock
+			)
 		).resolves.toEqual({
 			toolkit1: {path: 'toolkits/toolkit1'},
 			toolkit2: {path: 'toolkits/toolkit2'},
@@ -36,9 +36,11 @@ describe('Find toolkits within a repository', () => {
 	test('Filter by single toolkit', async () => {
 		expect.assertions(1);
 		await expect(
-			getToolkitLocations({
-				toolkits: 'toolkit2'
-			})
+			getToolkitLocations(
+				defaultConfigMock,
+				allToolkitsMock,
+				{toolkits: 'toolkit2'}
+			)
 		).resolves.toEqual({
 			toolkit2: {path: 'toolkits/toolkit2'}
 		});
@@ -47,9 +49,11 @@ describe('Find toolkits within a repository', () => {
 	test('Filter by multiple toolkits - all found', async () => {
 		expect.assertions(1);
 		await expect(
-			getToolkitLocations({
-				toolkits: 'toolkit2,toolkit3'
-			}, 'toolkits')
+			getToolkitLocations(
+				defaultConfigMock,
+				allToolkitsMock,
+				{toolkits: 'toolkit2,toolkit3'}
+			)
 		).resolves.toEqual({
 			toolkit2: {path: 'toolkits/toolkit2'},
 			toolkit3: {path: 'toolkits/toolkit3'}
@@ -59,9 +63,11 @@ describe('Find toolkits within a repository', () => {
 	test('Filter by multiple toolkits - at least one found', async () => {
 		expect.assertions(1);
 		await expect(
-			getToolkitLocations({
-				toolkits: 'toolkit2,toolkit5,toolkit6'
-			}, 'toolkits')
+			getToolkitLocations(
+				defaultConfigMock,
+				allToolkitsMock,
+				{toolkits: 'toolkit2,toolkit5,toolkit6'}
+			)
 		).resolves.toEqual({
 			toolkit2: {path: 'toolkits/toolkit2'}
 		});
@@ -70,9 +76,11 @@ describe('Find toolkits within a repository', () => {
 	test('Filter by package', async () => {
 		expect.assertions(1);
 		await expect(
-			getToolkitLocations({
-				package: 'toolkit1-package'
-			}, 'toolkits')
+			getToolkitLocations(
+				defaultConfigMock,
+				allToolkitsMock,
+				{package: 'toolkit1-package'}
+			)
 		).resolves.toEqual({
 			toolkit1: {path: 'toolkits/toolkit1', package: 'toolkits/toolkit1/packages/toolkit1-package'}
 		});
@@ -81,10 +89,14 @@ describe('Find toolkits within a repository', () => {
 	test('Filter by toolkit and package', async () => {
 		expect.assertions(1);
 		await expect(
-			getToolkitLocations({
-				toolkits: 'toolkit1',
-				package: 'toolkit1-package'
-			}, 'toolkits')
+			getToolkitLocations(
+				defaultConfigMock,
+				allToolkitsMock,
+				{
+					toolkits: 'toolkit1',
+					package: 'toolkit1-package'
+				}
+			)
 		).resolves.toEqual({
 			toolkit1: {path: 'toolkits/toolkit1', package: 'toolkits/toolkit1/packages/toolkit1-package'}
 		});
@@ -92,82 +104,50 @@ describe('Find toolkits within a repository', () => {
 });
 
 describe('Cannot find toolkits within a repository', () => {
-	afterEach(() => {
-		jest.resetModules();
-	});
-
-	test('Error when top-level toolkit folder doesn\'t exist', async () => {
-		jest.mock('../../../config/default.json', () => ({toolkitsDirectory: 'no-toolkits'}), {virtual: true});
-		const getToolkitLocationsLocal = require('../../../lib/js/_utils/_get-toolkit-locations');
-
-		expect.assertions(1);
-		await expect(
-			getToolkitLocationsLocal({})
-		).rejects.toThrowError(new Error('invalid folder: no-toolkits'));
-	});
-
-	test('Error when globby fails', async () => {
-		jest.mock('../../../config/default.json', () => ({toolkitsDirectory: 'toolkits-no-globby'}), {virtual: true});
-		const getToolkitLocationsLocal = require('../../../lib/js/_utils/_get-toolkit-locations');
-
-		expect.assertions(1);
-		await expect(
-			getToolkitLocationsLocal({})
-		).rejects.toThrowError(new Error('globby error'));
-	});
-
 	test('Filter by single toolkit - none found', async () => {
-		jest.mock('../../../config/default.json', () => ({toolkitsDirectory: 'toolkits'}), {virtual: true});
-		const getToolkitLocationsLocal = require('../../../lib/js/_utils/_get-toolkit-locations');
-
 		expect.assertions(1);
 		await expect(
-			getToolkitLocationsLocal({
-				toolkits: 'toolkit5'
-			})
+			getToolkitLocations(
+				defaultConfigMock,
+				allToolkitsMock,
+				{toolkits: 'toolkit5'}
+			)
 		).resolves.toEqual({});
 	});
 
 	test('Filter by multiple toolkits - none found', async () => {
-		jest.mock('../../../config/default.json', () => ({toolkitsDirectory: 'toolkits'}), {virtual: true});
-		const getToolkitLocationsLocal = require('../../../lib/js/_utils/_get-toolkit-locations');
-
 		expect.assertions(1);
 		await expect(
-			getToolkitLocationsLocal({
-				toolkits: 'toolkit5,toolkit6'
-			})
+			getToolkitLocations(
+				defaultConfigMock,
+				allToolkitsMock,
+				{toolkits: 'toolkit5,toolkit6'}
+			)
 		).resolves.toEqual({});
 	});
 
 	test('Filter by package - none found', async () => {
-		jest.mock('../../../config/default.json', () => ({
-			toolkitsDirectory: 'toolkits',
-			packagesDirectory: 'packages'
-		}), {virtual: true});
-		const getToolkitLocationsLocal = require('../../../lib/js/_utils/_get-toolkit-locations');
-
 		expect.assertions(1);
 		await expect(
-			getToolkitLocationsLocal({
-				package: 'toolkit5-package'
-			})
+			getToolkitLocations(
+				defaultConfigMock,
+				allToolkitsMock,
+				{package: 'toolkit5-package'}
+			)
 		).resolves.toEqual({});
 	});
 
 	test('Filter by toolkit and package - none found', async () => {
-		jest.mock('../../../config/default.json', () => ({
-			toolkitsDirectory: 'toolkits',
-			packagesDirectory: 'packages'
-		}), {virtual: true});
-		const getToolkitLocationsLocal = require('../../../lib/js/_utils/_get-toolkit-locations');
-
 		expect.assertions(1);
 		await expect(
-			getToolkitLocationsLocal({
-				toolkits: 'toolkit3',
-				package: 'toolkit3-package'
-			})
+			getToolkitLocations(
+				defaultConfigMock,
+				allToolkitsMock,
+				{
+					toolkits: 'toolkit4',
+					package: 'toolkit3-package'
+				}
+			)
 		).resolves.toEqual({});
 	});
 });

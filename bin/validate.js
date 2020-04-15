@@ -1,7 +1,6 @@
 #! /usr/bin/env node
 'use strict';
 
-const path = require('path');
 const reporter = require('@springernature/util-cli-reporter');
 const argv = require('yargs')
 	.usage('Usage: $0 [options]')
@@ -20,21 +19,29 @@ const argv = require('yargs')
 	.alias('h', 'help')
 	.argv;
 
+const currentWorkingDirectory = require('../lib/js/_utils/_current-working-directory')();
 const exitWithError = require('../lib/js/_utils/_error');
-const generateConfigs = require('../lib/js/_utils/_generate-configs');
+const generateToolkitConfig = require('../lib/js/_utils/_generate-toolkit-config');
+const generateContextConfig = require('../lib/js/_utils/_generate-context-config');
 const getToolkitLocations = require('../lib/js/_utils/_get-toolkit-locations');
+const getAllToolkitNames = require('../lib/js/_utils/_get-toolkit-names');
 const validatePackages = require('../lib/js/_validate');
 
-const packageJsonPath = path.resolve(process.cwd(), 'package.json');
+// const packageJsonPath = path.resolve(currentWorkingDirectory, 'package.json');
+const defaultConfig = require('../config/default.json');
+const defaultContextConfig = require('../config/context.json');
 
 reporter.title('validating packages');
-reporter.info('searching for toolkits');
+reporter.info('searching for all toolkits');
 
 (async () => {
 	try {
-		const allToolkitsInfo = await getToolkitLocations(argv);
-		const configs = await generateConfigs(packageJsonPath, allToolkitsInfo);
-		validatePackages(packageJsonPath, configs, argv.npm);
+		const allToolkitNames = await getAllToolkitNames(defaultConfig, currentWorkingDirectory);
+		const toolkitLocationInfo = await getToolkitLocations(defaultConfig, allToolkitNames, argv);
+		const toolkitConfig = await generateToolkitConfig(defaultConfig, currentWorkingDirectory, toolkitLocationInfo);
+		const contextConfig = await generateContextConfig(defaultContextConfig, currentWorkingDirectory);
+		const allConfigs = {context: contextConfig, toolkit: toolkitConfig};
+		validatePackages(currentWorkingDirectory, allConfigs, argv.npm);
 	} catch (error) {
 		exitWithError(error);
 	}
