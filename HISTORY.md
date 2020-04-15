@@ -1,5 +1,11 @@
 # History
 
+## 5.0.0 (2020-04-15)
+	* Major new release for new toolkit architecture
+	* BREAKING: Single context package, in its own location
+	* BREAKING: Remove package extension
+	* Refactor existing code
+
 ## 4.0.3 (2019-11-19)
 	* BUG: globby pattern fails as NPM module
 
