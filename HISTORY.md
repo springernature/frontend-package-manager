@@ -2,7 +2,7 @@
 
 ## 5.0.0 (2020-04-15)
 	* Major new release for new toolkit architecture
-	* BREAKING: Single context package, in it's own location
+	* BREAKING: Single context package, in its own location
 	* BREAKING: Remove package extension
 	* Refactor existing code
 
