@@ -27,7 +27,6 @@ const getToolkitLocations = require('../lib/js/_utils/_get-toolkit-locations');
 const getAllToolkitNames = require('../lib/js/_utils/_get-toolkit-names');
 const validatePackages = require('../lib/js/_validate');
 
-// const packageJsonPath = path.resolve(currentWorkingDirectory, 'package.json');
 const defaultConfig = require('../config/default.json');
 const defaultContextConfig = require('../config/context.json');
 
