@@ -6,17 +6,13 @@
 
 const results = require('./glob-results');
 
-const resultsToolkits = results.toolkitFiles();
-const resultsPackage = results.packageFiles();
-const resultsFolder = results.folderFiles();
-
 async function globby(globPath) {
 	// Check toolkit results
 	if (globPath.includes('toolkits')) {
 		if (globPath.includes('toolkits-no-globby')) {
 			throw new Error('globby error');
 		}
-		return resultsToolkits[globPath];
+		return results.toolkitFiles[globPath];
 	}
 
 	// Check package results
@@ -24,7 +20,7 @@ async function globby(globPath) {
 		if (globPath.includes('error')) {
 			throw new Error('globby error');
 		}
-		return resultsPackage[globPath];
+		return results.packageFiles[globPath];
 	}
 
 	// Check context folder results
@@ -32,7 +28,7 @@ async function globby(globPath) {
 		if (globPath.includes('error')) {
 			throw new Error('globby error');
 		}
-		return resultsFolder[globPath];
+		return results.folderFiles[globPath];
 	}
 }
 
