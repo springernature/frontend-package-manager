@@ -89,7 +89,7 @@ The default configuration options provided can be overriden and/or extended in o
 
 #### Repository
 
-By providing a `package-manager.json` file in the **`toolkits`** folder of your repository. Configuration options defined here will extend/override those in the default (with the exception of the `toolkitsDirectory` and `packagesDirectory` options), and are inherited by _all_ toolkits.
+By providing a `package-manager.json` file at the root of the **`toolkits`** folder of your repository. Configuration options defined here will extend/override those in the default (with the exception of the `toolkitsDirectory` and `packagesDirectory` options), and are inherited by _all_ toolkits.
 
 #### Toolkit
 
@@ -126,7 +126,7 @@ The following example would allow a folder with the name `js` that contains file
 
 #### CSSDirectoryStructure
 
-This option allows you to specify a custom CSS folder structure. This is used in the [package creation](#package-creation) step to generate a sub-folder structure within a specified folder, to assist in quickly spinning up a new package. It is not used in the validation or publication steps (more on those steps later).
+This option allows you to specify a custom CSS folder structure. This is used in the [package creation](#package-creation) step to generate a sub-folder structure within a specified folder, to assist in quickly spinning up a new package. It is not used in the [validation](#package-validation) or [publication](#package-publication) steps.
 
 The following shows an example folder structure, taken from the [Springer Nature Front-End Toolkits](https://github.com/springernature/frontend-toolkits) repository:
 
@@ -323,7 +323,7 @@ Valid packages within the specified packages directory are identified, and a new
 
 It is also required that the package `changelog` has been updated, and appears in the list of `CHANGED_FILES`, otherwise publication will not happen.
 
-#### travis
+#### Travis
 
 This package has been written to work with [TRAVIS CI](https://travis-ci.org/) and an example of the CI setup can be found in the Springer Nature [frontend-toolkits](https://github.com/springernature/frontend-toolkits):
 - [`package.json`](https://github.com/springernature/frontend-toolkits/blob/master/package.json)
