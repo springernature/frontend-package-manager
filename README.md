@@ -338,11 +338,19 @@ Unit tests for this package are written with [Jest](https://jestjs.io/en/). To r
 
 Javascript linting is enforced using the [Springer Nature Eslint config](https://www.npmjs.com/package/@springernature/eslint-config). Run the linter using `npm run lint` from the command line.
 
-## Dependency graph
+## Dependency graphs
 
-Visual graph of module dependencies generated using [Madge](https://www.npmjs.com/package/madge)
+Below are dependency graphs, generated using [Madge](https://www.npmjs.com/package/madge), for the three package manager entrypoints.
 
-<img src="img/graph.svg" width="914">
+### create
+<img src="img/create.svg" width="914">
+
+### validate
+<img src="img/validate.svg" width="914">
+
+### publish
+<img src="img/publish.svg" width="914">
+
 
 ## License
 
