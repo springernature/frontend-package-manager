@@ -135,4 +135,11 @@ describe('Check validation', () => {
 			checkValidation(validationConfigWithChangelog, 'packages/package/passContext', ['brandA'])
 		).resolves.toEqual();
 	});
+
+	test('Resolves for context organised into brands with brand specific README.md', async () => {
+		expect.assertions(1);
+		await expect(
+			checkValidation(validationConfigWithChangelog, 'packages/package/passContextWithReadme', ['brandA'])
+		).resolves.toEqual();
+	});
 });

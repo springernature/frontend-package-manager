@@ -152,6 +152,22 @@ const packageFiles = {
 		'packages/package/passContext/brandA/folder2/file.json',
 		'packages/package/passContext/brandA/folder2/subfolder',
 		'packages/package/passContext/brandA/folder2/subfolder/file.js'
+	],
+	'packages/package/passContextWithReadme/*': [
+		'packages/package/passContextWithReadme/required.md',
+		'packages/package/passContextWithReadme/HISTORY.md'
+	],
+	'packages/package/passContextWithReadme/brandA/**/*': [
+		'packages/package/passContextWithReadme/brandA/README.md',
+		'packages/package/passContextWithReadme/brandA/folder1',
+		'packages/package/passContextWithReadme/brandA/folder1/file.scss',
+		'packages/package/passContextWithReadme/brandA/folder1/file.css',
+		'packages/package/passContextWithReadme/brandA/folder2',
+		'packages/package/passContextWithReadme/brandA/folder2/file.js',
+		'packages/package/passContextWithReadme/brandA/folder2/file.spec.js',
+		'packages/package/passContextWithReadme/brandA/folder2/file.json',
+		'packages/package/passContextWithReadme/brandA/folder2/subfolder',
+		'packages/package/passContextWithReadme/brandA/folder2/subfolder/file.js'
 	]
 };
 
