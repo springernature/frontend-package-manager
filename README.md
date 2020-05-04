@@ -192,7 +192,7 @@ The context package accepts the following default configuration which can be ext
 }
 ```
 
-In addition to the configuration options defined for regular packages, the context package accepts the following additional configuration items:
+In addition to the configuration options defined for regular packages, the context package allows an _additional_ `README.md` file within each brand folder e.g. `name-of-context-package/brand-name/README.md`, as well as the following additional configuration items:
 
 #### contextDirectory
 
