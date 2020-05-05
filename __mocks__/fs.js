@@ -45,6 +45,8 @@ const __fsMockFiles = () => {
 		'packages/package/passDotfiles': defaultPackageContents,
 		'packages/package/passContext': {'required.md': 'file content', 'HISTORY.md': 'file content'},
 		'packages/package/passContext/brandA': defaultFolders,
+		'packages/package/passContextWithReadme': {'required.md': 'file content', 'HISTORY.md': 'file content'},
+		'packages/package/passContextWithReadme/brandA': {...defaultFolders, ...{'README.md': 'file content'}},
 		'packages/package/failIsRequired': defaultPackageContents,
 		'packages/package/failIsFolder': defaultPackageContents,
 		'packages/package/failIsFileType': defaultPackageContents,
