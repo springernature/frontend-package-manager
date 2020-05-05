@@ -1,5 +1,10 @@
 # History
 
+## 5.1.0 (2020-05-04)
+	* FEATURE: Allow brand level README files within context
+		* required: 'brand-context/README.md'
+		* optional: 'brand-context/brand/README.md'
+
 ## 5.0.0 (2020-04-15)
 	* Major new release for new toolkit architecture
 	* BREAKING: Single context package, in its own location
