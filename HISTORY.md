@@ -1,5 +1,8 @@
 # History
 
+## 5.1.1 (2020-05-14)
+    * BUG: npx command causing issues when version not explicitly stated
+
 ## 5.1.0 (2020-05-04)
 	* FEATURE: Allow brand level README files within context
 		* required: 'brand-context/README.md'
