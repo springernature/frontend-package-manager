@@ -9,17 +9,24 @@ const fs = require('fs');
 jest.mock('../../../lib/js/_utils/_check-context-version');
 jest.mock('@springernature/util-cli-reporter');
 
+jest.mock('latest-version');
+const latestVersion = require('latest-version');
+latestVersion.mockImplementation(() => '1.0.0');
+
 jest.mock('path/to/old-package/package.json', () => ({
-	name: 'old-style-component'
+	name: 'old-style-component',
+	version: '1.0.0',
 }), {virtual: true});
 
 jest.mock('path/to/package/package.json', () => ({
 	name: 'new-style-component',
+	version: '1.0.0',
 	brandContext: '^1.0.0'
 }), {virtual: true});
 
 jest.mock('path/to/other-package/package.json', () => ({
 	name: 'new-style-component',
+	version: '1.0.0',
 	brandContext: '^1.0.0',
 	scripts: {test: null}
 }), {virtual: true});
@@ -58,7 +65,7 @@ describe('Context defined', () => {
 				'@springernature',
 				'valid-context'
 			)
-		).resolves.toEqual();
+		).resolves.toEqual('npx @springernature/util-context-warning@1.0.0 -p new-style-component@1.0.0 -v 1.2.0 1.5.0');
 		expect(spy).toHaveBeenCalled();
 	});
 
@@ -70,7 +77,7 @@ describe('Context defined', () => {
 				'@springernature',
 				'valid-context'
 			)
-		).resolves.toEqual();
+		).resolves.toEqual('npx @springernature/util-context-warning@1.0.0 -p new-style-component@1.0.0 -v 1.2.0 1.5.0');
 		expect(spy).toHaveBeenCalled();
 	});
 
