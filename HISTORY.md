@@ -1,5 +1,8 @@
 # History
 
+## 5.1.2 (2020-06-02)
+    * BUG: missing argument from publish function
+
 ## 5.1.1 (2020-05-14)
     * BUG: npx command causing issues when version not explicitly stated
 
