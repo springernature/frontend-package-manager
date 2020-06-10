@@ -1,5 +1,8 @@
 # History
 
+## 5.1.3 (2020-06-10)
+    * BUG: race condition creating folders when running `create` script
+
 ## 5.1.2 (2020-06-02)
     * BUG: missing argument from publish function
 
