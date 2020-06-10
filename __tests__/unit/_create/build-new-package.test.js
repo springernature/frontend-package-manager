@@ -165,7 +165,7 @@ describe('Create task objects', () => {
 		result[0].task();
 
 		expect.assertions(1);
-		expect(consoleOutput).toEqual('mkdir error');
+		expect(consoleOutput).toEqual(new Error('mkdirSync error'));
 	});
 
 	test('Log error if unable to create package.json', () => {
@@ -189,7 +189,7 @@ describe('Create task objects', () => {
 		result[2].task();
 
 		expect.assertions(1);
-		expect(consoleOutput).toEqual('writefile error');
+		expect(consoleOutput).toEqual(new Error('writefile error'));
 	});
 
 	test('Log error if unable to create file', () => {
@@ -213,7 +213,7 @@ describe('Create task objects', () => {
 		result[2].task();
 
 		expect.assertions(1);
-		expect(consoleOutput).toEqual('writefile error');
+		expect(consoleOutput).toEqual(new Error('writefile error'));
 	});
 
 	test('Log error if unable to create folder', () => {
@@ -237,31 +237,7 @@ describe('Create task objects', () => {
 		result[1].task();
 
 		expect.assertions(1);
-		expect(consoleOutput).toEqual('mkdir error');
-	});
-
-	test('Log error if unable to create .gitkeep file in folder', () => {
-		const result = buildNewPackage(
-			{
-				scope: 'scope',
-				required: ['file.ext'],
-				packagesDirectory: 'path/to'
-			},
-			'.',
-			'license',
-			{
-				pkgname: 'package-file-error',
-				description: 'this is a description',
-				author: 'Joe Bloggs',
-				folders: ['view']
-			}
-		);
-
-		// Run the first task
-		result[1].task();
-
-		expect.assertions(1);
-		expect(consoleOutput).toEqual('writefile error');
+		expect(consoleOutput).toEqual(new Error('mkdir error'));
 	});
 
 	test('Log error if unable to create CSSDirectoryStructure', () => {
@@ -288,6 +264,6 @@ describe('Create task objects', () => {
 		result[2].task();
 
 		expect.assertions(1);
-		expect(consoleOutput).toEqual('mkdir error');
+		expect(consoleOutput).toEqual(new Error('mkdir error'));
 	});
 });
