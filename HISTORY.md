@@ -1,5 +1,9 @@
 # History
 
+## 6.1.1 (2020-10-05)
+    * Update util-package-renderer
+    * BUG: Mismatching lockfile
+
 ## 6.1.0 (2020-10-05)
     * FEATURE: Add `sn-package-demo` endpoint to generate static demo locally
 
