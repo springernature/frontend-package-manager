@@ -16,7 +16,8 @@
   "bin": {
     "sn-package-create": "./bin/create.js",
     "sn-package-validate": "./bin/validate.js",
-    "sn-package-publish": "./bin/publish.js"
+    "sn-package-publish": "./bin/publish.js",
+    "sn-package-demo": "./bin/demo.js"
   },
   "scripts": {
     "test": "jest --colors --verbose --coverage",
@@ -38,7 +39,7 @@
     "strip-ansi": "^5.2.0"
   },
   "dependencies": {
-    "@springernature/util-cli-reporter": "^1.2.0",
+    "@springernature/util-cli-reporter": "^1.2.1",
     "@springernature/util-package-extender": "^0.0.4",
     "@springernature/util-package-renderer": "^0.0.2",
     "deepmerge": "^4.2.2",
