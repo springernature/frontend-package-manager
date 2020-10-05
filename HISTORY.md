@@ -1,5 +1,9 @@
 # History
 
+## 6.0.0 (2020-10-05)
+    * FEATURE: Publish static component example from demo folder
+    * BREAKING: Now validates existing demo folder code
+
 ## 5.1.3 (2020-06-10)
     * BUG: race condition creating folders when running `create` script
 
