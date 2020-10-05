@@ -304,6 +304,16 @@ The package publication script is a CLI based tool that will publish new or upda
 $ ./node_modules/.bin/sn-package-publish
 ```
 
+### Create styleguide demo
+
+As part of the `validation` and `publication` steps, if there is an optional `demo` folder present within a package, the [`util-package-renderer`](https://github.com/springernature/frontend-toolkit-utilities/tree/master/packages/util-package-renderer) is used to generate a static `index.html` file that is used to display a working demonstration of the package for use in a styleguide. This file is published as `demo/dist/index.html` to NPM.
+
+You can run the following command to generate this file locally and test out any `demo` code. The file can be safely committed:
+
+```
+$ ./node_modules/.bin/sn-package-demo
+```
+
 ## Continuous Integration
 
 It is intended that the validation and publication scripts are run on your CI environment to ensure the safe and correct publication of packages.
