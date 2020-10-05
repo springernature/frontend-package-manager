@@ -1,5 +1,8 @@
 # History
 
+## 6.1.0 (2020-10-05)
+    * FEATURE: Add `sn-package-demo` endpoint to generate static demo locally
+
 ## 6.0.0 (2020-10-05)
     * FEATURE: Publish static component example from demo folder
     * BREAKING: Now validates existing demo folder code
