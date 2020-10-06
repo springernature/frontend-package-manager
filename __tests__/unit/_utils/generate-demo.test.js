@@ -4,6 +4,8 @@
  */
 'use strict';
 
+const path = require('path');
+
 jest.mock('@springernature/util-cli-reporter');
 jest.mock('@springernature/util-package-renderer');
 jest.mock('../../../lib/js/_utils/_check-exists');
@@ -78,7 +80,7 @@ describe('createDemoFile', () => {
 		expect(renderer).toHaveBeenCalledWith({
 			'brandContext': '@npmscope/context',
 			'demoCodeFolder': 'demo',
-			'distFolderPath': 'path/to/valid-toolkit-package/demo/dist',
+			'distFolderPath': path.join(process.cwd(), 'path/to/valid-toolkit-package/demo/dist'),
 			'packageRoot': 'path/to/valid-toolkit-package',
 			'reportingLevel': 'info'
 		});
