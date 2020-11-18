@@ -1,8 +1,12 @@
 # History
 
+# 6.1.3 (2020-11-18)
+    * BUG: NPX command failed when being run from a project using a private registry
+    * Updated to specify the use of the default registry for NPX
+
 ## 6.1.2 (2020-10-06)
     * BUG: demo generation could not be run from the root
-	* Changed behaviour to pass package name instead of running from package folder
+    * Changed behaviour to pass package name instead of running from package folder
 
 ## 6.1.1 (2020-10-05)
     * Update util-package-renderer
