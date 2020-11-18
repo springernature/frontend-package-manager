@@ -65,7 +65,7 @@ describe('Context defined', () => {
 				'@springernature',
 				'valid-context'
 			)
-		).resolves.toEqual('npx @springernature/util-context-warning@1.0.0 -p new-style-component@1.0.0 -v 1.2.0 1.5.0');
+		).resolves.toEqual('npm_config_registry=https://registry.npmjs.org/ npx @springernature/util-context-warning@1.0.0 -p new-style-component@1.0.0 -v 1.2.0 1.5.0');
 		expect(spy).toHaveBeenCalled();
 	});
 
@@ -77,7 +77,7 @@ describe('Context defined', () => {
 				'@springernature',
 				'valid-context'
 			)
-		).resolves.toEqual('npx @springernature/util-context-warning@1.0.0 -p new-style-component@1.0.0 -v 1.2.0 1.5.0');
+		).resolves.toEqual('npm_config_registry=https://registry.npmjs.org/ npx @springernature/util-context-warning@1.0.0 -p new-style-component@1.0.0 -v 1.2.0 1.5.0');
 		expect(spy).toHaveBeenCalled();
 	});
 
