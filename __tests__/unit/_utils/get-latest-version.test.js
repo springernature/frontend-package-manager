@@ -21,7 +21,7 @@ describe('Get latest version of package published on NPM', () => {
 		expect.assertions(1);
 		expect(
 			await getLatestVersion('empty')
-		).toBe(null);
+		).toBe(undefined);
 	});
 
 	test('Rejects when there is a problem with the registry', async () => {
