@@ -24,19 +24,19 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "@springernature/eslint-config": "^4.0.0",
-    "eslint": "^6.4.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jest": "^23.0.4",
-    "eslint-plugin-no-use-extend-native": "^0.4.1",
-    "eslint-plugin-node": "^10.0.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-unicorn": "^13.0.0",
-    "jest": "^24.9.0",
-    "mock-fs": "^4.11.0",
+    "@springernature/eslint-config": "^5.0.0",
+    "eslint": "^7.17.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.1.3",
+    "eslint-plugin-no-use-extend-native": "^0.5.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-unicorn": "^28.0.1",
+    "jest": "^26.6.3",
+    "mock-fs": "^4.14.0",
     "mock-os": "0.0.1",
     "mock-spawn": "^0.2.6",
-    "strip-ansi": "^5.2.0"
+    "strip-ansi": "^6.0.0"
   },
   "dependencies": {
     "@springernature/util-cli-reporter": "^1.2.1",
@@ -44,17 +44,17 @@
     "@springernature/util-package-renderer": "^0.0.4",
     "deepmerge": "^4.2.2",
     "gitignore-globs": "^0.1.1",
-    "globby": "^10.0.1",
+    "globby": "^11.0.3",
     "inquirer": "^7.0.0",
     "latest-version": "^5.1.0",
     "listr": "^0.14.3",
     "minimatch": "^3.0.4",
     "npm-registry-client": "^8.6.0",
-    "pretty-error": "^2.1.1",
+    "pretty-error": "^3.0.3",
     "sanitize-filename": "^1.6.3",
     "semver": "^6.3.0",
     "validate-npm-package-name": "^3.0.0",
-    "yargs": "^14.0.2"
+    "yargs": "^16.2.0"
   },
   "jest": {
     "testURL": "http://localhost/",

@@ -10,7 +10,7 @@ async function setAuthToken(path) {
 	}
 }
 
-const publish = () => null;
+const publish = () => {};
 
 module.exports = {
 	setAuthToken,
