@@ -54,7 +54,7 @@
     "sanitize-filename": "^1.6.3",
     "semver": "^6.3.0",
     "validate-npm-package-name": "^3.0.0",
-    "yargs": "^14.0.2"
+    "yargs": "^16.2.0"
   },
   "jest": {
     "testURL": "http://localhost/",
