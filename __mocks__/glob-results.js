@@ -168,6 +168,26 @@ const packageFiles = {
 		'packages/package/passContextWithReadme/brandA/folder2/file.json',
 		'packages/package/passContextWithReadme/brandA/folder2/subfolder',
 		'packages/package/passContextWithReadme/brandA/folder2/subfolder/file.js'
+	],
+	'packages/package/passWithCss/**/*': [
+		'packages/package/passWithCss/required.md',
+		'packages/package/passWithCss/folder1',
+		'packages/package/passWithCss/folder1/a',
+		'packages/package/passWithCss/folder1/b',
+		'packages/package/passWithCss/folder1/c',
+		'packages/package/passWithCss/folder1/a/fileA.scss',
+		'packages/package/passWithCss/folder1/b/fileB.scss',
+		'packages/package/passWithCss/folder1/c/fileC.css'
+	],
+	'packages/package/failIsCssFolder/**/*': [
+		'packages/package/failIsCssFolder/required.md',
+		'packages/package/failIsCssFolder/folder1',
+		'packages/package/failIsCssFolder/folder1/a',
+		'packages/package/failIsCssFolder/folder1/b',
+		'packages/package/failIsCssFolder/folder1/d',
+		'packages/package/failIsCssFolder/folder1/a/fileA.scss',
+		'packages/package/failIsCssFolder/folder1/b/fileB.scss',
+		'packages/package/failIsCssFolder/folder1/d/fileD.css'
 	]
 };
 

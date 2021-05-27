@@ -36,6 +36,27 @@ const defaultPackageContents = {...{
 	'.adotfile': 'file content'
 }, ...defaultFolders};
 
+const brandPackageContents = {
+	brandA: {
+		'fileA.ext': 'file content here'
+	},
+	brandB: {
+		'fileB.ext': 'file content here'
+	}
+};
+
+const cssFolderPackageContents = {
+	'required.md': 'file content',
+	folder1: {
+		a: {
+			'fileA.scss': 'file content here'
+		},
+		b: {
+			'fileB.scss': 'file content here'
+		}
+	}
+};
+
 const __fsMockFiles = () => {
 	return {
 		'packages/package/pass': defaultPackageContents,
@@ -52,41 +73,30 @@ const __fsMockFiles = () => {
 		'packages/package/failIsFileType': defaultPackageContents,
 		'packages/package/failIsTopLevelFile': defaultPackageContents,
 		'path/to/global-package': defaultPackageContents,
-		'path/to/global-package-b': {
-			'some-file.txt': 'file content here',
-			'empty-dir': {/** empty directory */}
-		},
+		'path/to/global-package-b': {'some-file.txt': 'file content here', 'empty-dir': {/** empty directory */}},
 		'path/to/some.png': Buffer.from([8, 6, 7, 5, 3, 0, 9]),
 		'some/other/path': {/** another empty directory */},
 		'home/user/.npmrc': '//mock-registry.npmjs.org/:_authToken=xyz',
 		'home/user-b/.npmrc': `//registry.npmjs.org/:_authToken=$\{NPM_TOKEN}`,
 		'home/user-c/.npmrc': `//registry.npmjs.org/:_authToken=$\{OTHER_NPM_TOKEN}`,
-		'context/brand-context': {
-			brandA: {
-				'fileA.ext': 'file content here'
-			},
-			brandB: {
-				'fileB.ext': 'file content here'
-			}
-		},
-		'context/brand-context-disallowed': {
-			brandA: {
-				'fileA.ext': 'file content here'
-			},
-			brandB: {
-				'fileB.ext': 'file content here'
-			},
-			brandC: {
-				'fileB.ext': 'file content here'
-			}
-		},
+		'context/brand-context': brandPackageContents,
+		'context/brand-context-disallowed': {...brandPackageContents, ...{brandC: {'fileB.ext': 'file content here'}}},
 		'context/brand-context-empty': {/** empty directory */},
-		'valid-context/brand-context': {
-			brandA: {
-				'fileA.ext': 'file content here'
-			},
-			brandB: {
-				'fileB.ext': 'file content here'
+		'valid-context/brand-context': brandPackageContents,
+		'packages/package/passWithCss': {
+			...cssFolderPackageContents,
+			...{
+				folder1: {
+					...cssFolderPackageContents.folder1, ...{c: {'fileC.css': 'file content here'}}
+				}
+			}
+		},
+		'packages/package/failIsCssFolder': {
+			...cssFolderPackageContents,
+			...{
+				folder1: {
+					...cssFolderPackageContents.folder1, ...{d: {'fileD.css': 'file content here'}}
+				}
 			}
 		}
 	};
