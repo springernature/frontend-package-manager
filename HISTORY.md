@@ -1,5 +1,9 @@
 # History
 
+# 7.0.0 (2021-05-27)
+    * BREAKING: Validates against 'CSSDirectoryStructure' if it is present in the config
+    * This will break any packages that didn't previously conform to this structure
+
 # 6.1.3 (2020-11-18)
     * BUG: NPX command failed when being run from a project using a private registry
     * Updated to specify the use of the default registry for NPX
