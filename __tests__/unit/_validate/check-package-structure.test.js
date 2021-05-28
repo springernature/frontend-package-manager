@@ -35,6 +35,16 @@ const validationConfigNoFolders = {
 	required: ['required.md']
 };
 
+const validationConfigWithCss = {
+	required: ['required.md'],
+	folders: {
+		folder1: ['scss', 'css']
+	},
+	CSSDirectoryStructure: {
+		folder1: ['a', 'b', 'c']
+	}
+};
+
 describe('Check validation', () => {
 	beforeEach(() => {
 		mockfs(MOCK_PACKAGES);
@@ -141,5 +151,19 @@ describe('Check validation', () => {
 		await expect(
 			checkValidation(validationConfigWithChangelog, 'packages/package/passContextWithReadme', ['brandA'])
 		).resolves.toEqual();
+	});
+
+	test('Resolves when filesystem matches validationConfigWithCss', async () => {
+		expect.assertions(1);
+		await expect(
+			checkValidation(validationConfigWithCss, 'packages/package/passWithCss')
+		).resolves.toEqual();
+	});
+
+	test('Rejects when invalid folder within CSS configuration', async () => {
+		expect.assertions(1);
+		await expect(
+			checkValidation(validationConfigWithCss, 'packages/package/failIsCssFolder')
+		).rejects.toThrowError(new Error('Invalid files or folders in failIsCssFolder'));
 	});
 });
