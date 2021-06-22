@@ -191,8 +191,6 @@ repository-monorepo
 
 The context package accepts the following default configuration which can be extended/overriden using a `package-manager.json` configuration within the `context` folder:
 
-#### Default Context configuration
-
 ```json
 {
   "scope": "springernature",
