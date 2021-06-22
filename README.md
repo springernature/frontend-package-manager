@@ -5,7 +5,7 @@
 [![Build Status][badge-build]][info-build]
 [![LGPL 3.0 licensed][badge-license]][info-license]
 
-Handles the **creation**, **validation**, and **publication** of packages built as part of the Springer Nature Elements Design System.
+Handles the **creation**, **validation**, and **publication** of packages built as part of the Springer Nature Elements Design System. More information on how this is used can be found within the [developer documentation](https://github.com/springernature/frontend-elements-docs) for Elements.
 
 The Design System is made up of different `toolkits` that contain `packages` designed for use with different `brands` within the Springer Nature ecosystem.
 
@@ -42,7 +42,7 @@ The package manager is used within the [Springer Nature Front-End Toolkits](http
 $ npm install --save-dev @springernature/frontend-package-manager
 ```
 
-Installing `frontend-package-manager` adds package management exectuables to `./node_modules/.bin/`.
+Installing `frontend-package-manager` adds [package management exectuables](#usage) to `./node_modules/.bin/`.
 
 ## Configuration
 
@@ -63,25 +63,35 @@ The package manager is configurable to enforce consistency across packages that 
 }
 ```
 
-#### scope
+#### `scope`
+
+Type: `String`
 
 All packages must be published under an [organisation scope](https://docs.npmjs.com/misc/scope) on NPM. By default packages within the Springer Nature ecosystem are published to the company scope.
 
-#### toolkitsDirectory
+#### `toolkitsDirectory`
+
+Type: `String`
 
 Defines the parent folder under which toolkits live (see example structure above), and can **NOT** be changed.
 
-#### packagesDirectory
+#### `packagesDirectory`
+
+Type: `String`
 
 Defines the parent folder under which packages live within a specific toolkit (see example structure above), and can **NOT** be changed.
 
-#### changelog
+#### `changelog`
+
+Type: `String`
 
 All packages **MUST** have a changelog file in their root directory.
 
-#### required
+#### `required`
 
-An array of file paths that **MUST** appear in any package. There is no need to specify the changelog file here, it is added automatically.
+Type: `Array`
+
+An array of top level files that **MUST** appear in any package. There is no need to specify the changelog file here, it is added automatically.
 
 ### Extending the default configuration
 
@@ -99,13 +109,17 @@ By providing a `package-manager.json` file in a specific toolkit folder e.g. `to
 
 The configuration files should take the same format as the default configuration, and can also add the following options:
 
-#### prefix
+#### `prefix`
+
+Type: `String`
 
 Package names can specify a prefix that namespaces them within NPM, based on which toolkit they live within.
 
-For example all Springer Nature packages published via the global toolkit use the prefix `global`, they will appear on NPM as `@springernature/global-name-of-component`
+For example all component packages published via the global toolkit use the prefix `global`, they will appear on NPM as `@springernature/global-name-of-component`
 
-#### folders
+#### `folders`
+
+Type: `Object`
 
 A folders object can be added to the config. This contains keys that map to any folder names that are allowed within a package, with their value being an array of allowed file extensions within that folder.
 
@@ -124,7 +138,9 @@ The following example would allow a folder with the name `js` that contains file
 }
 ```
 
-#### CSSDirectoryStructure
+#### `CSSDirectoryStructure`
+
+Type: `Object`
 
 This option allows you to specify a custom CSS folder structure. This is used in the [package creation](#package-creation) step to generate a sub-folder structure within a specified folder, to assist in quickly spinning up a new package. It is also used in the [validation](#package-validation) step to make sure that only valid CSS subdirectory naming is used.
 
@@ -136,16 +152,16 @@ The following shows an example folder structure, taken from the [Springer Nature
     "10-settings",
     "20-functions",
     "30-mixins",
-    "40-base",
-    "50-components",
-    "60-utilities"
+    "50-components"
   ]
 }
 ```
 
 In the above example, the object key `scss`, needs to match a key of the same name from the [folders](#folders) option mentioned above, to enable the sub-folders to be created in the correct parent.
 
-#### enforceBrandFileNaming
+#### `enforceBrandFileNaming`
+
+Type: `Array`
 
 This option accepts an array of folder paths that is used to enforce that all files contained in those folders are named after a valid brand (See the [context](#context) section below for more information on branding).
 
@@ -161,7 +177,7 @@ If we have the brands `brandA` and `brandB` configured, then in the above exampl
 - `brandB.ext`
 - `_brandB.ext`
 
-## Context
+### Context
 
 In addition to the `toolkits` folder there is also a `context` folder. This folder contains a single package that is split into `brands` and contains brand specific configurations and baseline styles that are used by other packages. The folder structure looks like this:
 
@@ -175,7 +191,7 @@ repository-monorepo
 
 The context package accepts the following default configuration which can be extended/overriden using a `package-manager.json` configuration within the `context` folder:
 
-### Default configuration
+#### Default Context configuration
 
 ```json
 {
@@ -194,15 +210,21 @@ The context package accepts the following default configuration which can be ext
 
 In addition to the configuration options defined for regular packages, the context package allows an _additional_ `README.md` file within each brand folder e.g. `name-of-context-package/brand-name/README.md`, as well as the following additional configuration items:
 
-#### contextDirectory
+#### `contextDirectory`
+
+Type: `String`
 
 Defines the parent folder under which the context package lives (see example structure above), and can **NOT** be changed.
 
-#### brandContextName
+#### `brandContextName`
+
+Type: `String`
 
 Defines the name of the context package, by default this is `brand-context`.
 
-#### brands
+#### `brands`
+
+Type: `Array`
 
 Defines an array of brand names. These must map to the folder names that live within the context package. For example:
 
@@ -213,18 +235,6 @@ Defines an array of brand names. These must map to the folder names that live wi
 	"brandB",
 	"brandC"
   ]
-}
-```
-
-### Using the context package within a toolkit package
-
-Each of the packages inside the `toolkits` folder must map to a version of the context package that is used as a baseline for when that package is compiled. This is defined in the `package.json` file for a toolkit package using the key `brandContext`, where the value maps to a valid semver version from the context package. Below is an example `package.json` file:
-
-```json
-{
-  "name": "@springernature/toolkit-name-of-component",
-  "version": "0.0.0",
-  "brandContext": "^1.0.0"
 }
 ```
 
