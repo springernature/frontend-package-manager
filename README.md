@@ -242,89 +242,22 @@ All packages that are published **MUST** be licensed. As packages are published 
 
 ## Usage
 
-Three CLI scripts are provided as part of this package. They should all be run from your **repository root**, in the same location as your `package-manager.json` and `package.json` files.
+Four CLI scripts are provided as part of this package. They should all be run from your **repository root**, in the same location as your `package-manager.json` and `package.json` files.
 
-### Package creation
+| Script                                    | Description                               |
+| ----------------------------------------- | ----------------------------------------- |
+| `./node_modules/.bin/sn-package-create`   | Create boilerplate code for a new package |
+| `./node_modules/.bin/sn-package-validate` | Validate toolkit packages against config  |
+| `./node_modules/.bin/sn-package-publish`  | Publish a new/updated package             |
+| `./node_modules/.bin/sn-package-demo`     | Compile demo code to static html          |
 
-The package creation script is a CLI based tool that can be used to quickly create a boilerplate new package based on the the configuration. This tool is designed to be run locally within your repository.
-
-```
-$ ./node_modules/.bin/sn-package-create
-```
-
-<img src="img/create.gif" width="600">
-
-> Example from Springer Nature [Front-End Toolkits](https://github.com/springernature/frontend-toolkits)
-
-### Package validation
-
-The package validation script is a CLI based tool that will validate the packages against the configuration and provide output to the CLI. This can be run locally and as part of your CI environment.
-
-Running this script will validate _all_ the packages in the provided packages directory:
-
-```
-$ ./node_modules/.bin/sn-package-validate
-```
-
-#### Filter by toolkits
-
-Running with the `-t` or `--toolkits` argument will validate only packages from the toolkits named after the argument:
-
-```
-$ ./node_modules/.bin/sn-package-validate -t toolkita,toolkitb,toolkitc
-```
-
-#### Filter by package
-
-Running with the `-p` or `--package` argument will validate the package named after the argument:
-
-```
-$ ./node_modules/.bin/sn-package-validate -p name-of-package
-```
-
-#### Validation publication
-
-Running with the `-n` or `--npm` argument will validate for publication to NPM. This is designed to validate the [publication step on your CI environment](#package-publication) and should not be run locally:
-
-```
-$ ./node_modules/.bin/sn-package-validate -n
-```
-
-#### Running via NPM Scripts
-
-If you are running via [NPM Scripts](https://docs.npmjs.com/cli/run-script), remember to forward on your arguments using the format `npm run <command> [-- <args>]`. For example:
-
-```
-$ npm run validate -- -p name-of-package
-```
-
-To view all the options:
-
-```
-$ ./node_modules/.bin/sn-package-validate -h
-```
-
-### Package publication
-
-The package publication script is a CLI based tool that will publish new or updated packages to NPM. This is designed to [run on your CI environment](#continuous-integration) and should not be run locally.
-
-```
-$ ./node_modules/.bin/sn-package-publish
-```
-
-### Create styleguide demo
-
-As part of the `validation` and `publication` steps, if there is an optional `demo` folder present within a package, the [`util-package-renderer`](https://github.com/springernature/frontend-toolkit-utilities/tree/master/packages/util-package-renderer) generates a static `index.html` file that is used to display a working demonstration of the package for use in a styleguide. This file is published as `demo/dist/index.html` to NPM.
-
-You can run the following command to generate this file locally and test out any `demo` code. The file can be safely committed:
-
-```
-$ ./node_modules/.bin/sn-package-demo -p name-of-package
-```
+More guidance can be found within the tooling section of the [developer documentation](https://github.com/springernature/frontend-elements-docs/tree/master/tooling) for Elements.
 
 ## Continuous Integration
 
-It is intended that the validation and publication scripts are run on your CI environment to ensure the safe and correct publication of packages.
+It is intended that the `validation` and `publication` scripts are run on your CI environment to ensure the safe and correct publication of packages.
+
+When validating on your CI environment the `sn-package-validate` script should be run with the `-n` or `--npm` argument. This will validate for publication to NPM.
 
 The `sn-package-publish` script expects a valid NPM token that allows you to publish to the specified organisation. this should be stored as an [Environment Variable](https://docs.travis-ci.com/user/environment-variables/#Defining-Variables-in-Repository-Settings) with the name `NPM_TOKEN`.
 
