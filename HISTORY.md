@@ -1,5 +1,8 @@
 # History
 
+# 7.1.0 (2021-05-27)
+    * FEATURE: Major release of `util-package-renderer` with new features and bugfixes
+
 # 7.0.0 (2021-05-27)
     * BREAKING: Validates against 'CSSDirectoryStructure' if it is present in the config
     * This will break any packages that didn't previously conform to this structure
