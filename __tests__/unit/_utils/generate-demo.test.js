@@ -30,6 +30,7 @@ describe('checkDemoFolder', () => {
 		expect(renderer).toHaveBeenCalledWith({
 			'brandContext': '@npmscope/context',
 			'demoCodeFolder': 'demo',
+			'minify': false,
 			'packageRoot': 'path/to/valid-toolkit-package',
 			'reportingLevel': 'info'
 		});
@@ -80,6 +81,7 @@ describe('createDemoFile', () => {
 		expect(renderer).toHaveBeenCalledWith({
 			'brandContext': '@npmscope/context',
 			'demoCodeFolder': 'demo',
+			'minify': false,
 			'distFolderPath': path.join(process.cwd(), 'path/to/valid-toolkit-package/demo/dist'),
 			'packageRoot': 'path/to/valid-toolkit-package',
 			'reportingLevel': 'info'
