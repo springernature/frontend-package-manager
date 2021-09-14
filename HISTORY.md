@@ -1,6 +1,9 @@
 # History
 
-# 7.1.0 (2021-05-27)
+# 7.2.0 (2021-09-13)
+    * FEATURE: Minification options for demo CSS/JS from `util-package-renderer`
+
+# 7.1.0 (2021-09-10)
     * FEATURE: Major release of `util-package-renderer` with new features and bugfixes
 
 # 7.0.0 (2021-05-27)
