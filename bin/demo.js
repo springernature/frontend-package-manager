@@ -19,6 +19,10 @@ const argv = require('yargs')
 	.nargs('s', 1)
 	.describe('s', 'NPM scope for context package')
 	.default('s', 'springernature')
+	.alias('m', 'minify')
+	.boolean('m')
+	.describe('m', 'Minify JS and CSS')
+	.default('m', false)
 	.help('h')
 	.alias('h', 'help')
 	.argv;
@@ -35,7 +39,7 @@ const exitWithError = require('../lib/js/_utils/_error');
 
 		const brand = argv.package.split(/-(.+)?$/)[0];
 		const path = `toolkits/${brand}/packages/${argv.package}`;
-		createDemoFile(path, argv.context, argv.scope, 'title');
+		createDemoFile(path, argv.context, argv.scope, argv.minify, 'title');
 	} catch (error) {
 		exitWithError(error);
 	}
