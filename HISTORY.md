@@ -1,5 +1,8 @@
 # History
 
+# 7.3.0 (2021-10-26)
+    * FEATURE: Dynamic handlebars template support from `util-package-renderer`
+
 # 7.2.0 (2021-09-13)
     * FEATURE: Minification options for demo CSS/JS from `util-package-renderer`
 
