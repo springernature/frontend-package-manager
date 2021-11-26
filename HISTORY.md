@@ -1,5 +1,8 @@
 # History
 
+# 7.4.0 (2021-11-26)
+    * FEATURE: Images in demo folder support from `util-package-renderer`
+
 # 7.3.0 (2021-10-26)
     * FEATURE: Dynamic handlebars template support from `util-package-renderer`
 
