@@ -1,5 +1,8 @@
 # History
 
+# 7.4.2 (2021-11-26)
+    * BUG: `util-package-renderer` fails when it hits a hyperlink
+
 # 7.4.1 (2021-11-26)
     * BUG: dependency issue with `util-package-renderer`
 
