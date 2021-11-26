@@ -1,5 +1,8 @@
 # History
 
+# 7.4.1 (2021-11-26)
+    * BUG: dependency issue with `util-package-renderer`
+
 # 7.4.0 (2021-11-26)
     * FEATURE: Images in demo folder support from `util-package-renderer`
 
