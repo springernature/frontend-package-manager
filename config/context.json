@@ -5,6 +5,7 @@
   "brandContextName": "brand-context",
   "brands": [],
   "changelog": "HISTORY.md",
+  "blockNewPackages": false,
   "required": [
     "README.md",
     "package.json"
