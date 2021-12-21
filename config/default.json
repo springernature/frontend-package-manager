@@ -3,6 +3,7 @@
   "toolkitsDirectory": "toolkits",
   "packagesDirectory": "packages",
 	"changelog": "HISTORY.md",
+  "blockNewPackages": false,
 	"required": [
 		"README.md",
 		"package.json"
