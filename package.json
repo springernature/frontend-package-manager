@@ -39,7 +39,7 @@
     "strip-ansi": "^6.0.0"
   },
   "dependencies": {
-    "@springernature/util-cli-reporter": "^1.2.1",
+    "@springernature/util-cli-reporter": "^2.0.0",
     "@springernature/util-package-extender": "^0.0.4",
     "@springernature/util-package-renderer": "^2.2.0",
     "deepmerge": "^4.2.2",
