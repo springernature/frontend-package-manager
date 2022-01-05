@@ -40,7 +40,6 @@
   "dependencies": {
     "@springernature/util-cli-reporter": "^2.0.0",
     "@springernature/util-package-renderer": "^2.2.0",
-    "capture-console": "^1.0.1",
     "conf": "^10.1.1",
     "deepmerge": "^4.2.2",
     "env-paths": "^2.2.1",
