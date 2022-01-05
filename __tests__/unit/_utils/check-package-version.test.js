@@ -1,17 +1,17 @@
 /**
- * __tests__/unit/_utils/check-new-version.test.js
- * Test: js/_utils/_check-new-version.js
+ * __tests__/unit/_utils/check-package-version.test.js
+ * Test: js/_utils/_check-package-version.js
  */
 'use strict';
 
 // Hide CLI output when testing error reporting
 console.log = jest.fn();
 
-const checkNewVersion = require('../../../lib/js/_utils/_check-new-version');
+const checkPackageVersion = require('../../../lib/js/_utils/_check-package-version');
 
 describe('Check for a valid semver version', () => {
 	test('Data is the version number when valid', () => {
-		const json = checkNewVersion({version: '1.0.0'});
+		const json = checkPackageVersion({version: '1.0.0'});
 		expect.assertions(1);
 		expect(json).toBe('1.0.0');
 	});
@@ -19,7 +19,7 @@ describe('Check for a valid semver version', () => {
 	test('Displays an error when number is invalid', () => {
 		const spy = jest.spyOn(global.console, 'log');
 		const mockExit = jest.spyOn(process, 'exit').mockImplementation(() => {});
-		checkNewVersion({version: 'x.x.x'});
+		checkPackageVersion({version: 'x.x.x'});
 
 		expect(spy).toHaveBeenCalled();
 		expect(mockExit).toHaveBeenCalledWith(1);
