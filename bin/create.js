@@ -12,8 +12,8 @@ const generateConfig = require('../lib/js/_utils/_generate-config');
 	reporter.init('none');
 
 	try {
-		await generateConfig();
-		createPackage();
+		const config = await generateConfig();
+		createPackage(config);
 	} catch (error) {
 		exitWithError(error);
 	}

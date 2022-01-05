@@ -28,8 +28,8 @@ reporter.info('searching for all toolkits');
 
 (async () => {
 	try {
-		await generateConfig(argv);
-		validatePackages(argv.npm);
+		const config = await generateConfig(argv);
+		validatePackages(config, argv.npm);
 	} catch (error) {
 		exitWithError(error);
 	}

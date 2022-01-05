@@ -12,9 +12,8 @@ reporter.info('searching for toolkits');
 
 (async () => {
 	try {
-		await generateConfig();
-		// publishPackages(allConfigs, currentWorkingDirectory);
-		publishPackages();
+		const config = await generateConfig();
+		publishPackages(config);
 	} catch (error) {
 		exitWithError(error);
 	}
