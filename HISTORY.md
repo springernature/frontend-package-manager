@@ -1,5 +1,9 @@
 # History
 
+# 7.5.0 (2022-01-06)
+    * FEATURE: allow the blocking of new packages. Only updates to existing allowed.
+    * Refactor how configuration is handled
+
 # 7.4.2 (2021-11-26)
     * BUG: `util-package-renderer` fails when it hits a hyperlink
 
