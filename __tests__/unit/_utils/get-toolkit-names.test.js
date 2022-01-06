@@ -7,28 +7,35 @@
 jest.mock('@springernature/util-cli-reporter');
 jest.mock('globby');
 jest.mock('../../../lib/js/_utils/_check-exists');
+jest.mock('../../../lib/js/_utils/_current-working-directory', () => {
+	return jest.fn(() => '.');
+});
 
 const getAllToolkitNames = require('../../../lib/js/_utils/_get-toolkit-names');
 
 describe('Get names of all available toolkits', () => {
+	beforeEach(() => {
+		jest.resetModules();
+	});
+
 	test('Successfully return all toolkit names', async () => {
 		expect.assertions(1);
 		await expect(
-			getAllToolkitNames({toolkitsDirectory: 'toolkits'}, '.')
+			getAllToolkitNames({toolkitsDirectory: 'toolkits'})
 		).resolves.toEqual(['toolkit1', 'toolkit2', 'toolkit3', 'toolkit4']);
 	});
 
 	test('Throw if it can\'t find the toolkits directory', async () => {
 		expect.assertions(1);
 		await expect(
-			getAllToolkitNames({toolkitsDirectory: 'no-toolkits'}, '.')
+			getAllToolkitNames({toolkitsDirectory: 'no-toolkits'})
 		).rejects.toThrowError(new Error('invalid folder: no-toolkits'));
 	});
 
 	test('Throw if error with globby', async () => {
 		expect.assertions(1);
 		await expect(
-			getAllToolkitNames({toolkitsDirectory: 'toolkits-no-globby'}, '.')
+			getAllToolkitNames({toolkitsDirectory: 'toolkits-no-globby'})
 		).rejects.toThrowError(new Error('globby error'));
 	});
 });
