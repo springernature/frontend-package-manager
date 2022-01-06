@@ -1,5 +1,8 @@
 # History
 
+# 7.5.1 (2022-01-06)
+    * Update util-package-renderer
+
 # 7.5.0 (2022-01-06)
     * FEATURE: allow the blocking of new packages. Only updates to existing allowed.
     * Refactor how configuration is handled
