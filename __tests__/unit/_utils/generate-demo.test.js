@@ -24,8 +24,10 @@ describe('checkDemoFolder', () => {
 		await expect(
 			generateDemo.checkDemoFolder(
 				'path/to/valid-toolkit-package',
-				'context',
-				'npmscope'
+				{
+					brandContextName: 'context',
+					scope: 'npmscope'
+				}
 			)
 		).resolves.toEqual();
 		expect(renderer).toHaveBeenCalledWith({
@@ -43,8 +45,10 @@ describe('checkDemoFolder', () => {
 		await expect(
 			generateDemo.checkDemoFolder(
 				'path/to/invalid-toolkit-package',
-				'context',
-				'npmscope'
+				{
+					brandContextName: 'context',
+					scope: 'npmscope'
+				}
 			)
 		).resolves.toEqual();
 		expect(renderer).not.toHaveBeenCalled();
@@ -59,8 +63,10 @@ describe('checkDemoFolder', () => {
 		await expect(
 			generateDemo.checkDemoFolder(
 				'path/to/valid-toolkit-package',
-				'context',
-				'npmscope'
+				{
+					brandContextName: 'context',
+					scope: 'npmscope'
+				}
 			)
 		).rejects.toThrowError(new Error('renderer error'));
 	});
@@ -76,8 +82,10 @@ describe('createDemoFile', () => {
 		await expect(
 			generateDemo.createDemoFile(
 				'path/to/valid-toolkit-package',
-				'context',
-				'npmscope'
+				{
+					brandContextName: 'context',
+					scope: 'npmscope'
+				}
 			)
 		).resolves.toEqual();
 		expect(renderer).toHaveBeenCalledWith({
@@ -91,13 +99,39 @@ describe('createDemoFile', () => {
 		});
 	});
 
+	test('as above but specifying reporting level and minification', async () => {
+		expect.assertions(2);
+		await expect(
+			generateDemo.createDemoFile(
+				'path/to/valid-toolkit-package',
+				{
+					brandContextName: 'context',
+					scope: 'npmscope'
+				},
+				'title',
+				true
+			)
+		).resolves.toEqual();
+		expect(renderer).toHaveBeenCalledWith({
+			'brandContext': '@npmscope/context',
+			'demoCodeFolder': 'demo',
+			'dynamicTemplateLocation': '.',
+			'minify': true,
+			'distFolderPath': path.join(process.cwd(), 'path/to/valid-toolkit-package/demo/dist'),
+			'packageRoot': 'path/to/valid-toolkit-package',
+			'reportingLevel': 'title'
+		});
+	});
+
 	test('resolves without calling renderer when no demo folder exists', async () => {
 		expect.assertions(2);
 		await expect(
 			generateDemo.createDemoFile(
 				'path/to/invalid-toolkit-package',
-				'context',
-				'npmscope'
+				{
+					brandContextName: 'context',
+					scope: 'npmscope'
+				}
 			)
 		).resolves.toEqual();
 		expect(renderer).not.toHaveBeenCalled();
@@ -112,8 +146,10 @@ describe('createDemoFile', () => {
 		await expect(
 			generateDemo.createDemoFile(
 				'path/to/valid-toolkit-package',
-				'context',
-				'npmscope'
+				{
+					brandContextName: 'context',
+					scope: 'npmscope'
+				}
 			)
 		).rejects.toThrowError(new Error('renderer error'));
 	});
