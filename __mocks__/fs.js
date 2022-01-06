@@ -82,6 +82,7 @@ const __fsMockFiles = () => {
 		'context/brand-context': brandPackageContents,
 		'context/brand-context-disallowed': {...brandPackageContents, ...{brandC: {'fileB.ext': 'file content here'}}},
 		'context/brand-context-empty': {/** empty directory */},
+		'context/brand-context-files': {'fileA.ext': 'file content here', brandA: {'fileA.ext': 'file content here'}},
 		'valid-context/brand-context': brandPackageContents,
 		'packages/package/passWithCss': {
 			...cssFolderPackageContents,

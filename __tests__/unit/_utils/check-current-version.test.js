@@ -10,7 +10,7 @@ jest.mock('../../../lib/js/_utils/_error', () => jest.fn())
 jest.mock('@springernature/util-cli-reporter');
 jest.mock('../../../lib/js/_utils/_error');
 jest.mock('../../../lib/js/_utils/_get-latest-version');
-jest.mock('../../../lib/js/_utils/_check-new-version');
+jest.mock('../../../lib/js/_utils/_check-package-version');
 
 jest.mock('path/to/global-package/package.json', () => ({
 	name: 'global-package'
