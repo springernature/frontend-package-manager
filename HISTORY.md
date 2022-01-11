@@ -1,5 +1,8 @@
 # History
 
+# 8.0.0 (2022-01-11)
+    * BREAKING: util-package-renderer switches to dart sass
+
 # 7.5.1 (2022-01-06)
     * Update util-package-renderer
 
