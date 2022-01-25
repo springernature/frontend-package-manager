@@ -1,5 +1,8 @@
 # History
 
+# 8.1.0 (2022-01-25)
+    * FEATURE: util-package-renderer supports `.js` class on the `html` tag
+
 # 8.0.1 (2022-01-25)
     * BUG: Update util-package-renderer to fix image rendering bug
 
