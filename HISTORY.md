@@ -1,5 +1,8 @@
 # History
 
+# 8.2.0 (2022-02-14)
+    * FEATURE: util-package-renderer uses the viewport meta html tag to assume a responsive layout approach on all demos
+
 # 8.1.0 (2022-01-25)
     * FEATURE: util-package-renderer supports `.js` class on the `html` tag
 
