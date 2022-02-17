@@ -1,5 +1,8 @@
 # History
 
+# 8.3.0 (2022-02-14)
+    * FEATURE: remove adding of post-install action to trigger context messaging
+
 # 8.2.0 (2022-02-14)
     * FEATURE: util-package-renderer uses the viewport meta html tag to assume a responsive layout approach on all demos
 
