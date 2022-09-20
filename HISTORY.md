@@ -1,5 +1,8 @@
 # History
 
+# 8.4.0 (2022-09-20)
+    * FEATURE: inline SVGs reference by use when creating demos
+
 # 8.3.0 (2022-02-14)
     * FEATURE: remove adding of post-install action to trigger context messaging
 
