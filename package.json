@@ -45,7 +45,7 @@
     "gitignore-globs": "^0.1.1",
     "globby": "^11.0.3",
     "inquirer": "^7.0.0",
-    "latest-version": "^5.1.0",
+    "latest-version": "^7.0.0",
     "listr": "^0.14.3",
     "minimatch": "^3.0.4",
     "npm-registry-client": "^8.6.0",
