@@ -17,7 +17,8 @@
     "sn-package-create": "./bin/create.js",
     "sn-package-validate": "./bin/validate.js",
     "sn-package-publish": "./bin/publish.js",
-    "sn-package-demo": "./bin/demo.js"
+    "sn-package-demo": "./bin/demo.js",
+    "sn-package-compile": "./bin/compile.js"
   },
   "scripts": {
     "test": "jest --colors --verbose --coverage",

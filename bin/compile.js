@@ -18,8 +18,9 @@ const argv = require('yargs')
 	.alias('h', 'help')
 	.argv;
 
-const createDemoFile = require('../lib/js/_utils/_generate-demo').createDemoFile;
+const createDistFiles = require('../lib/js/_utils/_generate-dist').createDistFiles;
 const exitWithError = require('../lib/js/_utils/_error');
+const generateConfig = require('../lib/js/_utils/_generate-config');
 
 (async () => {
 	try {
@@ -31,7 +32,11 @@ const exitWithError = require('../lib/js/_utils/_error');
 		const brand = argv.package.split(/-(.+)?$/)[0];
 		const path = `toolkits/${brand}/packages/${argv.package}`;
 
-		createDemoFile(path, {
+		reporter.init('none'); // Suppress CLI reporting
+		const config = await generateConfig();
+		reporter.init('title'); // Reset CLI reporting
+
+		createDistFiles(path, config, {
 			reporting: 'title',
 			minify: argv.minify,
 			installDependencies: true
