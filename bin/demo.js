@@ -31,7 +31,7 @@ const exitWithError = require('../lib/js/_utils/_error');
 		const brand = argv.package.split(/-(.+)?$/)[0];
 		const path = `toolkits/${brand}/packages/${argv.package}`;
 
-		createDemoFile(path, {
+		await createDemoFile(path, {
 			reporting: 'title',
 			minify: argv.minify,
 			installDependencies: true
