@@ -8,6 +8,7 @@ const argv = require('yargs')
 	.example('$0 -p toolkit-package', 'Name of the component package')
 	.example('$0 -m', 'Minify JS and CSS')
 	.example('$0 -c', 'Compile the context')
+	.example('$0 -c -m -p toolkit-package', 'Combine all options')
 	.alias('p', 'package')
 	.nargs('p', 1)
 	.describe('p', 'Name of the component package')
@@ -29,13 +30,16 @@ const generateConfig = require('../lib/js/_utils/_generate-config');
 
 (async () => {
 	try {
-		const brand = argv.package.split(/-(.+)?$/)[0];
-		const path = `toolkits/${brand}/packages/${argv.package}`;
+		if (typeof argv.package !== 'string' && !argv.context) {
+			reporter.fail('invalid CLI configuration', 'please specify a valid package or set the context flag', 'sn-package-compile -h');
+			return;
+		}
 
 		reporter.init('none'); // Suppress CLI reporting
 		const config = await generateConfig();
 		reporter.init('title'); // Reset CLI reporting
 
+		// Compile the context
 		if (argv.context) {
 			await generateDist.createContextDistFiles(config, {
 				reporting: 'title',
@@ -44,7 +48,11 @@ const generateConfig = require('../lib/js/_utils/_generate-config');
 			});
 		}
 
+		// Compile a package
 		if (typeof argv.package === 'string') {
+			const brand = argv.package.split(/-(.+)?$/)[0];
+			const path = `toolkits/${brand}/packages/${argv.package}`;
+
 			await generateDist.createPackageDistFiles(path, config, {
 				reporting: 'title',
 				minify: argv.minify,
