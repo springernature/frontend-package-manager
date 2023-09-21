@@ -39,7 +39,7 @@ describe('Check correct files appear in CI changed files list', () => {
 		await expect(
 			checkFiles(
 				'path/to/global-package',
-				'global-package/HISTORY.md\nglobal-package/package.json',
+				'global-package/HISTORY.md,global-package/package.json',
 				'HISTORY.md'
 			)
 		).resolves.toEqual();

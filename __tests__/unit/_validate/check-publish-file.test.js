@@ -13,7 +13,7 @@ describe('Check for updating of file when publishing', () => {
 		expect.assertions(1);
 		await expect(
 			checkPublishFile(
-				'filename.ext\npath/to/global-package/file.ext\nothername.ext',
+				'filename.ext,path/to/global-package/file.ext,othername.ext',
 				'global-package/file.ext'
 			)
 		).resolves.toEqual();
@@ -23,7 +23,7 @@ describe('Check for updating of file when publishing', () => {
 		expect.assertions(1);
 		await expect(
 			checkPublishFile(
-				'filename.ext\npath/to/other-package/file.ext\nothername.ext',
+				'filename.ext,path/to/other-package/file.ext,othername.ext',
 				'global-package/file.ext'
 			)
 		).rejects.toThrowError(new Error('global-package/file.ext file must be updated'));
@@ -33,7 +33,7 @@ describe('Check for updating of file when publishing', () => {
 		expect.assertions(1);
 		await expect(
 			checkPublishFile(
-				'filename.ext\npath/to/global-package/file.ext\nothername.ext',
+				'filename.ext,path/to/global-package/file.ext,othername.ext',
 				'global-package/other.ext'
 			)
 		).rejects.toThrowError(new Error('global-package/other.ext file must be updated'));
