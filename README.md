@@ -259,16 +259,9 @@ It is intended that the `validation` and `publication` scripts are run on your C
 
 When validating on your CI environment the `sn-package-validate` script should be run with the `-n` or `--npm` argument. This will validate for publication to NPM.
 
-The `sn-package-publish` script expects a valid NPM token that allows you to publish to the specified organisation. this should be stored as an [Environment Variable](https://docs.travis-ci.com/user/environment-variables/#Defining-Variables-in-Repository-Settings) with the name `NPM_TOKEN`.
+The `sn-package-publish` script expects a valid NPM token that allows you to publish to the specified organisation. this should be stored as an [Environment Variable](https://docs.github.com/en/actions/learn-github-actions/variables) with the name `NPM_TOKEN`.
 
-The script also expects the Environment Variable `CHANGED_FILES` which contains a list of all the files changed within the current commit, seperated with a line-break.
-
-```yml
-# Example from .travis.yml
-env:
-  global:
-    - CHANGED_FILES=$(git diff --name-only $TRAVIS_COMMIT_RANGE)
-```
+The script also expects the Environment Variable `CHANGED_FILES` which contains a comma-separated list of all the files changed within the current commit.
 
 Valid packages within the specified packages directory are identified, and a new version is published using the version number within the `package.json` file, if that version is greater than the last version published on NPM. Version numbers of `0.0.0` are ignored.
 
