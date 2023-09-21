@@ -1,5 +1,8 @@
 # History
 
+# 9.0.0 (2022-09-20)
+    * BREAKING: Switch from using Travis to GitHub Actions
+
 # 8.4.0 (2022-09-20)
     * FEATURE: inline SVGs reference by use when creating demos
 
